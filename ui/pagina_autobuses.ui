@@ -175,7 +175,7 @@ QPushButton:pressed {
    <widget class="QLabel" name="label_estatico_servicio">
     <property name="geometry">
      <rect>
-      <x>1270</x>
+      <x>1200</x>
       <y>40</y>
       <width>201</width>
       <height>28</height>
@@ -194,154 +194,10 @@ QPushButton:pressed {
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Filtrar por servicio:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_modelo">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>40</y>
-      <width>151</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    color: #606266;
-    min-height: 18px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_estatico_marca">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>40</y>
-      <width>181</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel {
-    background: transparent;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    color: #000000;
-}</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Filtrar por marca:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_estatico_modelo">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>40</y>
-      <width>185</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel {
-    background: transparent;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    color: #000000;
-}</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Filtrar por modelo:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QComboBox" name="comboBox_tiposAutobus">
     <property name="geometry">
      <rect>
-      <x>1460</x>
-      <y>40</y>
-      <width>151</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    color: #606266;
-    min-height: 18px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox_marca">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
+      <x>1400</x>
       <y>40</y>
       <width>151</width>
       <height>32</height>
