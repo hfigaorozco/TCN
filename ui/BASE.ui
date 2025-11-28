@@ -70,7 +70,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsEmpresa/entrega.png</normaloff>:/recursos/iconsEmpresa/entrega.png</iconset>
+       <normaloff>../recursos/recursos empresa/entrega.png</normaloff>../recursos/recursos empresa/entrega.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -117,7 +117,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsCliente/calendario.png</normaloff>:/recursos/iconsCliente/calendario.png</iconset>
+       <normaloff>../recursos/recursos empresa/calendario.png</normaloff>../recursos/recursos empresa/calendario.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -164,7 +164,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsEmpresa/conductor.png</normaloff>:/recursos/iconsEmpresa/conductor.png</iconset>
+       <normaloff>../recursos/recursos empresa/conductor.png</normaloff>../recursos/recursos empresa/conductor.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -211,7 +211,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsCliente/autobus.png</normaloff>:/recursos/iconsCliente/autobus.png</iconset>
+       <normaloff>../recursos/recursos empresa/autobus.png</normaloff>../recursos/recursos empresa/autobus.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -258,7 +258,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsEmpresa/casa-silueta-negra-sin-puerta.png</normaloff>:/recursos/iconsEmpresa/casa-silueta-negra-sin-puerta.png</iconset>
+       <normaloff>../recursos/recursos empresa/casa-silueta-negra-sin-puerta.png</normaloff>../recursos/recursos empresa/casa-silueta-negra-sin-puerta.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -305,7 +305,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsEmpresa/boleto.png</normaloff>:/recursos/iconsEmpresa/boleto.png</iconset>
+       <normaloff>../recursos/recursos empresa/boleto.png</normaloff>../recursos/recursos empresa/boleto.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -352,7 +352,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>:/recursos/iconsEmpresa/cerrar-sesion.png</normaloff>:/recursos/iconsEmpresa/cerrar-sesion.png</iconset>
+       <normaloff>../recursos/recursos empresa/cerrar-sesion.png</normaloff>../recursos/recursos empresa/cerrar-sesion.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -377,7 +377,7 @@ border-radius: 15px;
 border-bottom: 1px solid #E3E3E3;</string>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="pagina_rutas">
      <widget class="QWidget" name="botones_rutas" native="true">
@@ -1677,7 +1677,7 @@ QScrollBar::sub-line {
       </column>
       <column>
        <property name="text">
-        <string>New Column</string>
+        <string>Operador</string>
        </property>
       </column>
       <column>
@@ -1732,12 +1732,12 @@ color: #606266;
 
 </string>
       </property>
-      <widget class="QPushButton" name="boton_ejemplo_5">
+      <widget class="QPushButton" name="boton_anadirCorr">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>40</y>
-         <width>221</width>
+         <width>201</width>
          <height>71</height>
         </rect>
        </property>
@@ -1766,7 +1766,11 @@ QPushButton:pressed {
 }</string>
        </property>
        <property name="text">
-        <string>boton</string>
+        <string>Añadir</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../recursos/recursos empresa/añadir.png</normaloff>../recursos/recursos empresa/añadir.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1775,12 +1779,12 @@ QPushButton:pressed {
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="boton_ejemplo_6">
+      <widget class="QPushButton" name="boton_actualizarCorr">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>100</y>
-         <width>221</width>
+         <x>10</x>
+         <y>120</y>
+         <width>201</width>
          <height>71</height>
         </rect>
        </property>
@@ -1809,7 +1813,58 @@ QPushButton:pressed {
 }</string>
        </property>
        <property name="text">
-        <string>boton</string>
+        <string>Actualizar</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../recursos/recursos empresa/editar.png</normaloff>../recursos/recursos empresa/editar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="boton_estadoCorr">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>201</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+	background: #1061C4;
+	color:WHITE;
+	border:none;
+	border-radius: 8px;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+QPushButton:hover {
+    background-color: #0D4FAB;    
+}
+
+QPushButton:pressed {
+    background-color: #0A3F8A;     
+}</string>
+       </property>
+       <property name="text">
+        <string>Estado</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../recursos/recursos empresa/borrar.png</normaloff>../recursos/recursos empresa/borrar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1863,6 +1918,136 @@ border-bottom: 1px solid #E3E3E3;
        </property>
        <property name="text">
         <string>Corridas</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>1061</x>
+         <y>21</y>
+         <width>58</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: black;
+border:none;</string>
+       </property>
+       <property name="text">
+        <string>Buscar</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_buscar">
+       <property name="geometry">
+        <rect>
+         <x>1061</x>
+         <y>56</y>
+         <width>141</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius: 5px;</string>
+       </property>
+       <property name="placeholderText">
+        <string>Número de corrida</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>1421</x>
+         <y>21</y>
+         <width>58</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: black;
+border: none;</string>
+       </property>
+       <property name="text">
+        <string>Buscar</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_3">
+       <property name="geometry">
+        <rect>
+         <x>1421</x>
+         <y>56</y>
+         <width>141</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius: 5px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Número de corrida</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>1241</x>
+         <y>21</y>
+         <width>58</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: black;
+border: none;
+</string>
+       </property>
+       <property name="text">
+        <string>Buscar</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_buscar2">
+       <property name="geometry">
+        <rect>
+         <x>1241</x>
+         <y>56</y>
+         <width>141</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-radius: 5px</string>
+       </property>
+       <property name="placeholderText">
+        <string>Número de corrida</string>
        </property>
       </widget>
      </widget>
@@ -2611,7 +2796,7 @@ QScrollBar::sub-line {
       </column>
      </widget>
     </widget>
-    <widget class="QWidget" name="pafina_pasajerosycorridas">
+    <widget class="QWidget" name="pagina_pasajerosycorridas">
      <widget class="QWidget" name="widget_opbotones_5" native="true">
       <property name="geometry">
        <rect>
@@ -2636,9 +2821,9 @@ color: #606266;
       <widget class="QPushButton" name="boton_ejemplo_15">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>40</y>
-         <width>221</width>
+         <width>201</width>
          <height>71</height>
         </rect>
        </property>
@@ -2667,21 +2852,25 @@ QPushButton:pressed {
 }</string>
        </property>
        <property name="text">
-        <string>boton</string>
+        <string>Agregar</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../recursos/recursos empresa/añadir.png</normaloff>../recursos/recursos empresa/añadir.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>30</width>
-         <height>30</height>
+         <width>60</width>
+         <height>60</height>
         </size>
        </property>
       </widget>
       <widget class="QPushButton" name="boton_ejemplo_16">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>100</y>
-         <width>221</width>
+         <x>10</x>
+         <y>120</y>
+         <width>201</width>
          <height>71</height>
         </rect>
        </property>
@@ -2710,7 +2899,11 @@ QPushButton:pressed {
 }</string>
        </property>
        <property name="text">
-        <string>boton</string>
+        <string>Editar</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../recursos/recursos empresa/editar.png</normaloff>../recursos/recursos empresa/editar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2726,7 +2919,7 @@ QPushButton:pressed {
         <x>270</x>
         <y>20</y>
         <width>1641</width>
-        <height>101</height>
+        <height>251</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -2747,7 +2940,7 @@ border-bottom: 1px solid #E3E3E3;
          <x>20</x>
          <y>10</y>
          <width>811</width>
-         <height>71</height>
+         <height>111</height>
         </rect>
        </property>
        <property name="font">
@@ -2813,14 +3006,161 @@ QPushButton:pressed {
         </size>
        </property>
       </widget>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>31</x>
+         <y>172</y>
+         <width>125</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Número de corrida</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>31</x>
+         <y>131</y>
+         <width>97</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border:none</string>
+       </property>
+       <property name="text">
+        <string>Corrida</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="geometry">
+        <rect>
+         <x>521</x>
+         <y>175</y>
+         <width>125</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Números</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>521</x>
+         <y>131</y>
+         <width>263</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cantidad de pasajeros</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_origenPasCorr">
+       <property name="geometry">
+        <rect>
+         <x>191</x>
+         <y>175</y>
+         <width>125</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Origen</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>191</x>
+         <y>131</y>
+         <width>90</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Origen</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>351</x>
+         <y>131</y>
+         <width>100</width>
+         <height>35</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>19</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Destino</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_destinoPasCorr">
+       <property name="geometry">
+        <rect>
+         <x>351</x>
+         <y>175</y>
+         <width>125</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Destino</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QTableWidget" name="QtableWidget_corridas_5">
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>140</y>
+        <y>290</y>
         <width>1641</width>
-        <height>751</height>
+        <height>601</height>
        </rect>
       </property>
       <property name="font">
@@ -2840,7 +3180,7 @@ QPushButton:pressed {
     gridline-color: #f1f1f3;
     selection-background-color: #e8f0fe;
     selection-color: #1a1a1a;
-    font-size: 14px;
+    font-size: 11px;
     color: #333;
     alternate-background-color: #fafbff;
     show-grid: false;
@@ -2928,82 +3268,29 @@ QScrollBar::sub-line {
        <bool>false</bool>
       </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>164</number>
+       <number>410</number>
       </attribute>
       <attribute name="horizontalHeaderHighlightSections">
        <bool>false</bool>
       </attribute>
       <column>
        <property name="text">
-        <string>Num</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Origen</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Destino</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Distancia</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Fecha y hora</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Autobus</string>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>New Column</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
         <string>Matricula </string>
        </property>
        <property name="font">
         <font>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nombre</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -3014,6 +3301,7 @@ QScrollBar::sub-line {
        </property>
        <property name="font">
         <font>
+         <pointsize>12</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -3024,6 +3312,7 @@ QScrollBar::sub-line {
        </property>
        <property name="font">
         <font>
+         <pointsize>12</pointsize>
          <bold>true</bold>
         </font>
        </property>
@@ -3164,9 +3453,9 @@ border-bottom: 1px solid #E3E3E3;
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>10</y>
+         <y>-10</y>
          <width>881</width>
-         <height>71</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="font">
@@ -3825,8 +4114,6 @@ border-bottom: 1px solid #E3E3E3;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="MainWindow/resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
