@@ -10,13 +10,13 @@
     <height>700</height>
    </rect>
   </property>
-  <property name="maximumSize">
+  <property name="minimumSize">
    <size>
     <width>900</width>
     <height>700</height>
    </size>
   </property>
-  <property name="sizeIncrement">
+  <property name="maximumSize">
    <size>
     <width>900</width>
     <height>700</height>
@@ -28,33 +28,28 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QLabel" name="label_estatico_yatienescuenta">
+  <widget class="QLabel" name="label_imagen_identificate">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>630</y>
-     <width>171</width>
-     <height>21</height>
+     <x>0</x>
+     <y>10</y>
+     <width>451</width>
+     <height>721</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-     <underline>false</underline>
-    </font>
-   </property>
    <property name="text">
-    <string>¿Ya tienes una cuenta?</string>
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>:/recursos/iconsEmpresa/image(4).png</pixmap>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_contrasena">
+  <widget class="QLineEdit" name="lineEdit_telefono">
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>400</y>
-     <width>391</width>
+     <y>310</y>
+     <width>401</width>
      <height>32</height>
     </rect>
    </property>
@@ -81,17 +76,33 @@
     border: 1px solid #dcdfe6;
     border-radius: 6px;
     padding: 6px 12px;
-    font-size: 20px;
+    font-size: 13px;
     color: #606266;
     min-height: 18px;
 }
+
 </string>
    </property>
    <property name="inputMask">
-    <string/>
+    <string>9999999999</string>
    </property>
-   <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
+  </widget>
+  <widget class="QLabel" name="label_estatico_contrasena">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>359</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Contraseña:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="boton_continuar">
@@ -106,7 +117,6 @@
    <property name="font">
     <font>
      <pointsize>-1</pointsize>
-     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -131,12 +141,12 @@ QPushButton:pressed {
     <string>Continuar</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_telefono">
+  <widget class="QLineEdit" name="lineEdit_contrasena">
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>310</y>
-     <width>391</width>
+     <y>400</y>
+     <width>401</width>
      <height>32</height>
     </rect>
    </property>
@@ -159,32 +169,52 @@ QPushButton:pressed {
    </property>
    <property name="styleSheet">
     <string notr="true">QLineEdit {
-    
-	background-color: rgb(246, 245, 244);
+    background-color: rgb(246, 245, 244);
     border: 1px solid #dcdfe6;
     border-radius: 6px;
     padding: 6px 12px;
-    font-size: 20px;
+    font-size: 13px;
     color: #606266;
     min-height: 18px;
 }
-
 </string>
    </property>
    <property name="inputMask">
-    <string>9999999999</string>
-   </property>
-   <property name="text">
     <string/>
    </property>
+   <property name="echoMode">
+    <enum>QLineEdit::EchoMode::Password</enum>
+   </property>
   </widget>
-  <widget class="QLabel" name="label_estatico_registrotxt">
+  <widget class="QLabel" name="label_estatico_identificate">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>470</x>
+     <y>100</y>
+     <width>411</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>¡Hola, identifícate!</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_estatico_identificatetxt">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
      <y>160</y>
-     <width>401</width>
-     <height>81</height>
+     <width>411</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -193,25 +223,65 @@ QPushButton:pressed {
     </font>
    </property>
    <property name="text">
-    <string>Registrate para comprar tus boletos y gestionar tus reservaciones de forma rapida rapida</string>
+    <string>Accede para comprar boletos y getionar tus reservaciones de forma mas sencilla.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_estatico_identificate">
+  <widget class="QLabel" name="label_estatico_telefono">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>620</y>
+     <x>480</x>
+     <y>270</y>
      <width>111</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Teléfono:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_estatico_sincuenta">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>630</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>true</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="text">
+    <string>¿Aun sin cuenta?</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="boton_registrate">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>620</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
      <pointsize>-1</pointsize>
-     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -233,87 +303,48 @@ QPushButton:pressed {
 }</string>
    </property>
    <property name="text">
-    <string>Identificate</string>
+    <string>regístrate</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_imagen_registro">
+  <widget class="QPushButton" name="boton_invitado">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>-10</y>
-     <width>451</width>
-     <height>721</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>:/recursos/iconsEmpresa/image(4).png</pixmap>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_estatico_registro">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>110</y>
-     <width>401</width>
-     <height>51</height>
+     <x>550</x>
+     <y>540</y>
+     <width>261</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>25</pointsize>
-     <weight>75</weight>
+     <pointsize>-1</pointsize>
      <bold>true</bold>
+     <underline>true</underline>
     </font>
    </property>
-   <property name="text">
-    <string>Registro</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_estatico_telefono">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>271</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background: white;
+	color:#00000;
+	border:none;
+	border-radius: 15px;
+	font-weight: bold;
+	font-size: 14px;
+}
+QPushButton:hover {
+	background-color: rgb(222, 221, 218);
+}
+
+QPushButton:pressed {
+	background-color: rgb(192, 191, 188);
+}</string>
    </property>
    <property name="text">
-    <string>Teléfono:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_estatico_contrasena">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>360</y>
-     <width>141</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Contraseña:</string>
+    <string>Ingresa como invitado</string>
    </property>
   </widget>
  </widget>
  <resources>
-  <include location="../../../MainWindow/resources.qrc"/>
   <include location="../../../MainWindow/resources.qrc"/>
   <include location="../../../MainWindow/resources.qrc"/>
  </resources>
