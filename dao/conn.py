@@ -1,16 +1,11 @@
 import mysql.connector 
 from mysql.connector import Error
 
+#importando variables de entorno
+import config
 
 #Esta es una clase tipo Singleton (una instancia para todo el sistema).
 class Connection:
-
-    #parametros de la conexion
-    host = 'localhost'
-    port = 3306
-    user = 'root'
-    password = ''
-    database = 'tcn'
 
     _conexion = None
 
@@ -21,12 +16,12 @@ class Connection:
         if cls._conexion == None or not cls._conexion.is_connected():
             try:
                 cls._conexion = mysql.connector.connect(
-                host = cls.host,
-                port = cls.port, 
-                user = cls.user, 
-                password = cls.password, 
-                database = cls.database,
-                use_pure = True)
+                host = config.DB_HOST,
+                port = config.DB_PORT, 
+                user = config.DB_USER, 
+                password = config.DB_PASSWORD, 
+                database = config.DB_DATABASE,
+                use_pure = config.DB_USE_PURE)
             except Error as e:
                 cls._conexion = None
                 print(f'Error: Fallo conectar con la DB.{e}')
