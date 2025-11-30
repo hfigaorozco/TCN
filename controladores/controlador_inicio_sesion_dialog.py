@@ -14,5 +14,10 @@ class ControladorInicioSesionDialog:
         #Si el usuario existe retorna si es o no admin.
         return usuario.es_admin
 
-    
-        
+    def crearUsuario(self, phone,password):
+        #si el usuario si existe en la BD
+        usuario_nuevo = Usuario(id_usuario=0,phone=phone,password=password,es_admin=0)
+        respuesta = self.usuario_dao.crearUsuario(usuario_nuevo)
+        return respuesta
+
+        """Espacio para hacer validacion"""

@@ -28,49 +28,25 @@ class UsuarioDAO:
             return usuario
         
         except Error as e:
-            print(f'Error en RutaDAO (consultarTodasRutas): {e}')
+            print(f'Error en UsuarioDAO (consultarUsuario): {e}')
             raise e
 
 
     
-    def consultarCiudadesOrigen(self):
-
+    def crearUsuario(self, usuario: Usuario):
         try:
             conn = Connection.getConnection() #llamnado a la conexion
             #verificando conexion
             if not conn and not conn.is_connected():
                 raise Error('No se puede establecer conexion con la BD.')
 
-            query = 'SELECT DISTINCT c.nombre AS Nombre FROM ruta INNER JOIN ciudad AS c ON ruta.ciudadOrigen = c.codigo ORDER BY c.nombre ASC'
+            query = f"INSERT INTO usuario (phone, password,es_admin) VALUES ('{usuario.phone}','{usuario.password}',{usuario.es_admin})"
             cursor = conn.cursor()
             cursor.execute(query)
-            resultado = cursor.fetchall()
-            
+            conn.commit()
             cursor.close()
-            return resultado
+            return True
         
         except Error as e:
-            print(f'Error en RutaDAO (consultar ciudades origen): {e}')
-            raise e
-
-        
-    
-    def consultarCiudadesDestino(self):
-            
-        try:
-            conn = Connection.getConnection() #llamnado a la conexion
-            #verificando conexion
-            if not conn and not conn.is_connected():
-                raise Error('No se puede establecer conexion con la BD.')
-
-            query = 'SELECT DISTINCT c.nombre AS Nombre FROM ruta INNER JOIN ciudad AS c ON ruta.ciudadDestino = c.codigo ORDER BY c.nombre ASC'
-            cursor = conn.cursor()
-            cursor.execute(query)
-            resultado = cursor.fetchall()
-            
-            cursor.close()
-            return resultado
-        
-        except Error as e:
-            print(f'Error en RutaDAO (consultarCiudadesDestino): {e}')
+            print(f'Error en UsuarioDAO (crearUsuario): {e}')
             raise e

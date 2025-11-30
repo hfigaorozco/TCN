@@ -1,21 +1,34 @@
 #imports de pyside
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
-                            QDialog, QPushButton, QLineEdit, QLabel)
+                            QDialog, QPushButton, QLineEdit, QLabel, QMessageBox)
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
+from utilidades.validaciones import Validaciones
 
-class InicioSesionWidget(QDialog):
+#Importando el dialog del registro
+from vista.registroDialog import RegistroDialog
+
+class InicioSesionDialog(QDialog):
+    #variables de respuestas de este Dialog
+    ENTRAR_VISTA_EMPRESA = 20
+    ENTRAR_VISTA_CLIENTE = 30
+    ENTRAR_DIALOJ_REGISTRO = 40
+
     def __init__(self, app_manager, parent=None):
         super().__init__(parent)
         self.controlador = app_manager.controlador_isd
+        self.app_manager = app_manager #Solo en este caso 
+
+        #Creamos la variable donde se guardara el dialogo por lo del garbage collector
+        self.dialogo_registro = None
 
         # Crear una instancia del loader
         loader = QUiLoader()
 
         # Esto construye la ruta correcta sin importar desde donde se ejecute el script
-        path = os.path.join(os.path.dirname(__file__), "../vista/iniciosesionWidget.ui")
+        path = os.path.join(os.path.dirname(__file__), "../vista/iniciosesionDialog.ui")
         ui_file = QFile(path)
 
         # 3. Abrir el archivo.
@@ -48,30 +61,66 @@ class InicioSesionWidget(QDialog):
 
         #Obteniendo componentes del .ui
         self.boton_continuar = self.ui.findChild(QPushButton,'boton_continuar')
+        self.boton_registrate = self.ui.findChild(QPushButton,'boton_registrate')
+        self.boton_invitado = self.ui.findChild(QPushButton,'boton_invitado')
+
         self.lineEdit_telefono = self.ui.findChild(QLineEdit,'lineEdit_telefono')
         self.lineEdit_contrasena = self.ui.findChild(QLineEdit,'lineEdit_contrasena')
         
+
+        
         if self.boton_continuar:
-            #Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
+            # Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
             self.boton_continuar.clicked.connect(self.continuar)
+            # Si el boton registrar se presiona    
+        if self.boton_registrate:
+            self.boton_registrate.clicked.connect(self.abrirDialogRegistro)
+            # Si el boton ingresar como invitado se presiona
+        if self.boton_invitado:
+            self.boton_invitado.clicked.connect(self.ingresarComoInvitado)
 
     def continuar(self):
+        # Aqui se valida el num de telefono y el password
         phone = str(self.lineEdit_telefono.text())
+        validacion = Validaciones.validarNumeroDeTelefono(phone)
+        if phone != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
+        
         password = str(self.lineEdit_contrasena.text())
+        validacion = Validaciones.validarPassword(password)
+        if password != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
 
         respuesta_del_controlador = self.controlador.validarInicioSesion(phone,password)
         #Cerrar este dialog correctamente
         if respuesta_del_controlador == 1:
             print('Es admin')
-            self.accept()
+            self.done(self.ENTRAR_VISTA_EMPRESA)
         elif respuesta_del_controlador == 0:
             print('No es admin')
-            self.reject()
+            self.done(self.ENTRAR_VISTA_CLIENTE)
+        elif respuesta_del_controlador == 'Numero no encontrado.' or respuesta_del_controlador == 'Contrasena incorrecta.':
+            QMessageBox.information(self,"Mensaje",respuesta_del_controlador)
         else:
             print(respuesta_del_controlador)
-        # self.accept()
 
 
+    def abrirDialogRegistro(self):
+        #En lugar de cerrar este dialog lo ocultamos unos segundillos
+        self.hide()
+
+        #Creamos el dialog
+        if not self.dialogo_registro:
+            self.dialogo_registro = RegistroDialog(self.app_manager)
+
+        # Mostramos el dialog registro
+        self.dialogo_registro.exec()
         
-        
-        
+        # Mostramos el dialog de login, luego del registro dialog cerrarse. 
+        self.show()
+        self.done(RegistroDialog.ABRIR_INICIO_SESION_DIALOG)
+
+    def ingresarComoInvitado():
+        pass
