@@ -3,8 +3,8 @@
     1. Inicia la conexion con la DB que todos usaran
     2. Hace las instancias e inyecta estas dependencias/instancias
     3. Inicia el UI
-    4. Cieera el UI
-    5. Cieera la conexion con la DB que todos usarion.
+    4. Cierra el UI
+    5. Cieera la conexion con la DB que todos usaron.
     6. Termina la ejecucion del sistema.
 """
 

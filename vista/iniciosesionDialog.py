@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidge
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
+from utilidades.validaciones import Validaciones
 
 #Importando el dialog del registro
 from vista.registroDialog import RegistroDialog
@@ -79,8 +80,18 @@ class InicioSesionDialog(QDialog):
             self.boton_invitado.clicked.connect(self.ingresarComoInvitado)
 
     def continuar(self):
+        # Aqui se valida el num de telefono y el password
         phone = str(self.lineEdit_telefono.text())
+        validacion = Validaciones.validarNumeroDeTelefono(phone)
+        if phone != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
+        
         password = str(self.lineEdit_contrasena.text())
+        validacion = Validaciones.validarPassword(password)
+        if password != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
 
         respuesta_del_controlador = self.controlador.validarInicioSesion(phone,password)
         #Cerrar este dialog correctamente

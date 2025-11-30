@@ -6,6 +6,9 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
+# importando validaciones
+from utilidades.validaciones import Validaciones
+
 class RegistroDialog(QDialog):
     ABRIR_INICIO_SESION_DIALOG = 25
 
@@ -67,14 +70,23 @@ class RegistroDialog(QDialog):
         self.reject()
 
     def registrarUsuario(self):
+        # Aqui se valida el num de telefono y el password
         phone = str(self.lineEdit_telefono.text())
+        validacion = Validaciones.validarPhone(phone)
+        if phone != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
+        
         password = str(self.lineEdit_contrasena.text())
+        validacion = Validaciones.validarContrasena(password)
+        if password != validacion:
+            QMessageBox.warning(self,'Mensaje',validacion)
+            return
 
         respuesta_del_controlador = self.controlador.crearUsuario(phone,password)
         print(respuesta_del_controlador)
         if respuesta_del_controlador:
             QMessageBox.information(self,"Mensaje","Registro exitoso")
-            
         else:
             QMessageBox.critical(self,"Error de registro","Error al registrar al usuario.")
 

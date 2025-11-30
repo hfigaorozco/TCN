@@ -40,7 +40,7 @@ class UsuarioDAO:
             if not conn and not conn.is_connected():
                 raise Error('No se puede establecer conexion con la BD.')
 
-            query = f"INSERT INTO usuario (phone, password,es_admin) VALUES ({usuario.phone},{usuario.password},{usuario.es_admin})"
+            query = f"INSERT INTO usuario (phone, password,es_admin) VALUES ('{usuario.phone}','{usuario.password}',{usuario.es_admin})"
             cursor = conn.cursor()
             cursor.execute(query)
             conn.commit()
