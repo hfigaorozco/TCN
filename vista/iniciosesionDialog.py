@@ -7,8 +7,9 @@ from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
 class InicioSesionWidget(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, app_manager, parent=None):
         super().__init__(parent)
+        self.controlador = app_manager.controlador_isd
 
         # Crear una instancia del loader
         loader = QUiLoader()
@@ -47,15 +48,30 @@ class InicioSesionWidget(QDialog):
 
         #Obteniendo componentes del .ui
         self.boton_continuar = self.ui.findChild(QPushButton,'boton_continuar')
-        
+        self.lineEdit_telefono = self.ui.findChild(QLineEdit,'lineEdit_telefono')
+        self.lineEdit_contrasena = self.ui.findChild(QLineEdit,'lineEdit_contrasena')
         
         if self.boton_continuar:
             #Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
             self.boton_continuar.clicked.connect(self.continuar)
 
     def continuar(self):
+        phone = str(self.lineEdit_telefono.text())
+        password = str(self.lineEdit_contrasena.text())
+
+        respuesta_del_controlador = self.controlador.validarInicioSesion(phone,password)
         #Cerrar este dialog correctamente
-        self.accept()
+        if respuesta_del_controlador == 1:
+            print('Es admin')
+            self.accept()
+        elif respuesta_del_controlador == 0:
+            print('No es admin')
+            self.reject()
+        else:
+            print(respuesta_del_controlador)
+        # self.accept()
+
+
         
         
         

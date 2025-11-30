@@ -21,6 +21,15 @@ from dao.conn import Connection
 from vista.iniciosesionDialog import InicioSesionWidget
 from vista.main_ui_empresa import MainUIEmpresa
 
+#importando app manager
+from utilidades.app_manager import AppManager
+
+#importando dao's
+from dao.usuario_dao import UsuarioDAO
+
+#importando controladores
+from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
+
 
 def main():
     print('Iniciando Transportes Cuervo Negro')
@@ -35,13 +44,17 @@ def main():
         return #terminando la ejecucion del programa
 
     #Iniciando dao's
+    usuario_dao = UsuarioDAO()
     #Iniciando controladores
-    
+    controlador_isd = ControladorInicioSesionDialog(usuario_dao=usuario_dao)
+
+    #iniciando app manager
+    app_manager = AppManager(controlador_isd=controlador_isd)
 
     #iniciando UI
     print('Iniciando UI')
     app = QApplication(sys.argv)
-    dialog_iniciosesion = InicioSesionWidget() #aqui se le pasara el AppManager:opcional
+    dialog_iniciosesion = InicioSesionWidget(app_manager) #aqui se le pasara el AppManager:opcional
     resultado = dialog_iniciosesion.exec()
 
     exit_code = app.exit()
