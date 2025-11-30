@@ -6,28 +6,18 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
-#Importando el dialog del registro
-from vista.registroDialog import RegistroDialog
-
-class InicioSesionDialog(QDialog):
-    #variables de respuestas de este Dialog
-    ENTRAR_VISTA_EMPRESA = 20
-    ENTRAR_VISTA_CLIENTE = 30
-    ENTRAR_DIALOJ_REGISTRO = 40
+class RegistroDialog(QDialog):
+    ABRIR_INICIO_SESION_DIALOG = 25
 
     def __init__(self, app_manager, parent=None):
         super().__init__(parent)
-        self.controlador = app_manager.controlador_isd
-        self.app_manager = app_manager #Solo en este caso 
-
-        #Creamos la variable donde se guardara el dialogo por lo del garbage collector
-        self.dialogo_registro = None
+        self.controlador = app_manager.controlador_rd
 
         # Crear una instancia del loader
         loader = QUiLoader()
 
         # Esto construye la ruta correcta sin importar desde donde se ejecute el script
-        path = os.path.join(os.path.dirname(__file__), "../vista/iniciosesionWidget.ui")
+        path = os.path.join(os.path.dirname(__file__), "../vista/registroDialog.ui")
         ui_file = QFile(path)
 
         # 3. Abrir el archivo.
@@ -56,48 +46,35 @@ class InicioSesionDialog(QDialog):
 
         # Opcional: Ajustar el tamaño del diálogo al contenido del UI
         self.resize(self.ui.size())
-        self.setWindowTitle("Inicio de Sesión") # Puedes ponerlo aquí o en el Designer
+        self.setWindowTitle("Registrate") # Puedes ponerlo aquí o en el Designer
 
         #Obteniendo componentes del .ui
         self.boton_continuar = self.ui.findChild(QPushButton,'boton_continuar')
-        self.boton_registrate = self.ui.findChild(QPushButton,'boton_registrate')
+        self.boton_identificate = self.ui.findChild(QPushButton,'pushButton_estatico_identificate')
 
         self.lineEdit_telefono = self.ui.findChild(QLineEdit,'lineEdit_telefono')
         self.lineEdit_contrasena = self.ui.findChild(QLineEdit,'lineEdit_contrasena')
         
         if self.boton_continuar:
-            #Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
-            self.boton_continuar.clicked.connect(self.continuar)
-        #Si el boton registrar se presiona    
-        if self.boton_registrate:
-            self.boton_registrate.clicked.connect(self.abrirDialogRegistro)
+            # Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
+            self.boton_continuar.clicked.connect(self.registrarUsuario)
+            # Si el boton registrar se presiona    
+        if self.boton_identificate:
+            self.boton_identificate.clicked.connect(self.identificar)
+            
 
-    def continuar(self):
+    def identificar(self):
+        self.done(self.ABRIR_INICIO_SESION_DIALOG)
+
+    def registrarUsuario(self):
         phone = str(self.lineEdit_telefono.text())
         password = str(self.lineEdit_contrasena.text())
 
-        respuesta_del_controlador = self.controlador.validarInicioSesion(phone,password)
-        #Cerrar este dialog correctamente
-        if respuesta_del_controlador == 1:
-            print('Es admin')
-            self.done(self.ENTRAR_VISTA_EMPRESA)
-        elif respuesta_del_controlador == 0:
-            print('No es admin')
-            self.done(self.ENTRAR_VISTA_CLIENTE)
+        respuesta_del_controlador = self.controlador.crearUsuario(phone,password)
+        print(respuesta_del_controlador)
+        if respuesta_del_controlador:
+            print('Registro exitoso')
         else:
-            print(respuesta_del_controlador)
-
-    def abrirDialogRegistro(self):
-        #En lugar de cerrar este dialog lo ocultamos unos segundillos
-        self.hide()
-
-        #Creamos el dialog
-        if not self.dialogo_registro:
-            self.dialogo_registro = RegistroDialog(self.app_manager)
-
-        # Mostramos el dialog registro
-        self.dialogo_registro.exec()
+            print('Error al registrar.')
         
-        # Mostramos el dialog de login, luego del registro dialog cerrarse. 
-        self.show()
-        self.done(RegistroDialog.ABRIR_INICIO_SESION_DIALOG)
+        

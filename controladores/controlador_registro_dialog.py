@@ -1,6 +1,6 @@
 from objetos.usuario import Usuario
 
-class ControladorInicioSesionDialog:
+class ControladorRegistroDialog:
     def __init__(self, usuario_dao):
         self.usuario_dao = usuario_dao
 
