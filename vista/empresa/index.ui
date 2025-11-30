@@ -3,7 +3,7 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="windowModality">
-   <enum>Qt::WindowModality::NonModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -65,6 +65,7 @@ border-bottom: 1px solid #E3E3E3;
      <property name="font">
       <font>
        <pointsize>59</pointsize>
+       <weight>75</weight>
        <italic>true</italic>
        <bold>true</bold>
       </font>
@@ -103,6 +104,7 @@ border-bottom: 1px solid #E3E3E3;</string>
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -150,6 +152,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -197,6 +200,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -244,6 +248,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -291,6 +296,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -338,6 +344,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -385,6 +392,7 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <pointsize>-1</pointsize>
+       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -471,6 +479,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -509,7 +518,7 @@ QPushButton:pressed {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>880</x>
+      <x>910</x>
       <y>260</y>
       <width>951</width>
       <height>681</height>
@@ -521,6 +530,7 @@ QPushButton:pressed {
        <property name="font">
         <font>
          <pointsize>41</pointsize>
+         <weight>75</weight>
          <italic>true</italic>
          <bold>true</bold>
         </font>
@@ -533,7 +543,7 @@ QPushButton:pressed {
      <item>
       <widget class="QTableWidget" name="pasajerosm_tableWidget">
        <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
+        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">
@@ -590,10 +600,10 @@ QHeaderView::section:pressed {
 </string>
        </property>
        <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>237</number>
@@ -628,7 +638,7 @@ QHeaderView::section:pressed {
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>19</x>
+      <x>49</x>
       <y>260</y>
       <width>751</width>
       <height>681</height>
@@ -643,6 +653,7 @@ QHeaderView::section:pressed {
        <property name="font">
         <font>
          <pointsize>41</pointsize>
+         <weight>75</weight>
          <italic>true</italic>
          <bold>true</bold>
         </font>
@@ -713,7 +724,7 @@ border:none;</string>
      <item>
       <widget class="QTableWidget" name="corridasm_tableWidget">
        <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
+        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">
@@ -770,10 +781,10 @@ QHeaderView::section:pressed {
 </string>
        </property>
        <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAlwaysOff</enum>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>187</number>
@@ -808,6 +819,7 @@ QHeaderView::section:pressed {
        <property name="font">
         <font>
          <pointsize>41</pointsize>
+         <weight>75</weight>
          <italic>true</italic>
          <bold>true</bold>
         </font>
@@ -820,7 +832,7 @@ QHeaderView::section:pressed {
      <item>
       <widget class="QTableWidget" name="autobusm_tableWidget">
        <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
+        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">
@@ -877,10 +889,10 @@ QHeaderView::section:pressed {
 </string>
        </property>
        <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        <enum>Qt::ScrollBarAsNeeded</enum>
        </property>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>187</number>
@@ -915,8 +927,6 @@ QHeaderView::section:pressed {
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
