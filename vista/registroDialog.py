@@ -1,7 +1,7 @@
 #imports de pyside
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
-                            QDialog, QPushButton, QLineEdit, QLabel)
+                            QDialog, QPushButton, QLineEdit, QLabel,QMessageBox)
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
@@ -64,7 +64,7 @@ class RegistroDialog(QDialog):
             
 
     def identificar(self):
-        self.done(self.ABRIR_INICIO_SESION_DIALOG)
+        self.reject()
 
     def registrarUsuario(self):
         phone = str(self.lineEdit_telefono.text())
@@ -73,8 +73,10 @@ class RegistroDialog(QDialog):
         respuesta_del_controlador = self.controlador.crearUsuario(phone,password)
         print(respuesta_del_controlador)
         if respuesta_del_controlador:
-            print('Registro exitoso')
+            QMessageBox.information(self,"Mensaje","Registro exitoso")
+            
         else:
-            print('Error al registrar.')
+            QMessageBox.critical(self,"Error de registro","Error al registrar al usuario.")
+
         
         

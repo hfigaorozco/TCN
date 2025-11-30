@@ -5,7 +5,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
-class MainUIEmpresa(QMainWindow):
+class MainUIUsuario(QMainWindow):
     def __init__(self):
         super().__init__()
         
@@ -15,45 +15,25 @@ class MainUIEmpresa(QMainWindow):
 
         #Varibales para que el recolector de basura no haga su chamba
         self.index_ui = None
-        self.pagina_autobuses_widget = None
-        self.pagina_corridas_widget = None
-        self.pagina_operadores_widget = None
-        self.pagina_pasajeros_widget = None
-        self.pagina_reservaciones_widget = None
-        self.pagina_rutas_widget = None
         
         # Cargar todas las interfaces
         self.cargar_interfaces()
-        self.setup_connections()
+        # self.setup_connections()
 
         # Mostrar MainWindow por defecto (índice 0)
         self.stacked_widget.setCurrentIndex(0)
-        self.setWindowTitle('Transportes Cuervo Negro - Administrador')
+        self.setWindowTitle('Transportes Cuervo Negro - Usuario')
         self.showMaximized()
 
-        
     def cargar_interfaces(self):
         # Cargar todas las interfaces
         base_path = os.path.dirname(__file__) # Ruta del directorio de main_ui.py
         # Cargar el resto de interfaces con rutas absolutas
-        self.index_ui = self.load_ui(os.path.join(base_path,'empresa','index.ui'))
-        self.pagina_reservaciones_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_reservaciones.ui'))
-        self.pagina_corridas_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_corridas.ui'))
-        self.pagina_autobuses_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pagina_autobuses.ui')) # Corregido a pagina_autobuses.ui
-        self.pagina_rutas_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_rutas.ui'))
-        self.pagina_operadores_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_operadores.ui'))
-        self.pagina_pasajeros_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_pasajeros.ui'))
+        self.index_ui = self.load_ui(os.path.join(base_path,'usuario','index.ui'))
                                                     
         # Agregar al stacked widget en orden (el índice 0 ya está ocupado por main_index_widget)
         if self.index_ui: self.stacked_widget.addWidget(self.index_ui) #Index 0
-        if self.pagina_reservaciones_widget: self.stacked_widget.addWidget(self.pagina_reservaciones_widget) # Index 1
-        if self.pagina_corridas_widget: self.stacked_widget.addWidget(self.pagina_corridas_widget)  # Index
-        if self.pagina_autobuses_widget: self.stacked_widget.addWidget(self.pagina_autobuses_widget) # Index
-        if self.pagina_rutas_widget: self.stacked_widget.addWidget(self.pagina_rutas_widget) # Index
-        if self.pagina_operadores_widget: self.stacked_widget.addWidget(self.pagina_operadores_widget) # Index 5
-        if self.pagina_pasajeros_widget: self.stacked_widget.addWidget(self.pagina_pasajeros_widget) # Index 6
-
-    
+        
     def load_ui(self, ui_path):
         file = QFile(ui_path)
         if not file.open(QFile.ReadOnly):
@@ -93,6 +73,7 @@ class MainUIEmpresa(QMainWindow):
             boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
             if boton_operadores:
                 boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
 
     def closeEvent(self, event: QCloseEvent):
         """
