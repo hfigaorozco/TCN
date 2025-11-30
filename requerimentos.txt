@@ -1,0 +1,8 @@
+# Bibliotecas de Acceso a Datos (DAO)
+mysql-connector-python==(aqui ponemos version)
+
+# Librerias para la Interfaz de Usuario (UI) - PySyde6
+PySide6==(aqui ponemos la version)
+
+# Herramientas de Desarrollo y Pruebas (Opcional, pero recomendado)
+
