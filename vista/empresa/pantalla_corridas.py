@@ -34,6 +34,10 @@ class PantallaCorridas(QWidget):
         self.ui = loader.load(ui_file, self)
         ui_file.close()
 
+        # Registrar la vista con el controlador
+        if self.controlador:
+            self.controlador.set_vista(self)
+
         # --- Integración del widget cargado en este QDialog ---
 
         # 5. Crear un layout para nuestro QDialog.
