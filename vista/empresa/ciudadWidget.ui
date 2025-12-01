@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>424</width>
-    <height>450</height>
+    <height>452</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>424</width>
+    <height>452</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>424</width>
+    <height>452</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -259,32 +271,57 @@ QLineEdit:read-only {
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-QTableWidget {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 15px;
-    gridline-color: #e0e0e0;
-    outline: none;
-    font-size: 13px;
-    color: #606266;
+    <string notr="true">QTableView {
+    background: #ffffff;
+    border: 2px solid #e6e8ec;
+    border-radius: 8px;
+    gridline-color: #f1f1f3;
+    selection-background-color: #e8f0fe;
+    selection-color: #1a1a1a;
+    font-size: 18px;
+    color: #333;
+    alternate-background-color: #fafbff;
+    show-grid: false;
 }
 
-QTableWidget::item {
-    padding: 8px;
-    border-bottom: 1px solid #f0f0f0;
+QTableView::item {
+    padding: 8px 12px;
+    border: 0px;
 }
 
-QTableWidget::item:selected {
-    background-color: #409eff;
-    color: white;
+QTableView::item:hover {
+    background: #f5f8ff;
 }
 
-QTableWidget::item:hover {
-    background-color: #f5f7fa;
+QTableView::item:selected {
+    background: #e2edff;
+    color: #1a1a1a;
 }
 
-/* Header con bordes redondeados solo arriba */
+QHeaderView::section {
+    background: #ffffff;
+    color: #6b7280;
+    padding: 10px 12px;
+    border: 0;
+    border-bottom: 2px solid #e6e8ec;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+QHeaderView::section:hover {
+    background: #f7f9fc;
+}
+
+QHeaderView {
+    background: #ffffff;
+    border: 0;
+}
+
+QTableView::indicator {
+    width: 18px;
+    height: 18px;
+}
+
 QHeaderView::section:first {
     border-top-left-radius: 15px;
 }
@@ -293,29 +330,35 @@ QHeaderView::section:last {
     border-top-right-radius: 15px;
 }
 
-QHeaderView::section {
-    background-color: #1061C4;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    padding: 8px 12px;
-    border: none;
-    border-right: 1px solid #0a4a9d;
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 0px;
 }
 
-QHeaderView::section:hover {
-    background-color: #0a4a9d;
+QScrollBar::handle:vertical {
+    background: #cfd3da;
+    min-height: 25px;
+    border-radius: 5px;
 }
 
-QHeaderView::section:pressed {
-    background-color: #083a7a;
-}</string>
+QScrollBar::handle:vertical:hover {
+    background: #b5bac4;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    background: none;
+    height: 0px;
+}
+</string>
    </property>
    <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
     <bool>true</bool>
