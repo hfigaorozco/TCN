@@ -525,240 +525,26 @@ border-bottom: 1px solid #E3E3E3;
      <string>Operadores</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_estatico_fitrorigen">
+   <widget class="QLineEdit" name="lineEdit_boperadores">
     <property name="geometry">
      <rect>
-      <x>1220</x>
-      <y>10</y>
-      <width>179</width>
-      <height>40</height>
+      <x>1260</x>
+      <y>30</y>
+      <width>311</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <pointsize>20</pointsize>
      </font>
     </property>
-    <property name="styleSheet">
-     <string notr="true">border:none;
-
-
-</string>
+    <property name="placeholderText">
+     <string>Buscar operador..</string>
     </property>
-    <property name="text">
-     <string>Filtrar por origen</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="ComboBox_filtrorigen">
-    <property name="geometry">
-     <rect>
-      <x>1220</x>
-      <y>50</y>
-      <width>179</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    color: #606266;
-    min-height: 18px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}
-</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>Todos</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tijuana</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Mexicali</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ensenada</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>San Felipe</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tecate</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>San Quintin</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_estatico_filtrodestino">
-    <property name="geometry">
-     <rect>
-      <x>1430</x>
-      <y>10</y>
-      <width>179</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border:none;
-
-
-</string>
-    </property>
-    <property name="text">
-     <string>Filtrar por destino</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="ComboBox_filtrodestino">
-    <property name="geometry">
-     <rect>
-      <x>1430</x>
-      <y>50</y>
-      <width>179</width>
-      <height>33</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    color: #606266;
-    min-height: 10px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}
-</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>Todos</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tijuana</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Mexicali</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ensenada</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>San Felipe</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Tecate</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>San Quintin</string>
-     </property>
-    </item>
    </widget>
   </widget>
-  <widget class="QTableWidget" name="o_tableWidget">
+  <widget class="QTableWidget" name="QTableWidget_operadores">
    <property name="geometry">
     <rect>
      <x>360</x>
