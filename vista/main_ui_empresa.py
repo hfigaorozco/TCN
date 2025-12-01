@@ -34,7 +34,13 @@ class MainUIEmpresa(QMainWindow):
         
         # Cargar todas las interfaces
         self.cargar_interfaces()
-        self.setup_connections()
+        self.setup_connections_pantalla_index()
+        self.setup_connections_pantalla_reservaciones()
+        self.setup_connections_pantalla_corridas()
+        self.setup_connections_pantalla_autobuses()
+        self.setup_connections_pantalla_rutas()
+        self.setup_connections_pantalla_operadores()
+        self.setup_connections_pantalla_pasajeros()
 
         # Mostrar MainWindow por defecto (índice 0)
         self.stacked_widget.setCurrentIndex(0)
@@ -76,7 +82,7 @@ class MainUIEmpresa(QMainWindow):
         return ui
 
     
-    def setup_connections(self):
+    def setup_connections_pantalla_index(self):
         '''Agregando evento a los botones de navegacion del index.ui'''
         # Si el boton de inicio es presionado
         if self.index_ui:
@@ -113,6 +119,239 @@ class MainUIEmpresa(QMainWindow):
             boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
             if boton_operadores:
                 boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))
+
+
+    def setup_connections_pantalla_reservaciones(self):
+        '''Agregando evento a los botones de navegacion del pantalla_reservaciones.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_reservaciones_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_reservaciones_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_reservaciones_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_reservaciones_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_reservaciones_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_reservaciones_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))
+
+
+    def setup_connections_pantalla_corridas(self):
+        '''Agregando evento a los botones de navegacion de pantalla_corridas.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_corridas_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_corridas_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_corridas_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_corridas_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_corridas_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_corridas_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))        
+
+
+    def setup_connections_pantalla_autobuses(self):
+        '''Agregando evento a los botones de navegacion de pantalla_autobuses.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_autobuses_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_autobuses_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_autobuses_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_autobuses_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_autobuses_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_autobuses_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))  
+
+
+    def setup_connections_pantalla_rutas(self):
+        '''Agregando evento a los botones de navegacion de pantalla_rutas.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_rutas_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_rutas_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_rutas_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_rutas_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_rutas_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_rutas_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))        
+
+
+    def setup_connections_pantalla_operadores(self):
+        '''Agregando evento a los botones de navegacion de pantalla_operadores.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_operadores_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_operadores_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_operadores_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_operadores_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_operadores_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_operadores_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5)) 
+
+    def setup_connections_pantalla_pasajeros(self):
+        '''Agregando evento a los botones de navegacion de pantalla_operadores.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.pagina_pasajeros_widget.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
+        
+        # Si el boton reservaciones es presionado
+        if self.pagina_reservaciones_widget:
+            boton_reservaciones = self.pagina_pasajeros_widget.findChild(QWidget, "boton_reservaciones")
+            if boton_reservaciones:
+                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+
+        # Si el boton corridas es presionado
+        if self.pagina_corridas_widget:
+            boton_corridas = self.pagina_pasajeros_widget.findChild(QWidget, "boton_corridas")
+            if boton_corridas:
+                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
+
+        # Si el boton autobuses es presionado
+        if self.pagina_autobuses_widget:
+            boton_autobuses = self.pagina_pasajeros_widget.findChild(QWidget, "boton_autobuses")
+            if boton_autobuses:
+                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
+
+        # Si el boton rutas es presionado
+        if self.pagina_rutas_widget:
+            boton_rutas = self.pagina_pasajeros_widget.findChild(QWidget, "boton_rutas")
+            if boton_rutas:
+                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+
+        # Si el boton operadores es presionado
+        if self.pagina_operadores_widget:
+            boton_operadores = self.pagina_pasajeros_widget.findChild(QWidget, "boton_operadores")
+            if boton_operadores:
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5)) 
 
 
     def closeEvent(self, event: QCloseEvent):
