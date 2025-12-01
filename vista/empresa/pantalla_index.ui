@@ -253,7 +253,7 @@ QPushButton:pressed {
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>../recursos/recursos empresa/casa-silueta-negra-sin-puerta.png</normaloff>../recursos/recursos empresa/casa-silueta-negra-sin-puerta.png</iconset>
+      <normaloff>recursos/recursos_empresa/casa-silueta-negra-sin-puerta.png</normaloff>recursos/recursos_empresa/casa-silueta-negra-sin-puerta.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -610,7 +610,7 @@ border:none;</string>
        <widget class="QDateEdit" name="dateEdit_filtroFecha">
         <property name="maximumDateTime">
          <datetime>
-          <hour>23</hour>
+          <hour>7</hour>
           <minute>59</minute>
           <second>59</second>
           <year>2030</year>
@@ -620,7 +620,7 @@ border:none;</string>
         </property>
         <property name="minimumDateTime">
          <datetime>
-          <hour>8</hour>
+          <hour>16</hour>
           <minute>0</minute>
           <second>0</second>
           <year>2025</year>
