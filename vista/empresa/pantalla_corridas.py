@@ -8,7 +8,7 @@ from PySide6.QtGui import QCloseEvent
 from utilidades.validaciones import Validaciones
 
 
-class PantallaReservaciones(QWidget):
+class PantallaCorridas(QWidget):
 
     def __init__(self, controlador, parent=None):
         super().__init__(parent)
@@ -16,9 +16,10 @@ class PantallaReservaciones(QWidget):
 
         # Crear una instancia del loader
         loader = QUiLoader()
+        
 
         # Esto construye la ruta correcta sin importar desde donde se ejecute el script
-        path = os.path.join(os.path.dirname(__file__),"pantalla_reservaciones.ui")
+        path = os.path.join(os.path.dirname(__file__),"pantalla_corridas.ui")
         ui_file = QFile(path)
 
         # 3. Abrir el archivo.
@@ -49,14 +50,12 @@ class PantallaReservaciones(QWidget):
         self.resize(self.ui.size())
 
         #Obteniendo componentes del .ui
-        self.boton_crear_reservacion = self.ui.findChild(QPushButton,'boton_crear_reservacion')
-        self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
+        # self.boton_crear_reservacion = self.ui.findChild(QPushButton,'boton_crear_reservacion')
+        # self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
         
-        
-        if self.boton_crear_reservacion:
+        # if self.boton_crear_reservacion:
             # Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
-            self.boton_crear_reservacion.clicked.connect(self.crearReservacion)
-
+            # self.boton_crear_reservacion.clicked.connect(self.crearReservacion)
         
 
     def crearReservacion(self):

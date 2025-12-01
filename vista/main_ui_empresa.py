@@ -5,9 +5,18 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
+#importaciones de las pantallas de vista empresa y vista usuario
+from vista.empresa.pantalla_reservaciones import PantallaReservaciones
+from vista.empresa.pantalla_corridas import PantallaCorridas
+from vista.empresa.pantalla_autobuses import PantallaAutobuses
+from vista.empresa.pantalla_rutas import PantallaRutas
+from vista.empresa.pantalla_operadores import PantallaOperadores
+from vista.empresa.pantalla_pasajeros import PantallaPasajeros
+
 class MainUIEmpresa(QMainWindow):
-    def __init__(self):
+    def __init__(self, app_manager):
         super().__init__()
+        self.app_manager = app_manager
         
         # Configurar stacked widget
         self.stacked_widget = QStackedWidget()
@@ -37,12 +46,12 @@ class MainUIEmpresa(QMainWindow):
         base_path = os.path.dirname(__file__) # Ruta del directorio de main_ui.py
         # Cargar el resto de interfaces con rutas absolutas
         self.index_ui = self.load_ui(os.path.join(base_path,'empresa','index.ui'))
-        self.pagina_reservaciones_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_reservaciones.ui'))
-        self.pagina_corridas_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_corridas.ui'))
-        self.pagina_autobuses_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pagina_autobuses.ui')) # Corregido a pagina_autobuses.ui
-        self.pagina_rutas_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_rutas.ui'))
-        self.pagina_operadores_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_operadores.ui'))
-        self.pagina_pasajeros_widget = self.load_ui(os.path.join(base_path, 'empresa', 'pantalla_pasajeros.ui'))
+        self.pagina_reservaciones_widget = PantallaReservaciones(self.app_manager.controlador_pr)
+        self.pagina_corridas_widget = PantallaCorridas(self.app_manager.controlador_pc)
+        self.pagina_autobuses_widget = PantallaAutobuses(self.app_manager.controlador_pa)
+        self.pagina_rutas_widget = PantallaRutas(self.app_manager.controlador_prutas)
+        self.pagina_operadores_widget = PantallaOperadores(self.app_manager.controlador_po)
+        self.pagina_pasajeros_widget = PantallaPasajeros(self.app_manager.controlador_pp)
                                                     
         # Agregar al stacked widget en orden (el índice 0 ya está ocupado por main_index_widget)
         if self.index_ui: self.stacked_widget.addWidget(self.index_ui) #Index 0

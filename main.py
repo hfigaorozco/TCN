@@ -29,11 +29,23 @@ from utilidades.app_manager import AppManager
 #importando dao's
 from dao.usuario_dao import UsuarioDAO
 from dao.reservacion_dao import ReservacionDAO 
+from dao.corrida_dao import CorridaDAO
+from dao.autobus_dao import AutobusDAO
+from dao.ruta_dao import RutaDAO
+from dao.operador_dao import OperadorDAO
+from dao.pasajero_dao import PasajeroDAO
 
 #importando controladores
 from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
 from controladores.controlador_registro_dialog import ControladorRegistroDialog
 from controladores.controlador_pantalla_reservaciones import ControlardorPantallaReservaciones
+from controladores.controlador_pantalla_corridas import ControladorPantallaCorridas
+from controladores.controlador_pantalla_autobuses import ControladorPantallaAutobuses
+from controladores.controlador_pantalla_rutas import ControladorPantallaRutas
+from controladores.controlador_pantalla_operadores import ControladorPantallaOperadores
+from controladores.controlador_pantalla_pasajeros import ControladorPantallaPasajeros
+
+from utilidades.validaciones import Validaciones
 
 def main():
     print('Iniciando Transportes Cuervo Negro')
@@ -52,15 +64,27 @@ def main():
 
     #Iniciando dao's
     usuario_dao = UsuarioDAO()
-    reservaciones_dao = ReservacionDAO()
+    reservacion_dao = ReservacionDAO()
+    corrida_dao = CorridaDAO()
+    autobus_dao = AutobusDAO()
+    ruta_dao = RutaDAO()
+    operador_dao = OperadorDAO()
+    pasajero_dao = PasajeroDAO()
 
     #Iniciando controladores
     controlador_isd = ControladorInicioSesionDialog(usuario_dao=usuario_dao)
     controlador_rd = ControladorRegistroDialog(usuario_dao=usuario_dao)
-    controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservaciones_dao)
+    controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservacion_dao)
+    controlador_pc = ControladorPantallaCorridas(corrida_dao=corrida_dao)
+    controlador_pa = ControladorPantallaAutobuses(autobus_dao=autobus_dao)
+    controlador_prutas = ControladorPantallaRutas(ruta_dao=ruta_dao)
+    controlador_po = ControladorPantallaOperadores(operador_dao=operador_dao)
+    controlador_pp = ControladorPantallaPasajeros(pasajero_dao=pasajero_dao)
 
     #iniciando app manager
-    app_manager = AppManager(controlador_isd=controlador_isd, controlador_rd=controlador_rd, controlador_pr=controlador_pr)
+    app_manager = AppManager(controlador_isd=controlador_isd, controlador_rd=controlador_rd, controlador_pr=controlador_pr,
+                            controlador_pc=controlador_pc, controlador_pa=controlador_pa, controlador_prutas=controlador_prutas,
+                            controlador_po=controlador_po, controlador_pp=controlador_pp)
 
     #iniciando UI
     print('Iniciando UI')
@@ -76,7 +100,7 @@ def main():
         if resultado == InicioSesionDialog.ENTRAR_VISTA_EMPRESA:
             # Si el login es exitoso, salimos del bucle para abrir la app principal
             print("Abriendo la vista empresa...")
-            main_window = MainUIEmpresa()
+            main_window = MainUIEmpresa(app_manager)
             main_window.show()
             exit_code = app.exec() #Inica el bucle de la app   
             break 
