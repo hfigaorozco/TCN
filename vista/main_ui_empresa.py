@@ -12,6 +12,7 @@ from vista.empresa.pantalla_autobuses import PantallaAutobuses
 from vista.empresa.pantalla_rutas import PantallaRutas
 from vista.empresa.pantalla_operadores import PantallaOperadores
 from vista.empresa.pantalla_pasajeros import PantallaPasajeros
+from vista.empresa.pantalla_index import PantallaIndex
 
 class MainUIEmpresa(QMainWindow):
     def __init__(self, app_manager):
@@ -45,7 +46,7 @@ class MainUIEmpresa(QMainWindow):
         # Cargar todas las interfaces
         base_path = os.path.dirname(__file__) # Ruta del directorio de main_ui.py
         # Cargar el resto de interfaces con rutas absolutas
-        self.index_ui = self.load_ui(os.path.join(base_path,'empresa','index.ui'))
+        self.index_ui = PantallaIndex(self.app_manager.controlador_index)
         self.pagina_reservaciones_widget = PantallaReservaciones(self.app_manager.controlador_pr)
         self.pagina_corridas_widget = PantallaCorridas(self.app_manager.controlador_pc)
         self.pagina_autobuses_widget = PantallaAutobuses(self.app_manager.controlador_pa)
@@ -76,32 +77,43 @@ class MainUIEmpresa(QMainWindow):
 
     
     def setup_connections(self):
-        # Agregando evento a los botones de navegacion del index.ui
+        '''Agregando evento a los botones de navegacion del index.ui'''
+        # Si el boton de inicio es presionado
+        if self.index_ui:
+            boton_inicio = self.index_ui.findChild(QWidget, "boton_inicio")
+            if boton_inicio:
+                boton_inicio.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
         
+        # Si el boton reservaciones es presionado
         if self.pagina_reservaciones_widget:
             boton_reservaciones = self.index_ui.findChild(QWidget, "boton_reservaciones")
             if boton_reservaciones:
                 boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
 
+        # Si el boton corridas es presionado
         if self.pagina_corridas_widget:
             boton_corridas = self.index_ui.findChild(QWidget, "boton_corridas")
             if boton_corridas:
                 boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
 
+        # Si el boton autobuses es presionado
         if self.pagina_autobuses_widget:
             boton_autobuses = self.index_ui.findChild(QWidget, "boton_autobuses")
             if boton_autobuses:
                 boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
 
+        # Si el boton rutas es presionado
         if self.pagina_rutas_widget:
             boton_rutas = self.index_ui.findChild(QWidget, "boton_rutas")
             if boton_rutas:
                 boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
 
+        # Si el boton operadores es presionado
         if self.pagina_operadores_widget:
             boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
             if boton_operadores:
-                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))
+
 
     def closeEvent(self, event: QCloseEvent):
         """

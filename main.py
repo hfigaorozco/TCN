@@ -27,6 +27,7 @@ from vista.main_ui_usuario import MainUIUsuario
 from utilidades.app_manager import AppManager
 
 #importando dao's
+from dao.index_dao import IndexDAO
 from dao.usuario_dao import UsuarioDAO
 from dao.reservacion_dao import ReservacionDAO 
 from dao.corrida_dao import CorridaDAO
@@ -36,6 +37,7 @@ from dao.operador_dao import OperadorDAO
 from dao.pasajero_dao import PasajeroDAO
 
 #importando controladores
+from controladores.controlador_index import ControladorIndex
 from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
 from controladores.controlador_registro_dialog import ControladorRegistroDialog
 from controladores.controlador_pantalla_reservaciones import ControlardorPantallaReservaciones
@@ -63,6 +65,7 @@ def main():
         return #terminando la ejecucion del programa
 
     #Iniciando dao's
+    index_dao = IndexDAO()
     usuario_dao = UsuarioDAO()
     reservacion_dao = ReservacionDAO()
     corrida_dao = CorridaDAO()
@@ -72,6 +75,7 @@ def main():
     pasajero_dao = PasajeroDAO()
 
     #Iniciando controladores
+    controlador_index = ControladorIndex(index_dao=index_dao)
     controlador_isd = ControladorInicioSesionDialog(usuario_dao=usuario_dao)
     controlador_rd = ControladorRegistroDialog(usuario_dao=usuario_dao)
     controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservacion_dao)
@@ -82,9 +86,9 @@ def main():
     controlador_pp = ControladorPantallaPasajeros(pasajero_dao=pasajero_dao)
 
     #iniciando app manager
-    app_manager = AppManager(controlador_isd=controlador_isd, controlador_rd=controlador_rd, controlador_pr=controlador_pr,
-                            controlador_pc=controlador_pc, controlador_pa=controlador_pa, controlador_prutas=controlador_prutas,
-                            controlador_po=controlador_po, controlador_pp=controlador_pp)
+    app_manager = AppManager(controlador_index=controlador_index, controlador_isd=controlador_isd, controlador_rd=controlador_rd, 
+                            controlador_pr=controlador_pr, controlador_pc=controlador_pc, controlador_pa=controlador_pa, 
+                            controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp)
 
     #iniciando UI
     print('Iniciando UI')
