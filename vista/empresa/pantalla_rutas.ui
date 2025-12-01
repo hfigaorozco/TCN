@@ -377,7 +377,7 @@ QPushButton:pressed {
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);</string>
    </property>
-   <widget class="QWidget" name="widget_opbotones_6" native="true">
+   <widget class="QWidget" name="widget_opbotones" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -398,7 +398,7 @@ color: #606266;
 
 </string>
     </property>
-    <widget class="QPushButton" name="boton_agregaruta_3">
+    <widget class="QPushButton" name="boton_agregaruta">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -442,7 +442,7 @@ QPushButton:pressed {
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="boton_editaruta_2">
+    <widget class="QPushButton" name="boton_editaruta">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -486,7 +486,7 @@ QPushButton:pressed {
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="boton_agregaruta_4">
+    <widget class="QPushButton" name="boton_ciudades">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -531,7 +531,7 @@ QPushButton:pressed {
      </property>
     </widget>
    </widget>
-   <widget class="QTableWidget" name="QtableWidget_corridas_6">
+   <widget class="QTableWidget" name="QtableWidget_rutas">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -634,6 +634,9 @@ QScrollBar::sub-line {
 }
 </string>
     </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
     <property name="horizontalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
@@ -650,6 +653,9 @@ QScrollBar::sub-line {
      <number>325</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
      <bool>false</bool>
     </attribute>
     <column>
@@ -697,7 +703,7 @@ QScrollBar::sub-line {
      </property>
     </column>
    </widget>
-   <widget class="QWidget" name="widget_opfiltro_6" native="true">
+   <widget class="QWidget" name="widget_opfiltro" native="true">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -718,7 +724,7 @@ border-bottom: 1px solid #E3E3E3;
 
 </string>
     </property>
-    <widget class="QLabel" name="label_estatico_rutas_2">
+    <widget class="QLabel" name="label_estatico_rutas">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -744,7 +750,7 @@ border-bottom: 1px solid #E3E3E3;
       <string>Rutas</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="label_estatico_forigen">
      <property name="geometry">
       <rect>
        <x>1220</x>
@@ -773,7 +779,7 @@ border-bottom: 1px solid #E3E3E3;
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="fdestino_comboBox_2">
+    <widget class="QComboBox" name="comboBox_forigen">
      <property name="geometry">
       <rect>
        <x>1220</x>
@@ -860,7 +866,7 @@ QComboBox QAbstractItemView {
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QLabel" name="label_estatico_fdestino">
      <property name="geometry">
       <rect>
        <x>1430</x>
@@ -889,7 +895,7 @@ QComboBox QAbstractItemView {
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="forigen_comboBox_2">
+    <widget class="QComboBox" name="comboBox_fdestino">
      <property name="geometry">
       <rect>
        <x>1430</x>

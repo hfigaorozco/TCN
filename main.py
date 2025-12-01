@@ -35,6 +35,7 @@ from dao.autobus_dao import AutobusDAO
 from dao.ruta_dao import RutaDAO
 from dao.operador_dao import OperadorDAO
 from dao.pasajero_dao import PasajeroDAO
+from dao.ciudad_dao import CiudadesDAO # Agregado
 
 #importando controladores
 from controladores.controlador_index import ControladorIndex
@@ -73,6 +74,7 @@ def main():
     ruta_dao = RutaDAO()
     operador_dao = OperadorDAO()
     pasajero_dao = PasajeroDAO()
+    ciudad_dao = CiudadesDAO() # Agregado
 
     #Iniciando controladores
     controlador_index = ControladorIndex(index_dao=index_dao)
@@ -81,7 +83,7 @@ def main():
     controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservacion_dao)
     controlador_pc = ControladorPantallaCorridas(corrida_dao=corrida_dao)
     controlador_pa = ControladorPantallaAutobuses(autobus_dao=autobus_dao)
-    controlador_prutas = ControladorPantallaRutas(ruta_dao=ruta_dao)
+    controlador_prutas = ControladorPantallaRutas(ruta_dao=ruta_dao, ciudad_dao=ciudad_dao) # Modificado
     controlador_po = ControladorPantallaOperadores(operador_dao=operador_dao)
     controlador_pp = ControladorPantallaPasajeros(pasajero_dao=pasajero_dao)
 
