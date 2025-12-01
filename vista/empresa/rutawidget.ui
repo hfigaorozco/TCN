@@ -93,36 +93,6 @@ QComboBox QAbstractItemView {
     /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
 }</string>
       </property>
-      <item>
-       <property name="text">
-        <string>Tijuana</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Mexicali</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ensenada</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>San Felipe</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Tecate</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>San Quintin</string>
-       </property>
-      </item>
      </widget>
     </item>
    </layout>
@@ -192,36 +162,6 @@ QComboBox QAbstractItemView {
     /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
 }</string>
       </property>
-      <item>
-       <property name="text">
-        <string>Tijuana</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Mexicali</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Ensenada</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>San Felipe</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Tecate</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>San Quintin</string>
-       </property>
-      </item>
      </widget>
     </item>
    </layout>
