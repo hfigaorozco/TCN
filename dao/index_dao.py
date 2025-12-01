@@ -1,0 +1,2 @@
+class IndexDAO:
+    pass
