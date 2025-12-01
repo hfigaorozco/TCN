@@ -4,7 +4,7 @@
     2. Hace las instancias e inyecta estas dependencias/instancias
     3. Inicia el UI
     4. Cierra el UI
-    5. Cieera la conexion con la DB que todos usaron.
+    5. Cierra la conexion con la DB que todos usaron.
     6. Termina la ejecucion del sistema.
 """
 
