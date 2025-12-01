@@ -18,7 +18,7 @@ class PantallaIndex(QWidget):
         loader = QUiLoader()
 
         # Esto construye la ruta correcta sin importar desde donde se ejecute el script
-        path = os.path.join(os.path.dirname(__file__),"index.ui")
+        path = os.path.join(os.path.dirname(__file__),"pantalla_index.ui")
         print(path)
         ui_file = QFile(path)
 

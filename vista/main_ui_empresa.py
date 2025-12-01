@@ -12,7 +12,7 @@ from vista.empresa.pantalla_autobuses import PantallaAutobuses
 from vista.empresa.pantalla_rutas import PantallaRutas
 from vista.empresa.pantalla_operadores import PantallaOperadores
 from vista.empresa.pantalla_pasajeros import PantallaPasajeros
-from vista.empresa.index import PantallaIndex
+from vista.empresa.pantalla_index import PantallaIndex
 
 class MainUIEmpresa(QMainWindow):
     def __init__(self, app_manager):
