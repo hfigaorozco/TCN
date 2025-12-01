@@ -101,7 +101,7 @@ class MainUIEmpresa(QMainWindow):
         if self.pagina_operadores_widget:
             boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
             if boton_operadores:
-                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))
 
     def closeEvent(self, event: QCloseEvent):
         """
