@@ -47,6 +47,7 @@ from controladores.controlador_pantalla_autobuses import ControladorPantallaAuto
 from controladores.controlador_pantalla_rutas import ControladorPantallaRutas
 from controladores.controlador_pantalla_operadores import ControladorPantallaOperadores
 from controladores.controlador_pantalla_pasajeros import ControladorPantallaPasajeros
+from controladores.controlador_pantalla_ciudad import ControladorPantallaCiudad # Agregado
 
 from utilidades.validaciones import Validaciones
 
@@ -83,15 +84,20 @@ def main():
     controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservacion_dao)
     controlador_pc = ControladorPantallaCorridas(corrida_dao=corrida_dao)
     controlador_pa = ControladorPantallaAutobuses(autobus_dao=autobus_dao)
-    controlador_prutas = ControladorPantallaRutas(ruta_dao=ruta_dao, ciudad_dao=ciudad_dao) # Modificado
+    # controlador_prutas ahora se inicializa sin app_manager
+    controlador_prutas = ControladorPantallaRutas(ruta_dao=ruta_dao, ciudad_dao=ciudad_dao) 
     controlador_po = ControladorPantallaOperadores(operador_dao=operador_dao)
     controlador_pp = ControladorPantallaPasajeros(pasajero_dao=pasajero_dao)
+    controlador_pcidad = ControladorPantallaCiudad(ciudad_dao=ciudad_dao) 
 
     #iniciando app manager
     app_manager = AppManager(controlador_index=controlador_index, controlador_isd=controlador_isd, controlador_rd=controlador_rd, 
                             controlador_pr=controlador_pr, controlador_pc=controlador_pc, controlador_pa=controlador_pa, 
-                            controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp)
-
+                            controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp,
+                            controlador_pcidad=controlador_pcidad) 
+    
+    # Inyectar app_manager en los controladores que lo necesitan
+    controlador_prutas.set_app_manager(app_manager) # Inyectar app_manager en controlador_prutas
     #iniciando UI
     print('Iniciando UI')
     

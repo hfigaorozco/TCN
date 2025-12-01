@@ -36,8 +36,12 @@ class RutaDAO:
         Inserta una nueva ruta en la base de datos.
         Devuelve True si tiene éxito, "duplicado" si la ruta ya existe, o False si hay un error.
         """
+        print(f"DAO: Intentando insertar ruta con Origen={codigo_origen}, Destino={codigo_destino}, Distancia={distancia}")
         try:
             conn = Connection.getConnection()
+            if not conn or not conn.is_connected():
+                print("DAO: Conexión a la base de datos no disponible.")
+                return False
             cursor = conn.cursor()
             
             # Verificar si la ruta de ida o vuelta ya existe
@@ -46,16 +50,19 @@ class RutaDAO:
             
             cursor.execute("SELECT codigo FROM ruta WHERE codigo = %s OR codigo = %s", (codigo_ida, codigo_vuelta))
             if cursor.fetchone():
+                print(f"DAO: Ruta {codigo_ida} o {codigo_vuelta} ya existe.")
                 return "duplicado"
 
             # Insertar la nueva ruta
             cursor.execute("INSERT INTO ruta (codigo, ciudadOrigen, ciudadDestino, distancia) VALUES (%s, %s, %s, %s)",
                            (codigo_ida, codigo_origen, codigo_destino, distancia))
             conn.commit()
+            print(f"DAO: Ruta {codigo_ida} insertada con éxito.")
             return True
 
         except Error as e:
-            conn.rollback()
+            if 'conn' in locals() and conn.is_connected():
+                conn.rollback()
             print(f"Error en DAO al insertar ruta: {e}")
             return False
         finally:
@@ -67,15 +74,21 @@ class RutaDAO:
         Actualiza la distancia de una ruta existente.
         Devuelve True si tiene éxito, False si hay un error.
         """
+        print(f"DAO: Intentando actualizar distancia de ruta {codigo_ruta} a {distancia}")
         try:
             conn = Connection.getConnection()
+            if not conn or not conn.is_connected():
+                print("DAO: Conexión a la base de datos no disponible.")
+                return False
             cursor = conn.cursor()
             cursor.execute("UPDATE ruta SET distancia = %s WHERE codigo = %s", (distancia, codigo_ruta))
             conn.commit()
+            print(f"DAO: Distancia de ruta {codigo_ruta} actualizada con éxito.")
             return True
 
         except Error as e:
-            conn.rollback()
+            if 'conn' in locals() and conn.is_connected():
+                conn.rollback()
             print(f"Error en DAO al actualizar distancia: {e}")
             return False
         finally:

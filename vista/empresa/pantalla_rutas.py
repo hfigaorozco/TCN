@@ -1,7 +1,7 @@
 import os
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QDialog, QHeaderView, QVBoxLayout, QComboBox, QLineEdit, QPushButton
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QDialog, QHeaderView, QVBoxLayout, QComboBox, QLineEdit, QPushButton, QLabel, QAbstractItemView
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile, QIODevice
+from PySide6.QtCore import QFile, QIODevice, Qt
 
 from vista.empresa.ciudadWidget import CiudadWidget
 
@@ -26,6 +26,8 @@ class PantallaRutas(QWidget):
 
         # Configurar la tabla
         self.ui.QtableWidget_rutas.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.QtableWidget_rutas.setEditTriggers(QAbstractItemView.NoEditTriggers) # Deshabilitar edición de celdas
+        self.ui.QtableWidget_rutas.setSelectionBehavior(QAbstractItemView.SelectRows) # Mantener selección por fila
 
         # Conectar señales a slots
         self.ui.boton_agregaruta.clicked.connect(self.abrir_dialogo_agregar)
@@ -68,10 +70,22 @@ class PantallaRutas(QWidget):
         self.ui.QtableWidget_rutas.setRowCount(0)
         for fila_idx, ruta in enumerate(rutas):
             self.ui.QtableWidget_rutas.insertRow(fila_idx)
-            self.ui.QtableWidget_rutas.setItem(fila_idx, 0, QTableWidgetItem(str(ruta.get_codigo())))
-            self.ui.QtableWidget_rutas.setItem(fila_idx, 1, QTableWidgetItem(ruta.get_ciudadorigen()))
-            self.ui.QtableWidget_rutas.setItem(fila_idx, 2, QTableWidgetItem(ruta.get_ciudaddestino()))
-            self.ui.QtableWidget_rutas.setItem(fila_idx, 3, QTableWidgetItem(f"{ruta.get_distancia()} km"))
+            
+            item_codigo = QTableWidgetItem(str(ruta.get_codigo()))
+            item_codigo.setTextAlignment(Qt.AlignCenter)
+            self.ui.QtableWidget_rutas.setItem(fila_idx, 0, item_codigo)
+            
+            item_origen = QTableWidgetItem(ruta.get_ciudadorigen())
+            item_origen.setTextAlignment(Qt.AlignCenter)
+            self.ui.QtableWidget_rutas.setItem(fila_idx, 1, item_origen)
+            
+            item_destino = QTableWidgetItem(ruta.get_ciudaddestino())
+            item_destino.setTextAlignment(Qt.AlignCenter)
+            self.ui.QtableWidget_rutas.setItem(fila_idx, 2, item_destino)
+            
+            item_distancia = QTableWidgetItem(f"{ruta.get_distancia()} km")
+            item_distancia.setTextAlignment(Qt.AlignCenter)
+            self.ui.QtableWidget_rutas.setItem(fila_idx, 3, item_distancia)
 
     def llenar_filtros_ciudades(self):
         """Puebla los ComboBox de filtro con ciudades únicas."""
@@ -110,6 +124,7 @@ class PantallaRutas(QWidget):
 
     def abrir_dialogo_agregar(self):
         """Abre un diálogo para agregar una nueva ruta."""
+        print("Vista: Abriendo diálogo para agregar ruta.")
         try:
             dialogo = QDialog(self)
             
@@ -139,12 +154,14 @@ class PantallaRutas(QWidget):
             if dialogo.exec():
                 nombre_origen = combo_origen.currentText()
                 nombre_destino = combo_destino.currentText()
-                distancia = widget_dialogo.findChild(QLineEdit, "lineEdit_distancia").text().strip()
+                distancia = widget_dialogo.findChild(QLineEdit, "txt_distancia").text().strip()
 
                 codigo_origen = self.ciudades_map.get(nombre_origen)
                 codigo_destino = self.ciudades_map.get(nombre_destino)
+                print(f"Vista: Datos del diálogo de agregar - Origen: {nombre_origen} ({codigo_origen}), Destino: {nombre_destino} ({codigo_destino}), Distancia: {distancia}")
 
                 resultado = self.controlador.agregar_nueva_ruta(codigo_origen, codigo_destino, distancia)
+                print(f"Vista: Resultado del controlador al agregar ruta: {resultado}")
 
                 if resultado is True:
                     self.cargar_datos_iniciales()
@@ -159,6 +176,7 @@ class PantallaRutas(QWidget):
 
     def abrir_dialogo_editar(self):
         """Abre un diálogo para editar la distancia de una ruta seleccionada."""
+        print("Vista: Abriendo diálogo para editar ruta.")
         fila_seleccionada = self.ui.QtableWidget_rutas.currentRow()
         if fila_seleccionada == -1:
             QMessageBox.warning(self, "Advertencia", "Selecciona una ruta para editar.")
@@ -168,6 +186,7 @@ class PantallaRutas(QWidget):
         origen_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 1).text()
         destino_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 2).text()
         distancia_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 3).text().replace(" km", "")
+        print(f"Vista: Ruta seleccionada para editar - Código: {codigo_ruta}, Origen: {origen_actual}, Destino: {destino_actual}, Distancia: {distancia_actual}")
 
         try:
             dialogo = QDialog(self)
@@ -185,25 +204,40 @@ class PantallaRutas(QWidget):
             layout.addWidget(widget_dialogo)
             dialogo.setWindowTitle(f"Editar Distancia - {origen_actual} a {destino_actual}")
 
+            # Establecer el título del Label en el diálogo
+            label_titulo = widget_dialogo.findChild(QLabel, "label_estatico_titulo")
+            if label_titulo:
+                label_titulo.setText("Editar Ruta")
+                label_titulo.setAlignment(Qt.AlignCenter) # Centrar el texto
+
             combo_origen = widget_dialogo.findChild(QComboBox, "ComboBox_origen")
             combo_destino = widget_dialogo.findChild(QComboBox, "ComboBox_destino")
-            line_distancia = widget_dialogo.findChild(QLineEdit, "lineEdit_distancia")
+            line_distancia = widget_dialogo.findChild(QLineEdit, "txt_distancia") 
             
+            # Limpiar ComboBox y establecer el texto actual
+            combo_origen.clear()
             combo_origen.addItem(origen_actual)
-            combo_destino.addItem(destino_actual)
+            combo_origen.setCurrentText(origen_actual) # Asegura que esté seleccionado si no es el primer elemento
             combo_origen.setEnabled(False)
+
+            combo_destino.clear()
+            combo_destino.addItem(destino_actual)
+            combo_destino.setCurrentText(destino_actual) # Asegura que esté seleccionado si no es el primer elemento
             combo_destino.setEnabled(False)
+
             line_distancia.setText(distancia_actual)
             
             boton_actualizar = widget_dialogo.findChild(QPushButton, "boton_agregar")
-            boton_actualizar.setText("Actualizar Distancia")
+            boton_actualizar.setText("Editar Ruta") # Cambiar a "Editar Ruta"
             boton_actualizar.clicked.connect(dialogo.accept)
             widget_dialogo.findChild(QPushButton, "boton_cancelar").clicked.connect(dialogo.reject)
 
             if dialogo.exec():
                 nueva_distancia = line_distancia.text().strip()
+                print(f"Vista: Nueva distancia ingresada en el diálogo: {nueva_distancia}")
                 
                 resultado = self.controlador.actualizar_distancia_ruta(codigo_ruta, nueva_distancia)
+                print(f"Vista: Resultado del controlador al actualizar ruta: {resultado}")
 
                 if resultado is True:
                     self.cargar_datos_iniciales()
@@ -215,6 +249,27 @@ class PantallaRutas(QWidget):
             QMessageBox.critical(self, "Error", f"No se pudo abrir el diálogo de edición: {e}")
 
     def abrir_widget_ciudades(self):
-        """Abre el widget para administrar las ciudades."""
-        self.ciudad_widget_instance = CiudadWidget(self)
-        self.ciudad_widget_instance.show()
+        """Abre el widget para administrar las ciudades como un diálogo modal."""
+        try:
+            dialogo_ciudades = QDialog(self)
+            dialogo_ciudades.setWindowTitle("Administrar Ciudades")
+            
+            # Crear una instancia de CiudadWidget pasándole el controlador y el diálogo como parent
+            ciudad_widget_instance = CiudadWidget(self.controlador.app_manager.controlador_pcidad, dialogo_ciudades)
+            
+            # Crear un layout para el diálogo y añadir el CiudadWidget
+            layout_dialogo = QVBoxLayout(dialogo_ciudades)
+            layout_dialogo.addWidget(ciudad_widget_instance)
+            dialogo_ciudades.setLayout(layout_dialogo)
+            
+            # Establecer tamaño fijo para el diálogo
+            dialogo_ciudades.setFixedSize(440, 465)
+            
+            # Ejecutar el diálogo de forma modal
+            dialogo_ciudades.exec()
+            
+            # Después de cerrar el diálogo, recargar los datos de rutas por si se modificaron ciudades
+            self.cargar_datos_iniciales()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"No se pudo abrir el diálogo de ciudades: {e}")

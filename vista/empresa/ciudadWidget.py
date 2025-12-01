@@ -1,14 +1,14 @@
 import os
-from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QHeaderView
+from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QHeaderView, QAbstractItemView, QComboBox, QLineEdit, QPushButton, QLabel
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice
 
-from controladores.controlador_ciudad import ControladorCiudad
+from controladores.controlador_pantalla_ciudad import ControladorPantallaCiudad
 
 class CiudadWidget(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, controlador, parent=None):
         super().__init__(parent)
-        self.controlador = ControladorCiudad()
+        self.controlador = controlador
         self.ui = self.load_ui()
         self.setup_ui()
 
@@ -27,8 +27,8 @@ class CiudadWidget(QWidget):
         
         # Configurar la tabla
         self.ui.tableWidget_ciudad.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.ui.tableWidget_ciudad.setSelectionBehavior(QWidget.SelectRows)
-        self.ui.tableWidget_ciudad.setEditTriggers(QWidget.NoEditTriggers)
+        self.ui.tableWidget_ciudad.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.ui.tableWidget_ciudad.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         # Conectar señales a slots
         self.ui.boton_agregar.clicked.connect(self.agregar_ciudad)
@@ -51,10 +51,13 @@ class CiudadWidget(QWidget):
                 self.ui.tableWidget_ciudad.setItem(i, 1, QTableWidgetItem(ciudad.get_nombre()))
 
     def agregar_ciudad(self):
+        print("CiudadWidget: Iniciando agregar_ciudad.")
         codigo = self.ui.lineEdit_codigo.text()
         nombre = self.ui.lineEdit_ciudad.text()
+        print(f"CiudadWidget: Intentando agregar ciudad - Código: '{codigo}', Nombre: '{nombre}'")
         
-        resultado = self.controlador.agregar_nueva_ciudad(codigo, nombre)
+        resultado = self.controlador.insertar_ciudad(codigo, nombre)
+        print(f"CiudadWidget: Resultado del controlador al agregar: {resultado}")
         
         if resultado is True:
             QMessageBox.information(self, "Éxito", "Ciudad agregada correctamente.")
@@ -68,6 +71,7 @@ class CiudadWidget(QWidget):
             QMessageBox.critical(self, "Error", resultado)
 
     def editar_ciudad(self):
+        print("CiudadWidget: Iniciando editar_ciudad.")
         fila_seleccionada = self.ui.tableWidget_ciudad.currentRow()
         if fila_seleccionada == -1:
             QMessageBox.warning(self, "Advertencia", "Selecciona una ciudad para editar.")
@@ -76,8 +80,10 @@ class CiudadWidget(QWidget):
         codigo_actual = self.ui.tableWidget_ciudad.item(fila_seleccionada, 0).text()
         nuevo_codigo = self.ui.lineEdit_codigo.text()
         nuevo_nombre = self.ui.lineEdit_ciudad.text()
+        print(f"CiudadWidget: Intentando editar ciudad - Código actual: '{codigo_actual}', Nuevo Código: '{nuevo_codigo}', Nuevo Nombre: '{nuevo_nombre}'")
 
         resultado = self.controlador.actualizar_ciudad(codigo_actual, nuevo_codigo, nuevo_nombre)
+        print(f"CiudadWidget: Resultado del controlador al editar: {resultado}")
 
         if resultado is True:
             QMessageBox.information(self, "Éxito", "Ciudad actualizada correctamente.")
@@ -94,7 +100,7 @@ class CiudadWidget(QWidget):
         texto_busqueda = self.ui.lineEdit_ciudad.text()
         # Solo buscar si el modo no es de edición
         if self.ui.boton_editar.isEnabled():
-            ciudades_filtradas = self.controlador.buscar_ciudades_por_nombre(texto_busqueda)
+            ciudades_filtradas = self.controlador.buscar_ciudades(texto_busqueda) # Corregido: Llamar a buscar_ciudades
             self.mostrar_ciudades_en_tabla(ciudades_filtradas)
 
     def seleccionar_ciudad(self):
@@ -112,6 +118,7 @@ class CiudadWidget(QWidget):
         self.ui.boton_editar.setEnabled(True)
 
     def limpiar_campos(self):
+        print("CiudadWidget: Limpiando campos y cerrando diálogo.")
         self.ui.lineEdit_codigo.clear()
         self.ui.lineEdit_ciudad.clear()
         self.ui.tableWidget_ciudad.clearSelection()
@@ -122,6 +129,10 @@ class CiudadWidget(QWidget):
         # Si la búsqueda borró la tabla, la recargamos
         if self.ui.tableWidget_ciudad.rowCount() == 0:
             self.cargar_ciudades()
+        
+        # Cierra el diálogo padre
+        if self.parent():
+            self.parent().reject() # Cierra el QDialog que contiene este widget
 
     def mostrar_ciudades_en_tabla(self, ciudades):
         self.ui.tableWidget_ciudad.setRowCount(0)

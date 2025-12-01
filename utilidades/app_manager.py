@@ -1,7 +1,7 @@
 #Este modulo contiene todas las referencias a los controladores del programa.
 class AppManager:
     def __init__(self, controlador_index,controlador_isd, controlador_rd, controlador_pr, 
-                controlador_pc,controlador_pa,controlador_prutas, controlador_po,controlador_pp):
+                controlador_pc,controlador_pa,controlador_prutas, controlador_po,controlador_pp, controlador_pcidad):
         # Almacena los controladores como atributos
         self.controlador_index = controlador_index
         self.controlador_isd = controlador_isd
@@ -12,3 +12,4 @@ class AppManager:
         self.controlador_prutas = controlador_prutas
         self.controlador_po = controlador_po
         self.controlador_pp = controlador_pp
+        self.controlador_pcidad = controlador_pcidad
