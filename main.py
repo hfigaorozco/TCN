@@ -10,7 +10,7 @@
 
 #imports de librerias
 import sys
-import mysql.connector 
+import mysql.connector
 from mysql.connector import Error
 from PySide6.QtWidgets import QApplication, QDialog, QMessageBox
 
@@ -28,11 +28,12 @@ from utilidades.app_manager import AppManager
 
 #importando dao's
 from dao.usuario_dao import UsuarioDAO
+from dao.reservacion_dao import ReservacionDAO 
 
 #importando controladores
 from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
 from controladores.controlador_registro_dialog import ControladorRegistroDialog
-
+from controladores.controlador_pantalla_reservaciones import ControlardorPantallaReservaciones
 
 def main():
     print('Iniciando Transportes Cuervo Negro')
@@ -51,12 +52,15 @@ def main():
 
     #Iniciando dao's
     usuario_dao = UsuarioDAO()
+    reservaciones_dao = ReservacionDAO()
+
     #Iniciando controladores
     controlador_isd = ControladorInicioSesionDialog(usuario_dao=usuario_dao)
     controlador_rd = ControladorRegistroDialog(usuario_dao=usuario_dao)
+    controlador_pr = ControlardorPantallaReservaciones(reservacion_dao=reservaciones_dao)
 
     #iniciando app manager
-    app_manager = AppManager(controlador_isd=controlador_isd, controlador_rd=controlador_rd)
+    app_manager = AppManager(controlador_isd=controlador_isd, controlador_rd=controlador_rd, controlador_pr=controlador_pr)
 
     #iniciando UI
     print('Iniciando UI')
