@@ -138,3 +138,32 @@ class CorridaDAO:
         finally:
             if cursor:
                 cursor.close()
+
+    def actualizar_corrida(self, numero_viaje, ruta_codigo, fecha_hora_salida, fecha_hora_llegada, precio, operador_numero, autobus_numero, lugares_disponibles, estado):
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = """
+                UPDATE corrida
+                SET ruta = %s, fecha = %s, hora_salida = %s, hora_llegada = %s,
+                    tarifaBase = %s, operador = %s, autobus = %s, lugaresDisp = %s, estado = %s
+                WHERE numero = %s
+            """
+            fecha_salida, hora_salida = fecha_hora_salida.split(' ')
+            fecha_llegada, hora_llegada = fecha_hora_llegada.split(' ')
+            
+            cursor.execute(query, (ruta_codigo, fecha_salida, hora_salida, hora_llegada,
+                                   precio, operador_numero, autobus_numero, lugares_disponibles, estado,
+                                   numero_viaje))
+            conexion.commit()
+            return True
+        except Error as e:
+            print(f"Error al actualizar corrida: {e}")
+            if conexion:
+                conexion.rollback()
+            return False
+        finally:
+            if cursor:
+                cursor.close()
