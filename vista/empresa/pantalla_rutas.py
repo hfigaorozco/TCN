@@ -5,11 +5,13 @@ from PySide6.QtCore import QFile, QIODevice, Qt
 
 from vista.empresa.ciudadWidget import CiudadWidget
 
+
 class PantallaRutas(QWidget):
-    def __init__(self, controlador, parent=None):
+    def __init__(self, app_manager, parent=None):
         super().__init__(parent)
         
-        self.controlador = controlador
+        self.controlador = app_manager.controlador_prutas
+        self.app_manager = app_manager
 
         # Cargar el archivo .ui
         self.ui = self.load_ui("pantalla_rutas.ui")
@@ -255,7 +257,7 @@ class PantallaRutas(QWidget):
             dialogo_ciudades.setWindowTitle("Administrar Ciudades")
             
             # Crear una instancia de CiudadWidget pasándole el controlador y el diálogo como parent
-            ciudad_widget_instance = CiudadWidget(self.controlador.app_manager.controlador_pcidad, dialogo_ciudades)
+            ciudad_widget_instance = CiudadWidget(self.app_manager, dialogo_ciudades)
             
             # Crear un layout para el diálogo y añadir el CiudadWidget
             layout_dialogo = QVBoxLayout(dialogo_ciudades)

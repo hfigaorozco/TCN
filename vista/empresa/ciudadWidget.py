@@ -3,12 +3,13 @@ from PySide6.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QHeaderVie
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice
 
-from controladores.controlador_pantalla_ciudad import ControladorPantallaCiudad
+
+
 
 class CiudadWidget(QWidget):
-    def __init__(self, controlador, parent=None):
+    def __init__(self, app_manager, parent=None):
         super().__init__(parent)
-        self.controlador = controlador
+        self.app_manager = app_manager
         self.ui = self.load_ui()
         self.setup_ui()
 
@@ -42,7 +43,7 @@ class CiudadWidget(QWidget):
         self.limpiar_campos()
 
     def cargar_ciudades(self):
-        ciudades = self.controlador.obtener_todas_las_ciudades()
+        ciudades = self.app_manager.controlador_pcidad.obtener_todas_las_ciudades()
         self.ui.tableWidget_ciudad.setRowCount(0)
         if ciudades:
             for i, ciudad in enumerate(ciudades):
@@ -56,7 +57,7 @@ class CiudadWidget(QWidget):
         nombre = self.ui.lineEdit_ciudad.text()
         print(f"CiudadWidget: Intentando agregar ciudad - Código: '{codigo}', Nombre: '{nombre}'")
         
-        resultado = self.controlador.insertar_ciudad(codigo, nombre)
+        resultado = self.app_manager.controlador_pcidad.insertar_ciudad(codigo, nombre)
         print(f"CiudadWidget: Resultado del controlador al agregar: {resultado}")
         
         if resultado is True:
@@ -82,7 +83,7 @@ class CiudadWidget(QWidget):
         nuevo_nombre = self.ui.lineEdit_ciudad.text()
         print(f"CiudadWidget: Intentando editar ciudad - Código actual: '{codigo_actual}', Nuevo Código: '{nuevo_codigo}', Nuevo Nombre: '{nuevo_nombre}'")
 
-        resultado = self.controlador.actualizar_ciudad(codigo_actual, nuevo_codigo, nuevo_nombre)
+        resultado = self.app_manager.controlador_pcidad.actualizar_ciudad(codigo_actual, nuevo_codigo, nuevo_nombre)
         print(f"CiudadWidget: Resultado del controlador al editar: {resultado}")
 
         if resultado is True:
@@ -100,7 +101,7 @@ class CiudadWidget(QWidget):
         texto_busqueda = self.ui.lineEdit_ciudad.text()
         # Solo buscar si el modo no es de edición
         if self.ui.boton_editar.isEnabled():
-            ciudades_filtradas = self.controlador.buscar_ciudades(texto_busqueda) # Corregido: Llamar a buscar_ciudades
+            ciudades_filtradas = self.app_manager.controlador_pcidad.buscar_ciudades(texto_busqueda) # Corregido: Llamar a buscar_ciudades
             self.mostrar_ciudades_en_tabla(ciudades_filtradas)
 
     def seleccionar_ciudad(self):
