@@ -31,10 +31,9 @@ class IndexDAO:
         'Carga las corridas recientes o del día actual'
         try:
             comando = """
-            SELECT numero as numero, fecha, hora_salida as horasalida, 
-                   ruta as ruta
-            FROM corrida 
-            WHERE c.fecha >= CURDATE()
+            SELECT c.numero as numero, c.fecha, c.hora_salida as horasalida, 
+                   c.ruta as ruta
+            FROM corrida c 
             ORDER BY c.fecha, c.hora_salida
             """
             
@@ -60,7 +59,6 @@ class IndexDAO:
             FROM operador op
             JOIN corrida c ON op.numero = c.operador
             ORDER BY op.numero, c.fecha DESC
-            
             """
             
             cursor = self.db.cursor()
@@ -71,4 +69,25 @@ class IndexDAO:
                 
         except Error as e:
             print(f"Error en IndexDAO.cargar_operadores_con_corridas_dashboard: {e}")
+            return []
+
+    def cargar_pasajeros_por_corrida(self, corrida_id):
+        'Carga los pasajeros asociados a una corrida específica'
+        try:
+            comando = """
+            SELECT p.numero, p.nombre, p.apellPat, p.apellMat, 
+                   TIMESTAMPDIFF(YEAR, p.fechaNac, CURDATE()) as edad,
+                   p.telefono
+            FROM pasajero p
+            JOIN reservacion r ON p.numero = r.pasajero
+            WHERE r.corrida = %s
+            ORDER BY p.numero
+            """
+            cursor = self.db.cursor()
+            cursor.execute(comando, (corrida_id,))
+            pasajeros = cursor.fetchall()
+            cursor.close()
+            return pasajeros
+        except Error as e:
+            print(f"Error en IndexDAO.cargar_pasajeros_por_corrida: {e}")
             return []
