@@ -120,8 +120,24 @@ class PantallaReservaciones(QWidget):
 
     def filtrarPorComboBox(self):
         if self.combo_box_filtro.currentText() == "Reservaciones Activas":
-            datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
-            self.__llenar_tabla_reservaciones(datos_tabla)
+            if True:
+                pass
+        elif self.combo_box_filtro.currentText() == "Reservaciones Pendientes":
+            pass
+        elif self.combo_box_filtro.currentText() == "Nombre de cliente":
+            pass
+        elif self.combo_box_filtro.currentText() == "Origen":
+            datos_tabla = self.controlador.buscarReservacionPorCiudad(str(self.line_edit_buscar_reservacion.text()))
+            if datos_tabla:
+                self.__llenar_tabla_reservaciones(datos_tabla)
+        elif self.combo_box_filtro.currentText() == "Destino":
+            datos_tabla = self.controlador.buscarReservacionPorCiudad(str(self.line_edit_buscar_reservacion.text()))
+            if datos_tabla:
+                self.__llenar_tabla_reservaciones(datos_tabla)
+        elif self.combo_box_filtro.currentText() == "Fecha":
+            pass
+
+        
 
     def llenarTablaAlInicio(self):
         datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
