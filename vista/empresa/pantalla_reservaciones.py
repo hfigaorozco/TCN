@@ -59,10 +59,11 @@ class PantallaReservaciones(QWidget):
         # Si el boton editar fue recuperado as True, entonces ejecuata el metodo determinado.
         if self.boton_editar_reservacion:
             self.boton_crear_reservacion.clicked.connect(self.editarReservacion)
- 
+
 
     def crearReservacion(self):
         pass
 
     def editarReservacion(self):
         pass
+    
