@@ -93,5 +93,4 @@ class ControladorActualizarCorrEstadoDialog:
             QMessageBox.critical(self.dialog, "Error", "Número de corrida inválido.")
 
     def mostrar_dialogo(self, corrida_data=None):
-        print("DEBUG: mostrar_dialogo called in ControladorActualizarCorrEstadoDialog.")
         self.corrida_data = corrida_data
