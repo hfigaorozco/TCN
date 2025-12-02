@@ -1,4 +1,5 @@
 from mysql.connector import Error
+from utilidades.validaciones import Validaciones
 
 class ControlardorPantallaReservaciones:
     def __init__(self, reservacion_dao):
@@ -37,8 +38,8 @@ class ControlardorPantallaReservaciones:
         
 
     def buscarReservacionPorNumero(self,numero):
-        validaciones = Validaciones()
-        if not validaciones.validar_id(numero):
+
+        if not Validaciones.validar_id(numero):
             return False
         try:
             return self.servicio_de_consulta.buscarReservacionPorNumero(numero)
