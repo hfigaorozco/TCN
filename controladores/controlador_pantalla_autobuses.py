@@ -1,3 +1,5 @@
+# controladores/controlador_pantalla_autobuses.py
+
 from PySide6.QtWidgets import QMessageBox, QTableWidgetItem, QHeaderView, QWidget, QDialog
 from PySide6.QtCore import Qt
 from dao.autobus_dao import AutobusDAO

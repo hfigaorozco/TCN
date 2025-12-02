@@ -152,9 +152,9 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>10</y>
+      <y>0</y>
       <width>481</width>
-      <height>71</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -169,7 +169,7 @@ QPushButton:pressed {
 </string>
     </property>
     <property name="text">
-     <string>Autobuses</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#9d9d9d;&quot;&gt;Autobuses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_estatico_servicio">

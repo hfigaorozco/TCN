@@ -1,3 +1,5 @@
+# controladores/controlador_pantalla_operadores.py
+
 from dao.operador_dao import OperadorDAO
 # Asumiendo que existe un objeto Operador si es necesario para el controlador
 # from objetos.Operador import Operador 

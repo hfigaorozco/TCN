@@ -1,3 +1,5 @@
+# vista/main_ui_empresa.py
+
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
                             QDialog, QPushButton, QLineEdit, QLabel)
