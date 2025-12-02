@@ -145,7 +145,8 @@ class PantallaReservaciones(QWidget):
 
     def __llenar_tabla_reservaciones(self,datos_tabla):
         # columnas = ["Nombre", "Edad", "Ciudad"]
-        
+        if datos_tabla == True or datos_tabla == False:
+            return
         # Establecer la estructura
         self.table_widget.setRowCount(len(datos_tabla))
         num_columnas = self.table_widget.columnCount()
@@ -176,3 +177,5 @@ class PantallaReservaciones(QWidget):
         # Ajustar el ancho de las columnas al contenido
         # self.table_widget.resizeColumnsToContents()
     
+
+

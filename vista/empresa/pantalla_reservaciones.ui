@@ -679,7 +679,7 @@ border: 1px solid #FF6A36
 }</string>
       </property>
       <property name="maxLength">
-       <number>6</number>
+       <number>20</number>
       </property>
       <property name="placeholderText">
        <string>Buscar por numero de corrida...</string>
