@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QPushButton,
-    QSizePolicy, QTableWidget, QTableWidgetItem, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QHeaderView,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QTableWidget, QTableWidgetItem, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -76,8 +77,8 @@ class Ui_Form(object):
 "    background-color: transparent;\n"
 "}")
         self.tableWidget = QTableWidget(Form)
-        if (self.tableWidget.columnCount() < 7):
-            self.tableWidget.setColumnCount(7)
+        if (self.tableWidget.columnCount() < 8):
+            self.tableWidget.setColumnCount(8)
         __qtablewidgetitem = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -92,8 +93,10 @@ class Ui_Form(object):
         self.tableWidget.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(6, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(7, __qtablewidgetitem7)
         self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setGeometry(QRect(160, 300, 1561, 681))
+        self.tableWidget.setGeometry(QRect(60, 300, 1781, 681))
         self.tableWidget.setStyleSheet(u"QTableView {\n"
 "    background: #ffffff;\n"
 "    border: 1px solid #e6e8ec;\n"
@@ -203,34 +206,9 @@ class Ui_Form(object):
 "    background: none;\n"
 "    height: 0px;\n"
 "}")
+        self.tableWidget.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(223)
-        self.label_estatico_subtitulo = QLabel(Form)
-        self.label_estatico_subtitulo.setObjectName(u"label_estatico_subtitulo")
-        self.label_estatico_subtitulo.setGeometry(QRect(90, 200, 141, 61))
-        self.label_ciudadOrigen = QLabel(Form)
-        self.label_ciudadOrigen.setObjectName(u"label_ciudadOrigen")
-        self.label_ciudadOrigen.setGeometry(QRect(230, 210, 431, 51))
-        self.label_ciudadOrigen.setStyleSheet(u"QLabel {\n"
-"    font-size: 24px;\n"
-"}")
-        self.label_estatico_subtitulo_2 = QLabel(Form)
-        self.label_estatico_subtitulo_2.setObjectName(u"label_estatico_subtitulo_2")
-        self.label_estatico_subtitulo_2.setGeometry(QRect(690, 210, 141, 51))
-        self.label_ciudadDestino = QLabel(Form)
-        self.label_ciudadDestino.setObjectName(u"label_ciudadDestino")
-        self.label_ciudadDestino.setGeometry(QRect(850, 210, 461, 61))
-        self.label_ciudadDestino.setStyleSheet(u"QLabel {\n"
-"    font-size: 24px;\n"
-"}")
-        self.label_estatico_subtitulo_3 = QLabel(Form)
-        self.label_estatico_subtitulo_3.setObjectName(u"label_estatico_subtitulo_3")
-        self.label_estatico_subtitulo_3.setGeometry(QRect(1350, 210, 121, 51))
-        self.label_fechaCorrida = QLabel(Form)
-        self.label_fechaCorrida.setObjectName(u"label_fechaCorrida")
-        self.label_fechaCorrida.setGeometry(QRect(1490, 200, 401, 61))
-        self.label_fechaCorrida.setStyleSheet(u"QLabel {\n"
-"    font-size: 20px;\n"
-"}")
         self.boton_continuar = QPushButton(Form)
         self.boton_continuar.setObjectName(u"boton_continuar")
         self.boton_continuar.setGeometry(QRect(1110, 1000, 191, 61))
@@ -265,6 +243,166 @@ class Ui_Form(object):
         self.label_estatico_subtitulo_4 = QLabel(Form)
         self.label_estatico_subtitulo_4.setObjectName(u"label_estatico_subtitulo_4")
         self.label_estatico_subtitulo_4.setGeometry(QRect(450, 1010, 651, 41))
+        self.comboBox_destino = QComboBox(Form)
+        self.comboBox_destino.setObjectName(u"comboBox_destino")
+        self.comboBox_destino.setGeometry(QRect(910, 210, 301, 61))
+        self.comboBox_destino.setStyleSheet(u"QComboBox {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px 12px;\n"
+"    font-size: 25px;\n"
+"    color: #1061C4;\n"
+"    min-height: 18px;\n"
+"}\n"
+"\n"
+"QComboBox:hover {\n"
+"    border-color: #c0c4cc;\n"
+"}\n"
+"\n"
+"QComboBox:focus {\n"
+"    border-color: #409eff;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"    width: 25px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: none;\n"
+"    border-left: 4px solid transparent;\n"
+"    border-right: 4px solid transparent;\n"
+"    border-top: 4px solid #909399;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    background-color: white;\n"
+"    outline: none;\n"
+"    selection-background-color: #409eff;\n"
+"    selection-color: white;\n"
+"    /* ELIMINA CUALQUIER cursor: ...; DE AQU\u00cd */\n"
+"}")
+        self.comboBox_fecha = QComboBox(Form)
+        self.comboBox_fecha.setObjectName(u"comboBox_fecha")
+        self.comboBox_fecha.setGeometry(QRect(1230, 210, 261, 61))
+        self.comboBox_fecha.setStyleSheet(u"QComboBox {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px 12px;\n"
+"    font-size: 25px;\n"
+"    color: #1061C4;\n"
+"    min-height: 18px;\n"
+"}\n"
+"\n"
+"QComboBox:hover {\n"
+"    border-color: #c0c4cc;\n"
+"}\n"
+"\n"
+"QComboBox:focus {\n"
+"    border-color: #409eff;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"    width: 25px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: none;\n"
+"    border-left: 4px solid transparent;\n"
+"    border-right: 4px solid transparent;\n"
+"    border-top: 4px solid #909399;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    background-color: white;\n"
+"    outline: none;\n"
+"    selection-background-color: #409eff;\n"
+"    selection-color: white;\n"
+"    /* ELIMINA CUALQUIER cursor: ...; DE AQU\u00cd */\n"
+"}")
+        self.LineEdit_pasajeros = QLineEdit(Form)
+        self.LineEdit_pasajeros.setObjectName(u"LineEdit_pasajeros")
+        self.LineEdit_pasajeros.setGeometry(QRect(1510, 210, 221, 61))
+        self.LineEdit_pasajeros.setStyleSheet(u"QLineEdit {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px 12px;\n"
+"    font-size: 25px;\n"
+"    color: #1061C4;\n"
+"    min-height: 18px;\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    border-color: #c0c4cc;\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    border-color: #409eff;\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    background-color: #f5f7fa;\n"
+"    color: #c0c4cc;\n"
+"    border-color: #e4e7ed;\n"
+"}\n"
+"\n"
+"QLineEdit:read-only {\n"
+"    background-color: #f5f7fa;\n"
+"    color: #909399;\n"
+"}")
+        self.comboBox_origen = QComboBox(Form)
+        self.comboBox_origen.setObjectName(u"comboBox_origen")
+        self.comboBox_origen.setGeometry(QRect(590, 210, 301, 61))
+        self.comboBox_origen.setStyleSheet(u"QComboBox {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    padding: 6px 12px;\n"
+"    font-size: 25px;\n"
+"    color: #1061C4;\n"
+"    min-height: 18px;\n"
+"}\n"
+"\n"
+"QComboBox:hover {\n"
+"    border-color: #c0c4cc;\n"
+"}\n"
+"\n"
+"QComboBox:focus {\n"
+"    border-color: #409eff;\n"
+"}\n"
+"\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"    width: 25px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow {\n"
+"    image: none;\n"
+"    border-left: 4px solid transparent;\n"
+"    border-right: 4px solid transparent;\n"
+"    border-top: 4px solid #909399;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid #dcdfe6;\n"
+"    border-radius: 6px;\n"
+"    background-color: white;\n"
+"    outline: none;\n"
+"    selection-background-color: #409eff;\n"
+"    selection-color: white;\n"
+"    /* ELIMINA CUALQUIER cursor: ...; DE AQU\u00cd */\n"
+"}")
+        self.label_estatico_titulo_2 = QLabel(Form)
+        self.label_estatico_titulo_2.setObjectName(u"label_estatico_titulo_2")
+        self.label_estatico_titulo_2.setGeometry(QRect(160, 200, 411, 71))
 
         self.retranslateUi(Form)
 
@@ -279,24 +417,26 @@ class Ui_Form(object):
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("Form", u"No. Corrida", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Autob\u00fas", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("Form", u"Ruta", None));
         ___qtablewidgetitem2 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Servicio", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("Form", u"Autob\u00fas", None));
         ___qtablewidgetitem3 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Hora de llegada", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("Form", u"Servicio", None));
         ___qtablewidgetitem4 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Hora de salida", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("Form", u"Hora de llegada", None));
         ___qtablewidgetitem5 = self.tableWidget.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Lugares disponibles", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("Form", u"Hora de salida", None));
         ___qtablewidgetitem6 = self.tableWidget.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Precio", None));
-        self.label_estatico_subtitulo.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" font-size:28pt; font-weight:700;\">Origen:</span></p></body></html>", None))
-        self.label_ciudadOrigen.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><br/></p></body></html>", None))
-        self.label_estatico_subtitulo_2.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" font-size:28pt; font-weight:700;\">Destino:</span></p><p><br/></p></body></html>", None))
-        self.label_ciudadDestino.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><br/></p></body></html>", None))
-        self.label_estatico_subtitulo_3.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><span style=\" font-size:28pt; font-weight:700;\">Fecha:</span></p><p><br/></p></body></html>", None))
-        self.label_fechaCorrida.setText(QCoreApplication.translate("Form", u"<html><head/><body><p><br/></p></body></html>", None))
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("Form", u"Lugares disponibles", None));
+        ___qtablewidgetitem7 = self.tableWidget.horizontalHeaderItem(7)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("Form", u"Precio", None));
         self.boton_continuar.setText(QCoreApplication.translate("Form", u"Continuar", None))
         self.label_estatico_subtitulo_4.setText(QCoreApplication.translate("Form", u"<html><head/><body><p align=\"center\"><span style=\" font-size:24pt; font-weight:700;\">Selecciona una corrida para continuar</span></p></body></html>", None))
+        self.comboBox_destino.setPlaceholderText(QCoreApplication.translate("Form", u"Destino", None))
+        self.comboBox_fecha.setPlaceholderText(QCoreApplication.translate("Form", u"Fecha", None))
+        self.LineEdit_pasajeros.setText("")
+        self.LineEdit_pasajeros.setPlaceholderText(QCoreApplication.translate("Form", u"Pasajeros", None))
+        self.comboBox_origen.setPlaceholderText(QCoreApplication.translate("Form", u"Origen", None))
+        self.label_estatico_titulo_2.setText(QCoreApplication.translate("Form", u"<html><head/><body><p align=\"center\"><span style=\" font-size:36pt; font-weight:700;\">Ingrese los datos:</span></p></body></html>", None))
     # retranslateUi
 
