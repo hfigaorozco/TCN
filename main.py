@@ -1,4 +1,3 @@
-
 """Este metodo es el metodo principal de todo el sistema.
     1. Inicia la conexion con la DB que todos usaran
     2. Hace las instancias e inyecta estas dependencias/instancias
@@ -38,7 +37,7 @@ from dao.pasajero_dao import PasajeroDAO
 from dao.ciudad_dao import CiudadesDAO # Agregado
 
 #importando controladores
-from controladores.controlador_index import ControladorIndex
+from controladores.controlador_index_empresa import ControladorIndex
 from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
 from controladores.controlador_registro_dialog import ControladorRegistroDialog
 from controladores.controlador_pantalla_reservaciones import ControlardorPantallaReservaciones
@@ -96,8 +95,6 @@ def main():
                             controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp,
                             controlador_pcidad=controlador_pcidad) 
     
-    # Inyectar app_manager en los controladores que lo necesitan
-    controlador_prutas.set_app_manager(app_manager) # Inyectar app_manager en controlador_prutas
     #iniciando UI
     print('Iniciando UI')
     

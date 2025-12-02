@@ -1,3 +1,5 @@
+# controladores/controlador_pantalla_autobuses.py
+
 from PySide6.QtWidgets import QMessageBox, QTableWidgetItem, QHeaderView, QWidget, QDialog
 from PySide6.QtCore import Qt
 from dao.autobus_dao import AutobusDAO
@@ -20,11 +22,10 @@ class ControladorPantallaAutobuses:
         self.asiento_dao = AsientoDAO()
         self.marca_modelo_dao = MarcaModeloDAO()
     
-    def setup_ui(self, pantalla_autobuses_widget):
+    def setup_ui(self, pantalla_autobuses_widget, ui):
         """Configura la UI de la pantalla de autobuses"""
         self.pantalla = pantalla_autobuses_widget
-        self.ui = Ui_pantalla_autobuses()
-        self.ui.setupUi(self.pantalla)
+        self.ui = ui
         
         self.configurar_vista()
     
