@@ -28,15 +28,11 @@ class PantallaReservaciones(QWidget):
             return
 
         # 4. Cargar el UI. El loader devuelve un NUEVO WIDGET.
-        # Guardamos este widget en una variable de instancia (self.ui) para que no sea eliminado
-        # por el recolector de basura. Este es un paso FUNDAMENTAL.
         self.ui = loader.load(ui_file, self)
         ui_file.close()
-
-        # --- Integración del widget cargado en este QDialog ---
-
+        
         # 5. Crear un layout para nuestro QDialog.
-        #    El QDialog está vacío por defecto, necesitamos un layout para organizar su contenido.
+        #    El QWidget está vacío por defecto, necesitamos un layout para organizar su contenido.
         layout = QVBoxLayout()
 
         # 6. Añadir el widget que cargamos (self.ui) al layout.
@@ -47,27 +43,26 @@ class PantallaReservaciones(QWidget):
 
         # Opcional: Ajustar el tamaño del diálogo al contenido del UI
         self.resize(self.ui.size())
+        self.setContentsMargins(0,0,0,0)
 
         #Obteniendo componentes del .ui
         self.boton_crear_reservacion = self.ui.findChild(QPushButton,'boton_crear_reservacion')
         self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
+
+        self.line_edit_buscar_reservacion = self.ui.findChild(QLineEdit,'lineEdit_buscar')
+        self.combo_box_filtro = self.ui.findChild(QLabel,'comboBox_filtros')
         
-        
+        # Si el boton crear reservacion fue recuperado as True, entonces ejecuata el metodo determinado.
         if self.boton_crear_reservacion:
-            # Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
             self.boton_crear_reservacion.clicked.connect(self.crearReservacion)
 
-        
+        # Si el boton editar fue recuperado as True, entonces ejecuata el metodo determinado.
+        if self.boton_editar_reservacion:
+            self.boton_crear_reservacion.clicked.connect(self.editarReservacion)
+ 
 
     def crearReservacion(self):
         pass
-        # abre el dialog
-        #self.controlador.mostrarCrearReservacion()
 
-    
-    def cargar_interfaces(self):
-        pass
-
-
-    def setup_connections(self):
+    def editarReservacion(self):
         pass

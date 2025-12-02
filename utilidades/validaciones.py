@@ -1,4 +1,6 @@
-class Validaciones:
+import re
+
+class Validaciones:  
 
     # Validaciones de login
     @classmethod
@@ -31,3 +33,16 @@ class Validaciones:
         if len(pwrd) >= 21:
             return 'La contrasena debe tener menos de 21 caracteres.'
         return pwrd
+    
+
+    ''' Validaciones para reservaciones '''
+    @classmethod
+    def validar_id(self,valor):
+        valor = str(valor).strip()
+
+        if valor == "":
+            return "Todo"   # si quieres que un campo vacío signifique "Todo"
+    
+        # Solo números positivos, 1 a 4 dígitos
+        patron = r'^[0-9]{1,4}$'
+        return bool(re.match(patron, valor))
