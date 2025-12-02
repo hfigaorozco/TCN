@@ -1,7 +1,8 @@
 #imports de pyside
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
-                            QDialog, QPushButton, QLineEdit, QLabel, QMessageBox)
+                            QDialog, QPushButton, QLineEdit, QLabel, QMessageBox, QTableWidget,
+                            QTableWidgetItem, QComboBox)
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
@@ -50,20 +51,69 @@ class PantallaReservaciones(QWidget):
         self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
 
         self.line_edit_buscar_reservacion = self.ui.findChild(QLineEdit,'lineEdit_buscar')
-        self.combo_box_filtro = self.ui.findChild(QLabel,'comboBox_filtros')
-        
+        self.combo_box_filtro = self.ui.findChild(QComboBox,'comboBox_filtros')
+
+        self.table_widget = self.ui.findChild(QTableWidget,'tabla_reservaciones')
+
         # Si el boton crear reservacion fue recuperado as True, entonces ejecuata el metodo determinado.
         if self.boton_crear_reservacion:
-            self.boton_crear_reservacion.clicked.connect(self.crearReservacion)
+            self.boton_crear_reservacion.clicked.connect(self.filtrarPorComboBox)
 
         # Si el boton editar fue recuperado as True, entonces ejecuata el metodo determinado.
         if self.boton_editar_reservacion:
             self.boton_crear_reservacion.clicked.connect(self.editarReservacion)
 
+        if self.combo_box_filtro:
+            self.combo_box_filtro.currentIndexChanged.connect(self.filtrarPorComboBox)
+
+
+        self.llenarTablaAlInicio()
 
     def crearReservacion(self):
         pass
 
     def editarReservacion(self):
         pass
+
+    def filtrarPorComboBox(self):
+        if self.combo_box_filtro.currentText() == "Reservaciones Activas":
+            datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
+            self.__llenar_tabla_reservaciones(datos_tabla)
+
+    def llenarTablaAlInicio(self):
+        datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
+        self.__llenar_tabla_reservaciones(datos_tabla)
+
+    def __llenar_tabla_reservaciones(self,datos_tabla):
+        # columnas = ["Nombre", "Edad", "Ciudad"]
+        
+        # Establecer la estructura
+        self.table_widget.setRowCount(len(datos_tabla))
+        num_columnas = self.table_widget.columnCount()
+
+        num_cols_datos = len(datos_tabla[0])
+
+        if not datos_tabla:
+            self.table_widget.setRowCount(0) # Vacía la tabla si no hay datos
+            print("No hay datos para llenar la tabla.")
+            return
+
+        for row_index, row_data in enumerate(datos_tabla):
+        # Usamos el minimo entre las columnas de los datos y las columnas de la tabla 
+        # para evitar errores si las dimensiones no coinciden.
+            for col_index in range(min(num_cols_datos, self.table_widget.columnCount())):
+                item_data = row_data[col_index]
+
+                # Crear y configurar el ítem
+                item = QTableWidgetItem(str(item_data))
+
+                # 4. Insertar el item en la celda
+                self.table_widget.setItem(row_index, col_index, item)
+
+                # Si la columna es la 2 (indice 1), la centramos
+                if col_index == 1: 
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            
+        # Ajustar el ancho de las columnas al contenido
+        # self.table_widget.resizeColumnsToContents()
     

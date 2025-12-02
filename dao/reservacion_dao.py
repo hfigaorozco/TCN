@@ -159,15 +159,16 @@ class ReservacionDAO:
                 raise Error('No se puede establecer conexion con la BD.')
 
             query = f"""
-                    SELECT reservacion.numero,reservacion.fecha,corrida,co.nombre,cd.nombre,cantPasajeros, 
-                    CONCAT(p.nombre,' ', p.apellPat,' ',p.apellMat),fechaLimPago,total
+                    SELECT reservacion.fecha,corrida, CONCAT(p.nombre,' ', p.apellPat,' ',p.apellMat),
+                    co.nombre,cd.nombre, c.hora_salida, c.hora_llegada,
+                    cantPasajeros,fechaLimPago
                     FROM reservacion 
                     INNER JOIN corrida AS c ON reservacion.corrida = c.numero
                     INNER JOIN pasajero AS p ON reservacion.pasajero = p.numero
                     INNER JOIN ruta AS rt ON c.ruta = rt.codigo
                     INNER JOIN ciudad AS co ON rt.ciudadOrigen = co.codigo
                     INNER JOIN ciudad AS cd ON rt.ciudadDestino = cd.codigo
-                    ORDER BY reservacion.numero ASC;
+                    ORDER BY fecha ASC;
                     """          
             cursor = conn.cursor()
             cursor.execute(query)

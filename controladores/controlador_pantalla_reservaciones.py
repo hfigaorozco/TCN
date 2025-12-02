@@ -7,7 +7,7 @@ class ControlardorPantallaReservaciones:
 
     def getTotalReservaciones(self):
         try:
-            return self.servicio_de_consulta.consultarNumeroReservaciones()
+            return self.reservacion_dao.consultarNumeroReservaciones()
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTotalReservaciones()): {e}')
             raise e
@@ -15,15 +15,17 @@ class ControlardorPantallaReservaciones:
 
     def consultarTodasReservacionesParaTabla(self):
         try:
-            return self.servicio_de_consulta.consultarTodasReservacionesParaTabla()
+            return self.reservacion_dao.getTodasReservacionesParaTabla()
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservaciones()): {e}')
             raise e
         
 
     def consultarTablaReservacionesActuales(self):
+        listado_reservaciones = []
         try:
-            return self.servicio_de_consulta.consultarTablaReservacionesActuales()
+            return self.reservacion_dao.getTodasReservaciones()
+
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservaciones()): {e}')
             raise e
@@ -31,7 +33,7 @@ class ControlardorPantallaReservaciones:
 
     def consultarTablaReservacionesPasadas(self):
         try:
-            return self.servicio_de_consulta.consultarTablaReservacionesPasadas()
+            return self.reservacion_dao.consultarTablaReservacionesPasadas()
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservaciones()): {e}')
             raise e
@@ -42,14 +44,14 @@ class ControlardorPantallaReservaciones:
         if not Validaciones.validar_id(numero):
             return False
         try:
-            return self.servicio_de_consulta.buscarReservacionPorNumero(numero)
+            return self.reservacion_dao.buscarReservacionPorNumero(numero)
         except Error as e:
             print(f'Error en ControladorVEReservaciones (buscarReservacionesPorNUmero()): {e}')
             raise e
         
     def consultarTotalReservacionesPasadas(self):
         try:
-            return self.servicio_de_consulta.consultarTotalReservacionesPasadas()
+            return self.reservacion_dao.consultarTotalReservacionesPasadas()
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservacionesPasadas()): {e}')
             raise e
@@ -57,7 +59,7 @@ class ControlardorPantallaReservaciones:
 
     def consultarTotalReservacionesActivas(self):
         try:
-            return self.servicio_de_consulta.consultarTotalReservacionesActivas()
+            return self.reservacion_dao.consultarTotalReservacionesActivas()
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservacionesActivas()): {e}')
             raise e
