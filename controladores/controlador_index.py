@@ -19,7 +19,8 @@ class ControladorIndex:
         Obtiene las corridas para mostrar en el dashboard.
         """
         try:
-            return self.index_dao.cargar_corridas_dashboard()
+            corridas_data = self.index_dao.cargar_corridas_dashboard()
+            return corridas_data
         except Exception as e:
             print(f"Error en ControladorIndex.obtener_corridas_dashboard: {e}")
             return []
@@ -32,4 +33,14 @@ class ControladorIndex:
             return self.index_dao.cargar_operadores_con_corridas_dashboard()
         except Exception as e:
             print(f"Error en ControladorIndex.obtener_operadores_con_corridas_dashboard: {e}")
+            return []
+
+    def obtener_pasajeros_por_corrida(self, corrida_id):
+        """
+        Obtiene los pasajeros para una corrida específica.
+        """
+        try:
+            return self.index_dao.cargar_pasajeros_por_corrida(corrida_id)
+        except Exception as e:
+            print(f"Error en ControladorIndex.obtener_pasajeros_por_corrida: {e}")
             return []
