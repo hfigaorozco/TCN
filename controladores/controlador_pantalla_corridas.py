@@ -142,8 +142,8 @@ class ControladorPantallaCorridas:
             QMessageBox.critical(self.vista, "Error", "No se encontró la corrida seleccionada en los datos internos.")
             return
 
-        dialog = ControladorActualizarCorrEstadoDialog(self.vista, corrida_data=corrida_to_update)
-        dialog.exec()
+        controlador_dialogo = ControladorActualizarCorrEstadoDialog(self.vista)
+        controlador_dialogo.mostrar_dialogo(corrida_data=corrida_to_update)
         self._cargar_todas_las_corridas() # Refresh table after dialog closes
 
     def _cargar_todas_las_corridas(self):
