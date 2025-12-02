@@ -37,7 +37,7 @@ from dao.pasajero_dao import PasajeroDAO
 from dao.ciudad_dao import CiudadesDAO # Agregado
 
 #importando controladores
-from controladores.controlador_index import ControladorIndex
+from controladores.controlador_index_empresa import ControladorIndex
 from controladores.controlador_inicio_sesion_dialog import ControladorInicioSesionDialog
 from controladores.controlador_registro_dialog import ControladorRegistroDialog
 from controladores.controlador_pantalla_reservaciones import ControlardorPantallaReservaciones
