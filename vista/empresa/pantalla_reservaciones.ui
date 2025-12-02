@@ -541,7 +541,7 @@ border-bottom: 1px solid #E3E3E3;
       <property name="font">
        <font>
         <pointsize>59</pointsize>
-        <italic>true</italic>
+        <italic>false</italic>
         <bold>true</bold>
        </font>
       </property>
@@ -574,7 +574,7 @@ border-bottom: 1px solid #E3E3E3;
     border: 1px solid #dcdfe6;
     border-radius: 6px;
     padding: 6px 12px;
-    font-size: 13px;
+    font-size: 16px;
     color: #606266;
     min-height: 10px;
 }
@@ -638,16 +638,11 @@ QComboBox QAbstractItemView {
         <string>Destino</string>
        </property>
       </item>
-      <item>
-       <property name="text">
-        <string>Nuevo elemento</string>
-       </property>
-      </item>
      </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>1280</x>
+        <x>1290</x>
         <y>40</y>
         <width>81</width>
         <height>19</height>
@@ -669,7 +664,7 @@ QComboBox QAbstractItemView {
      <widget class="QLineEdit" name="lineEdit_buscar">
       <property name="geometry">
        <rect>
-        <x>650</x>
+        <x>720</x>
         <y>30</y>
         <width>431</width>
         <height>41</height>
@@ -684,7 +679,7 @@ border: 1px solid #FF6A36
 }</string>
       </property>
       <property name="maxLength">
-       <number>6</number>
+       <number>20</number>
       </property>
       <property name="placeholderText">
        <string>Buscar por numero de corrida...</string>
@@ -693,7 +688,7 @@ border: 1px solid #FF6A36
      <widget class="QPushButton" name="boton_buscar">
       <property name="geometry">
        <rect>
-        <x>1060</x>
+        <x>1130</x>
         <y>30</y>
         <width>41</width>
         <height>41</height>

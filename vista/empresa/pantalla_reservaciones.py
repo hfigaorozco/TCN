@@ -2,7 +2,7 @@
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
                             QDialog, QPushButton, QLineEdit, QLabel, QMessageBox, QTableWidget,
-                            QTableWidgetItem, QComboBox)
+                            QTableWidgetItem, QComboBox, QInputDialog)
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
@@ -119,9 +119,47 @@ class PantallaReservaciones(QWidget):
         return datos_fila
 
     def filtrarPorComboBox(self):
-        if self.combo_box_filtro.currentText() == "Reservaciones Activas":
-            datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
-            self.__llenar_tabla_reservaciones(datos_tabla)
+        filtro_seleccionado = self.combo_box_filtro.currentText()
+        if filtro_seleccionado == "Reservaciones Activas":
+            if True:
+                pass
+        elif filtro_seleccionado == "Reservaciones Pendientes":
+            pass
+
+        elif filtro_seleccionado in ["Nombre de cliente", "Origen", "Destino"]:
+            # Titulo y etiqueta del dialogo
+            titulo_dialogo = f"Buscar por {filtro_seleccionado}"
+            etiqueta_dialogo = f"Ingrese el {filtro_seleccionado.lower()} a buscar:"
+
+            # Llamamos al QInputDialog.getText()
+            texto_busqueda, ok = QInputDialog.getText(self, titulo_dialogo, etiqueta_dialogo)
+
+            # Verificamos si el usuario presionóo "Ok" y si escribio algo
+            if ok and texto_busqueda:
+                print(f"Buscando '{texto_busqueda}' en el filtro '{filtro_seleccionado}'")
+                validacion = Validaciones.validar_ciudad(texto_busqueda)
+                
+                if Validaciones.validar_ciudad(texto_busqueda) != texto_busqueda:
+                    return QMessageBox.information(self, "Mensaje", texto_busqueda)
+
+                if filtro_seleccionado == "Nombre de cliente":
+                    # Necesitarías un método en tu controlador para esto
+                    # datos_tabla = self.controlador.buscarReservacionPorCliente(texto_busqueda)
+                    # self.__llenar_tabla_reservaciones(datos_tabla)
+                    pass # A implementar
+                elif filtro_seleccionado == "Origen" or filtro_seleccionado == "Destino":
+                    
+                    datos_tabla = self.controlador.buscarReservacionPorCiudad(texto_busqueda)
+                    print(datos_tabla)
+                    self.__llenar_tabla_reservaciones(datos_tabla)
+            else:
+                # El usuario cancelo o no ingreso texto se recarga la tabla original o no hace nada
+                print("Busqueda cancelada por el usuario.")
+                self.llenarTablaAlInicio()
+
+        elif filtro_seleccionado == "Fecha":
+            pass
+        
 
     def llenarTablaAlInicio(self):
         datos_tabla = self.controlador.consultarTodasReservacionesParaTabla()
@@ -129,7 +167,8 @@ class PantallaReservaciones(QWidget):
 
     def __llenar_tabla_reservaciones(self,datos_tabla):
         # columnas = ["Nombre", "Edad", "Ciudad"]
-        
+        if datos_tabla == True or datos_tabla == False:
+            return
         # Establecer la estructura
         self.table_widget.setRowCount(len(datos_tabla))
         num_columnas = self.table_widget.columnCount()
@@ -156,7 +195,10 @@ class PantallaReservaciones(QWidget):
                 # Si la columna es la 2 (indice 1), la centramos
                 if col_index == 1: 
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    
             
         # Ajustar el ancho de las columnas al contenido
         # self.table_widget.resizeColumnsToContents()
     
+
+

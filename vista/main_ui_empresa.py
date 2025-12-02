@@ -58,7 +58,7 @@ class MainUIEmpresa(QMainWindow):
         self.pagina_reservaciones_widget = PantallaReservaciones(self.app_manager.controlador_pr)
         self.pagina_corridas_widget = PantallaCorridas(self.app_manager.controlador_pc)
         self.pagina_autobuses_widget = PantallaAutobuses(self.app_manager.controlador_pa)
-        self.pagina_rutas_widget = PantallaRutas(self.app_manager.controlador_prutas)
+        self.pagina_rutas_widget = PantallaRutas(self.app_manager)
         self.pagina_operadores_widget = PantallaOperadores(self.app_manager.controlador_po, self.app_manager) # Pasar app_manager
         self.pagina_pasajeros_widget = PantallaPasajeros(self.app_manager.controlador_pp)
                                                     

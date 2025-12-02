@@ -46,3 +46,17 @@ class Validaciones:
         # Solo números positivos, 1 a 4 dígitos
         patron = r'^[0-9]{1,4}$'
         return bool(re.match(patron, valor))
+
+    @classmethod
+    def validar_ciudad(self,ciudad):
+        ciudad = str(ciudad).strip()
+
+        if ciudad == "":
+            return "Ciudad no ingresada."   # si quieres que un campo vacío signifique "Todo"
+        
+        if int(ciudad.isdigit()):
+            return "Ciudad no valida. Solo letras y espacios permitidos."
+    
+        if len(ciudad) > 20 or len(ciudad) < 1:
+            return "Ciudad debe tener entre 1 y 20 caracteres."
+        

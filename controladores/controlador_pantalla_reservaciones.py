@@ -74,3 +74,10 @@ class ControlardorPantallaReservaciones:
         except Error as e:
             print(f'Error en ControladorVEReservaciones (buscarReservacionesPorNUmero()): {e}')
             raise e
+        
+    def buscarReservacionPorCiudad(self,ciudad):
+        try:
+            return self.reservacion_dao.buscarReservacionPorCiudad(ciudad)
+        except Error as e:
+            print(f'Error en ControladorVEReservaciones (buscarReservacionesPorCiudad()): {e}')
+            raise e
