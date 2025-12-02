@@ -537,6 +537,11 @@ QComboBox QAbstractItemView {
     </property>
     <item>
      <property name="text">
+      <string>TODOS</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Ensenada</string>
      </property>
     </item>
@@ -660,6 +665,11 @@ QComboBox QAbstractItemView {
     selection-color: white;
 }</string>
     </property>
+    <item>
+     <property name="text">
+      <string>TODOS</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>Ensenada</string>

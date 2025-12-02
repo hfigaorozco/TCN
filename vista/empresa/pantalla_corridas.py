@@ -6,6 +6,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 from utilidades.validaciones import Validaciones
+from controladores.controlador_actualizar_corr_estado_dialog import ControladorActualizarCorrEstadoDialog
 
 
 class PantallaCorridas(QWidget):
@@ -34,6 +35,10 @@ class PantallaCorridas(QWidget):
         self.ui = loader.load(ui_file, self)
         ui_file.close()
 
+        # Registrar la vista con el controlador
+        if self.controlador:
+            self.controlador.set_vista(self)
+
         # --- Integración del widget cargado en este QDialog ---
 
         # 5. Crear un layout para nuestro QDialog.
@@ -50,8 +55,7 @@ class PantallaCorridas(QWidget):
         self.resize(self.ui.size())
 
         #Obteniendo componentes del .ui
-        # self.boton_crear_reservacion = self.ui.findChild(QPushButton,'boton_crear_reservacion')
-        # self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
+        self.boton_estadoCorr = self.ui.findChild(QPushButton, 'boton_estadoCorr')
         
         # if self.boton_crear_reservacion:
             # Si el boton continuar fue recuperado as True, entonces ejecuata el metodo determinado.
@@ -62,7 +66,6 @@ class PantallaCorridas(QWidget):
         pass
         # abre el dialog
         #self.controlador.mostrarCrearReservacion()
-
     
     def cargar_interfaces(self):
         pass
