@@ -53,7 +53,10 @@ class Validaciones:
 
         if ciudad == "":
             return "Ciudad no ingresada."   # si quieres que un campo vacío signifique "Todo"
+        
+        if int(ciudad.isdigit()):
+            return "Ciudad no valida. Solo letras y espacios permitidos."
     
-        # Solo letras y espacios, 1 a 20 caracteres
-        patron = r'^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{1,20}$'
-        return bool(re.match(patron, ciudad))
+        if len(ciudad) > 20 or len(ciudad) < 1:
+            return "Ciudad debe tener entre 1 y 20 caracteres."
+        

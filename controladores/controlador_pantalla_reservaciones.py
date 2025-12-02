@@ -76,9 +76,6 @@ class ControlardorPantallaReservaciones:
             raise e
         
     def buscarReservacionPorCiudad(self,ciudad):
-        
-        if not Validaciones.validar_ciudad(ciudad):
-            return False
         try:
             return self.reservacion_dao.buscarReservacionPorCiudad(ciudad)
         except Error as e:
