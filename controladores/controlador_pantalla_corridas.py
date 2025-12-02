@@ -134,7 +134,7 @@ class ControladorPantallaCorridas:
             self.tabla_corridas.setItem(row_num, 3, QTableWidgetItem(str(corrida['distancia'])))
             self.tabla_corridas.setItem(row_num, 4, QTableWidgetItem(str(corrida['fecha_hora_salida'])))
             self.tabla_corridas.setItem(row_num, 5, QTableWidgetItem(corrida['nombre_operador']))
-            self.tabla_corridas.setItem(row_num, 6, QTableWidgetItem(str(corrida['numero_autobus'])))
+            self.tabla_corridas.setItem(row_num, 6, QTableWidgetItem(str(corrida['autobus_numero'])))
             self.tabla_corridas.setItem(row_num, 7, QTableWidgetItem(corrida['matricula']))
             self.tabla_corridas.setItem(row_num, 8, QTableWidgetItem(str(corrida['cantidad_asientos'])))
             self.tabla_corridas.setItem(row_num, 9, QTableWidgetItem(str(corrida['cantidad_pasajeros'])))
