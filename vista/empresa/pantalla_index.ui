@@ -924,7 +924,7 @@ QScrollBar::sub-line {
     <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <attribute name="horizontalHeaderDefaultSectionSize">
-    <number>210</number>
+    <number>262</number>
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
@@ -947,15 +947,6 @@ QScrollBar::sub-line {
    <column>
     <property name="text">
      <string>Telefono</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Boleto</string>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../../recursos/recursos_empresa/boleto.png</normaloff>../../recursos/recursos_empresa/boleto.png</iconset>
     </property>
    </column>
   </widget>
