@@ -23,7 +23,7 @@ class CorridaDAO:
                     CONCAT(c.fecha, ' ', c.hora_llegada) AS fecha_hora_llegada,
                     CONCAT(o.nombre, ' ', o.apellPat, ' ', COALESCE(o.apellMat, '')) AS nombre_operador,
                     c.operador AS operador_numero,
-                    a.numero AS numero_autobus,
+                    a.numero AS autobus_numero,
                     a.matricula,
                     a.cantAsientos AS cantidad_asientos,
                     c.tarifaBase AS precio,
