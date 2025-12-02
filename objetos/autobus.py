@@ -1,74 +1,77 @@
-# objetos/autobus.py
-
 class Autobus:
-    def __init__(self, numero, matricula, cantAsientos, tipoAutobus, estado, marca_clave, modelo_clave, marca_nombre=None, modelo_nombre=None):
-        self.__numero = numero
-        self.__matricula = matricula
-        self.__cantAsientos = cantAsientos
-        self.__tipoAutobus = tipoAutobus
-        self.__estado = estado
-        self.__marca_clave = marca_clave
-        self.__modelo_clave = modelo_clave
-        self.__marca_nombre = marca_nombre
-        self.__modelo_nombre = modelo_nombre
-
-    def __str__(self):
-        return (f"Número: {self.__numero}, Matrícula: {self.__matricula}, Asientos: {self.__cantAsientos}, "
-                f"Tipo: {self.__tipoAutobus}, Estado: {self.__estado}, Marca: {self.__marca_nombre or self.__marca_clave}, "
-                f"Modelo: {self.__modelo_nombre or self.__modelo_clave}")
-
-    # Getters
+    def __init__(self, numero=None, matricula=None, claveWIFI=None, cantAsientos=None, 
+                 tipoAutobus=None, marca=None, modelo=None, estado=None):
+        self._numero = numero
+        self._matricula = matricula
+        self._claveWIFI = claveWIFI
+        self._cantAsientos = cantAsientos
+        self._tipoAutobus = tipoAutobus
+        self._marca = marca
+        self._modelo = modelo
+        self._estado = estado
+        
+    def to_dict(self):
+        return {
+            'numero': self._numero,
+            'matricula': self._matricula,
+            'claveWIFI': self._claveWIFI,
+            'cantAsientos': self._cantAsientos,
+            'tipoAutobus': self._tipoAutobus,
+            'marca': self._marca,
+            'modelo': self._modelo,
+            'estado': self._estado
+        }
+    
+    # Getters y Setters
     def get_numero(self):
-        return self.__numero
-
-    def get_matricula(self):
-        return self.__matricula
-
-    def get_cantAsientos(self):
-        return self.__cantAsientos
-
-    def get_tipoAutobus(self):
-        return self.__tipoAutobus
-
-    def get_estado(self):
-        return self.__estado
-
-    def get_marca_clave(self):
-        return self.__marca_clave
-
-    def get_modelo_clave(self):
-        return self.__modelo_clave
+        return self._numero
     
-    def get_marca_nombre(self):
-        return self.__marca_nombre
-    
-    def get_modelo_nombre(self):
-        return self.__modelo_nombre
-
-    # Setters
     def set_numero(self, numero):
-        self.__numero = numero
-
+        self._numero = numero
+    
+    def get_matricula(self):
+        return self._matricula
+    
     def set_matricula(self, matricula):
-        self.__matricula = matricula
-
+        self._matricula = matricula
+    
+    def get_claveWIFI(self):
+        return self._claveWIFI
+    
+    def set_claveWIFI(self, claveWIFI):
+        self._claveWIFI = claveWIFI
+    
+    def get_cantAsientos(self):
+        return self._cantAsientos
+    
     def set_cantAsientos(self, cantAsientos):
-        self.__cantAsientos = cantAsientos
-
+        self._cantAsientos = cantAsientos
+    
+    def get_tipoAutobus(self):
+        return self._tipoAutobus
+    
     def set_tipoAutobus(self, tipoAutobus):
-        self.__tipoAutobus = tipoAutobus
-
+        self._tipoAutobus = tipoAutobus
+    
+    def get_marca(self):
+        return self._marca
+    
+    def set_marca(self, marca):
+        self._marca = marca
+    
+    def get_modelo(self):
+        return self._modelo
+    
+    def set_modelo(self, modelo):
+        self._modelo = modelo
+    
+    def get_estado(self):
+        return self._estado
+    
     def set_estado(self, estado):
-        self.__estado = estado
+        self._estado = estado
+    
+    def __str__(self):
+        return f"Autobus {self._numero} - {self._matricula} ({self._estado})"
+    
 
-    def set_marca_clave(self, marca_clave):
-        self.__marca_clave = marca_clave
-
-    def set_modelo_clave(self, modelo_clave):
-        self.__modelo_clave = modelo_clave
-
-    def set_marca_nombre(self, marca_nombre):
-        self.__marca_nombre = marca_nombre
-
-    def set_modelo_nombre(self, modelo_nombre):
-        self.__modelo_nombre = modelo_nombre

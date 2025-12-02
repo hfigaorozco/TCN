@@ -64,7 +64,7 @@ class ControladorCorridaDialog(QDialog):
             self.ui.comboBox_autobusCorrida.setEnabled(True)
             print("DEBUG CTLR: ComboBox autobus habilitado. Agregando autobuses...") # Debug print
             for bus in all_buses: # Iterate through all buses
-                self.ui.comboBox_autobusCorrida.addItem(f"{bus.get_numero()} - {bus.get_marca_nombre()} {bus.get_modelo_nombre()} ({bus.get_matricula()})", bus)
+                self.ui.comboBox_autobusCorrida.addItem(f"{bus.get_numero()} - {bus.get_marca()} {bus.get_modelo()} ({bus.get_matricula()})", bus)
             self.ui.comboBox_autobusCorrida.setCurrentIndex(-1) # No selection initially
 
     def populate_operador_combobox(self, selected_date):
