@@ -26,7 +26,7 @@ class Ui_Form(object):
         Form.resize(442, 543)
         self.layoutWidget = QWidget(Form)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(16, 111, 361, 286))
+        self.layoutWidget.setGeometry(QRect(16, 111, 365, 341))
         self.verticalLayout_5 = QVBoxLayout(self.layoutWidget)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -78,22 +78,6 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addLayout(self.verticalLayout)
 
-        self.verticalLayout_4 = QVBoxLayout()
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.label_16 = QLabel(self.layoutWidget)
-        self.label_16.setObjectName(u"label_16")
-        self.label_16.setFont(font)
-
-        self.verticalLayout_4.addWidget(self.label_16)
-
-        self.comboBox_autobusCorrida = QComboBox(self.layoutWidget)
-        self.comboBox_autobusCorrida.setObjectName(u"comboBox_autobusCorrida")
-
-        self.verticalLayout_4.addWidget(self.comboBox_autobusCorrida)
-
-
-        self.verticalLayout_5.addLayout(self.verticalLayout_4)
-
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.verticalLayout_6 = QVBoxLayout()
@@ -106,7 +90,7 @@ class Ui_Form(object):
 
         self.dateEdit_fechaCorrida = QDateEdit(self.layoutWidget)
         self.dateEdit_fechaCorrida.setObjectName(u"dateEdit_fechaCorrida")
-        self.dateEdit_fechaCorrida.setMinimumDateTime(QDateTime(QDate(2025, 11, 24), QTime(0, 0, 0)))
+        self.dateEdit_fechaCorrida.setMinimumDateTime(QDateTime(QDate(2025, 11, 24), QTime(8, 0, 0)))
         self.dateEdit_fechaCorrida.setMaximumDate(QDate(2030, 11, 23))
 
         self.verticalLayout_6.addWidget(self.dateEdit_fechaCorrida)
@@ -149,6 +133,8 @@ class Ui_Form(object):
 
         self.verticalLayout_5.addLayout(self.horizontalLayout)
 
+        self.verticalLayout_4 = QVBoxLayout()
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.label_14 = QLabel(self.layoutWidget)
@@ -164,7 +150,21 @@ class Ui_Form(object):
         self.verticalLayout_3.addWidget(self.lineEdit_precioCorrida)
 
 
-        self.verticalLayout_5.addLayout(self.verticalLayout_3)
+        self.verticalLayout_4.addLayout(self.verticalLayout_3)
+
+        self.label_16 = QLabel(self.layoutWidget)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setFont(font)
+
+        self.verticalLayout_4.addWidget(self.label_16)
+
+        self.comboBox_autobusCorrida = QComboBox(self.layoutWidget)
+        self.comboBox_autobusCorrida.setObjectName(u"comboBox_autobusCorrida")
+
+        self.verticalLayout_4.addWidget(self.comboBox_autobusCorrida)
+
+
+        self.verticalLayout_5.addLayout(self.verticalLayout_4)
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -278,14 +278,14 @@ class Ui_Form(object):
         self.comboBox_rutaCorrida.setItemText(29, QCoreApplication.translate("Form", u"SNQ-ESE", None))
 
         self.comboBox_rutaCorrida.setPlaceholderText(QCoreApplication.translate("Form", u"Ruta", None))
-        self.label_16.setText(QCoreApplication.translate("Form", u"Autob\u00fas", None))
-        self.comboBox_autobusCorrida.setPlaceholderText(QCoreApplication.translate("Form", u"Autob\u00fas", None))
         self.label_13.setText(QCoreApplication.translate("Form", u"Fecha", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"Hora de salida", None))
         self.label_11.setText(QCoreApplication.translate("Form", u"Hora de llegada", None))
         self.label_14.setText(QCoreApplication.translate("Form", u"Precio", None))
         self.lineEdit_precioCorrida.setText("")
         self.lineEdit_precioCorrida.setPlaceholderText(QCoreApplication.translate("Form", u"Precio", None))
+        self.label_16.setText(QCoreApplication.translate("Form", u"Autob\u00fas", None))
+        self.comboBox_autobusCorrida.setPlaceholderText(QCoreApplication.translate("Form", u"Autob\u00fas", None))
         self.label_15.setText(QCoreApplication.translate("Form", u"Operador", None))
         self.comboBox_operadorCorrida.setPlaceholderText(QCoreApplication.translate("Form", u"Operador", None))
         self.label.setText(QCoreApplication.translate("Form", u"Agregar nueva corrida", None))

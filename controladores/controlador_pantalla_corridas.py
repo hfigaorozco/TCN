@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox, QDialog, QPushButton
-from PySide6.QtUiTools import QUiLoader
+from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox, QPushButton, QDialog
+from controladores.controlador_corrida_dialog import ControladorCorridaDialog # Import the new controller
 
 class ControladorPantallaCorridas:
     def __init__(self, corrida_dao):
@@ -7,7 +7,7 @@ class ControladorPantallaCorridas:
         self.vista = None
         self.tabla_corridas = None 
         self.todas_las_corridas = [] # Store all corridas
-        self.ui_loader = QUiLoader()
+        # self.ui_loader = QUiLoader() # QUiLoader is no longer needed for corridaDialog
 
         # Filter states
         self.filtro_numero_corrida = ""
@@ -57,20 +57,31 @@ class ControladorPantallaCorridas:
         self.tabla_corridas.setColumnCount(10)
         self.tabla_corridas.setHorizontalHeaderLabels([
             "Número de Viaje", "Origen", "Destino", "Distancia",
-            "Fecha y Hora de Salida", "Operador", "Número Autobús",
+            "Fecha y Hora de Salida", "Operador", "Autobus", # Changed "Número Autobús" to "Autobus"
             "Matrícula", "Asientos", "Pasajeros"
         ])
         self.tabla_corridas.setEditTriggers(QTableWidget.NoEditTriggers)
         self.tabla_corridas.verticalHeader().setVisible(False)
+        
+        # Adjust column widths (increased space)
+        self.tabla_corridas.setColumnWidth(0, 120)  # Número de Viaje
+        self.tabla_corridas.setColumnWidth(1, 140)  # Origen
+        self.tabla_corridas.setColumnWidth(2, 140)  # Destino
+        self.tabla_corridas.setColumnWidth(3, 100)  # Distancia
+        self.tabla_corridas.setColumnWidth(4, 220)  # Fecha y Hora de Salida (more space)
+        self.tabla_corridas.setColumnWidth(5, 220)  # Operador (more space)
+        self.tabla_corridas.setColumnWidth(6, 120)  # Autobus
+        self.tabla_corridas.setColumnWidth(7, 120)  # Matrícula
+        self.tabla_corridas.setColumnWidth(8, 120)  # Asientos
+        self.tabla_corridas.setColumnWidth(9, 120)  # Pasajeros
+        
         self._cargar_todas_las_corridas() # Call this to load data on init and store it
 
     def _abrir_corrida_dialog(self):
-        # Create a QDialog instance
-        dialog = QDialog(self.vista)
-        # Load the UI file into the dialog
-        self.ui_loader.load("vista/empresa/corridaDialog.ui", dialog)
-        # Display the dialog modally
+        dialog = ControladorCorridaDialog(self.vista)
         dialog.exec()
+        # After the dialog closes, refresh the corridas table to show any new additions
+        self._cargar_todas_las_corridas()
 
     def _cargar_todas_las_corridas(self):
         # Fetch and store all corridas

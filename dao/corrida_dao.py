@@ -1,4 +1,7 @@
 from dao.conn import Connection
+from objetos.corrida import Corrida
+import mysql.connector
+from mysql.connector import Error
 
 class CorridaDAO:
     def __init__(self):
@@ -42,3 +45,94 @@ class CorridaDAO:
             if 'cursor' in locals() and cursor:
                 cursor.close()
         return corridas_detalladas
+
+    def obtener_corridas_por_fecha_autobus_u_operador(self, fecha_str, id_autobus=None, numero_operador=None):
+        corridas = []
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = """
+                SELECT numero, ruta, fecha, hora_salida, hora_llegada, tarifaBase, operador, autobus
+                FROM corrida
+                WHERE fecha = %s
+            """
+            params = [fecha_str]
+
+            if id_autobus is not None:
+                query += " AND autobus = %s"
+                params.append(id_autobus)
+            if numero_operador is not None:
+                query += " AND operador = %s"
+                params.append(numero_operador)
+
+            cursor.execute(query, tuple(params))
+            resultados = cursor.fetchall()
+
+            for fila in resultados:
+                corrida = Corrida(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7])
+                corridas.append(corrida)
+
+        except Error as e:
+            print(f"Error al obtener corridas por fecha, autobus u operador: {e}")
+        finally:
+            if cursor:
+                cursor.close()
+        return corridas
+
+    def autobus_ocupado_en_fecha(self, numero_autobus, fecha_str): # Renamed id_autobus to numero_autobus
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = "SELECT COUNT(*) FROM corrida WHERE autobus = %s AND fecha = %s"
+            cursor.execute(query, (numero_autobus, fecha_str))
+            count = cursor.fetchone()[0]
+            return count > 0
+        except Error as e:
+            print(f"Error al verificar si el autobús está ocupado: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+
+    def operador_ocupado_en_fecha(self, numero_operador, fecha_str):
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = "SELECT COUNT(*) FROM corrida WHERE operador = %s AND fecha = %s"
+            cursor.execute(query, (numero_operador, fecha_str))
+            count = cursor.fetchone()[0]
+            return count > 0
+        except Error as e:
+            print(f"Error al verificar si el operador está ocupado: {e}")
+            return False
+        finally:
+            if cursor:
+                cursor.close()
+    
+    def crear_corrida(self, ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, operador_numero, autobus_numero, lugares_disponibles, estado='ACT'):
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = """
+                INSERT INTO corrida (ruta, fecha, hora_salida, hora_llegada, tarifaBase, lugaresDisp, operador, autobus, estado)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            cursor.execute(query, (ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, lugares_disponibles, operador_numero, autobus_numero, estado))
+            conexion.commit()
+            return True
+        except Error as e:
+            print(f"Error al crear corrida: {e}")
+            if conexion:
+                conexion.rollback()
+            return False
+        finally:
+            if cursor:
+                cursor.close()

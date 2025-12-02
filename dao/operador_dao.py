@@ -1,8 +1,37 @@
-from objetos.Operador import Operador
-from dao.conn import Connection
+import mysql.connector
 from mysql.connector import Error
+from dao.conn import Connection
+from objetos.Operador import Operador
+from datetime import date
 
 class OperadorDAO:
+    def __init__(self):
+        pass
+
+    def listar_operadores(self):
+        operadores = []
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = "SELECT numero, nombre, apellPat, apellMat, fechaNac, telefono, fechaContrato FROM operador"
+            cursor.execute(query)
+            resultados = cursor.fetchall()
+
+            for fila in resultados:
+                # Assuming fechaNac and fechaContrato are stored as strings in 'YYYY-MM-DD' format
+                # and need to be converted to date objects.
+                fecha_nac = date.fromisoformat(str(fila[4])) if fila[4] else None
+                fecha_contrato = date.fromisoformat(str(fila[6])) if fila[6] else None
+                operador = Operador(fila[0], fila[1], fila[2], fila[3], fecha_nac, fila[5], fecha_contrato)
+                operadores.append(operador)
+
+        except Error as e:
+            print(f"Error al listar operadores: {e}")
+        finally:
+            if 'conexion' in locals() and conexion.is_connected():
+                cursor.close()
+                # Connection.closeConnection()
+        return operadores
     def obtener_todos(self):
         try:
             conn = Connection.getConnection()
