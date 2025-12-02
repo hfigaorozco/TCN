@@ -1,5 +1,6 @@
-from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox, QPushButton, QDialog
-from controladores.controlador_corrida_dialog import ControladorCorridaDialog # Import the new controller
+from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox, QPushButton, QDialog, QMessageBox
+from controladores.controlador_corrida_dialog import ControladorCorridaDialog
+from controladores.controlador_actualizar_corrida_dialog import ControladorActualizarCorridaDialog # New Import
 
 class ControladorPantallaCorridas:
     def __init__(self, corrida_dao):
@@ -7,7 +8,6 @@ class ControladorPantallaCorridas:
         self.vista = None
         self.tabla_corridas = None 
         self.todas_las_corridas = [] # Store all corridas
-        # self.ui_loader = QUiLoader() # QUiLoader is no longer needed for corridaDialog
 
         # Filter states
         self.filtro_numero_corrida = ""
@@ -53,6 +53,13 @@ class ControladorPantallaCorridas:
         else:
             print("Error: boton_anadirCorr not found in the UI.")
 
+        # Connect boton_actualizarCorr (New connection)
+        self.boton_actualizarCorr = self.vista.ui.findChild(QPushButton, 'boton_actualizarCorr')
+        if self.boton_actualizarCorr:
+            self.boton_actualizarCorr.clicked.connect(self._abrir_actualizar_corrida_dialog)
+        else:
+            print("Error: boton_actualizarCorr not found in the UI.")
+
 
         self.tabla_corridas.setColumnCount(10)
         self.tabla_corridas.setHorizontalHeaderLabels([
@@ -81,6 +88,30 @@ class ControladorPantallaCorridas:
         dialog = ControladorCorridaDialog(self.vista)
         dialog.exec()
         # After the dialog closes, refresh the corridas table to show any new additions
+        self._cargar_todas_las_corridas()
+
+    def _abrir_actualizar_corrida_dialog(self):
+        selected_row = self.tabla_corridas.currentRow()
+        if selected_row < 0:
+            QMessageBox.warning(self.vista, "Selección Requerida", "Por favor, seleccione una corrida de la tabla para actualizar.")
+            return
+
+        # Get numero_viaje from the selected row
+        numero_viaje_selected = int(self.tabla_corridas.item(selected_row, 0).text())
+        
+        # Find the complete corrida_data from self.todas_las_corridas
+        corrida_to_update = None
+        for corrida in self.todas_las_corridas:
+            if corrida['numero_viaje'] == numero_viaje_selected:
+                corrida_to_update = corrida
+                break
+
+        if corrida_to_update is None:
+            QMessageBox.critical(self.vista, "Error", "No se encontró la corrida seleccionada en los datos internos.")
+            return
+
+        dialog = ControladorActualizarCorridaDialog(corrida_data=corrida_to_update) # Removed self.vista as parent
+        dialog.exec()
         self._cargar_todas_las_corridas()
 
     def _cargar_todas_las_corridas(self):

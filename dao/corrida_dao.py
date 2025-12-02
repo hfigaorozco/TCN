@@ -20,9 +20,11 @@ class CorridaDAO:
                     r.distancia,
                     CONCAT(c.fecha, ' ', c.hora_salida) AS fecha_hora_salida,
                     CONCAT(o.nombre, ' ', o.apellPat, ' ', COALESCE(o.apellMat, '')) AS nombre_operador,
+                    c.operador AS operador_numero,
                     a.numero AS numero_autobus,
                     a.matricula,
                     a.cantAsientos AS cantidad_asientos,
+                    c.tarifaBase AS precio,
                     (SELECT COUNT(*) FROM reservacion res WHERE res.corrida = c.numero) AS cantidad_pasajeros
                 FROM
                     corrida c
