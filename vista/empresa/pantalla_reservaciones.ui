@@ -698,10 +698,10 @@ border: 1px solid #FF6A36
        <number>6</number>
       </property>
       <property name="placeholderText">
-       <string>Buscar numero de reservacion...</string>
+       <string>Buscar por numero de corrida...</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="boton_rutas_2">
+     <widget class="QPushButton" name="boton_buscar">
       <property name="geometry">
        <rect>
         <x>1070</x>

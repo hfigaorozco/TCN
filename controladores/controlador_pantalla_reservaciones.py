@@ -63,3 +63,14 @@ class ControlardorPantallaReservaciones:
         except Error as e:
             print(f'Error en ControladorVEReservaciones (getTodasReservacionesActivas()): {e}')
             raise e
+        
+
+    def buscarReservacionPorCorrida(self,numero):
+
+        if not Validaciones.validar_id(numero):
+            return False
+        try:
+            return self.reservacion_dao.buscarReservacionPorCorrida(numero)
+        except Error as e:
+            print(f'Error en ControladorVEReservaciones (buscarReservacionesPorNUmero()): {e}')
+            raise e

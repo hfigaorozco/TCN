@@ -49,6 +49,7 @@ class PantallaReservaciones(QWidget):
         #Obteniendo componentes del .ui
         self.boton_crear_reservacion = self.ui.findChild(QPushButton,'boton_crear_reservacion')
         self.boton_editar_reservacion = self.ui.findChild(QPushButton,'boton_editar_reservacion')
+        self.boton_buscar = self.ui.findChild(QPushButton,'boton_buscar')
 
         self.line_edit_buscar_reservacion = self.ui.findChild(QLineEdit,'lineEdit_buscar')
         self.combo_box_filtro = self.ui.findChild(QComboBox,'comboBox_filtros')
@@ -66,14 +67,56 @@ class PantallaReservaciones(QWidget):
         if self.combo_box_filtro:
             self.combo_box_filtro.currentIndexChanged.connect(self.filtrarPorComboBox)
 
+        if self.boton_buscar:
+            self.boton_buscar.clicked.connect(self.buscarPorCorrida)
+
 
         self.llenarTablaAlInicio()
 
     def crearReservacion(self):
         pass
 
+    def buscarPorCorrida(self):
+        corridas = self.controlador.buscarReservacionPorCorrida(str(self.line_edit_buscar_reservacion.text()))
+        self.__llenar_tabla_reservaciones(corridas)
+
     def editarReservacion(self):
-        print(self.table_widget.currentItem())
+        """
+        Obtiene los datos de la fila que está actualmente seleccionada o enfocada.
+        Retorna una lista con el contenido de cada celda de esa fila.
+        """
+
+        tabla = self.table_widget  # Asume que 'self.tableWidget' es tu QTableWidget
+
+        # 1. Obtener el indice de la fila actualmente seleccionada/enfocada
+        fila_actual = tabla.currentRow()
+
+        # 2. Verificar si hay alguna fila seleccionada (-1 si no hay)
+        if fila_actual < 0:
+            print("No hay ninguna fila actualmente seleccionada o enfocada.")
+            return None  # Retorna None si no hay selección
+
+        # 3. Obtener la cantidad de columnas de la tabla (Método clave)
+        num_columnas = tabla.columnCount()
+
+        datos_fila = []
+
+        # 4. Iterar sobre las columnas de la fila actual para extraer los datos
+        for col_index in range(num_columnas):
+
+            # Obtener el QTableWidgetItem en la posición (fila, columna)
+            item = tabla.item(fila_actual, col_index)
+
+            if item is not None:
+                # Extraer el texto del QTableWidgetItem (Método clave)
+                dato = item.text()
+                datos_fila.append(dato)
+            else:
+                # Manejar celdas vacías si es posible
+                datos_fila.append("")
+
+        print(f"Datos de la fila {fila_actual}: {datos_fila}")
+        return datos_fila
 
     def filtrarPorComboBox(self):
         if self.combo_box_filtro.currentText() == "Reservaciones Activas":
