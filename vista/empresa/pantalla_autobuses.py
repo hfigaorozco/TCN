@@ -12,4 +12,4 @@ class PantallaAutobuses(QWidget):
         self.ui.setupUi(self)
         
         # Configurar la UI usando el controlador
-        self.controlador.setup_ui(self)
+        self.controlador.setup_ui(self, self.ui)
