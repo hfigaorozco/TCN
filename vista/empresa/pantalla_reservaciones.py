@@ -73,7 +73,7 @@ class PantallaReservaciones(QWidget):
         pass
 
     def editarReservacion(self):
-        pass
+        print(self.table_widget.currentItem())
 
     def filtrarPorComboBox(self):
         if self.combo_box_filtro.currentText() == "Reservaciones Activas":
