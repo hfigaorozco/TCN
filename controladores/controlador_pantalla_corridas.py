@@ -71,7 +71,7 @@ class ControladorPantallaCorridas:
 
         self.tabla_corridas.setColumnCount(10)
         self.tabla_corridas.setHorizontalHeaderLabels([
-            "Número de Viaje", "Origen", "Destino", "Distancia",
+            "Corrida", "Origen", "Destino", "Distancia",
             "Fecha y Hora de Salida", "Operador", "Autobus", # Changed "Número Autobús" to "Autobus"
             "Matrícula", "Asientos", "Pasajeros"
         ])
