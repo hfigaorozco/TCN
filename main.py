@@ -1,4 +1,3 @@
-
 """Este metodo es el metodo principal de todo el sistema.
     1. Inicia la conexion con la DB que todos usaran
     2. Hace las instancias e inyecta estas dependencias/instancias

@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QHeaderView,
     QLabel, QPushButton, QSizePolicy, QTableWidget,
     QTableWidgetItem, QWidget)
-#import resources_rc quitar comentario cuando ya tenga la carpeta resources
+import resources_rc
 
 class Ui_pantalla_autobuses(object):
     def setupUi(self, pantalla_autobuses):
@@ -102,7 +102,7 @@ class Ui_pantalla_autobuses(object):
 "}")
         self.label_estatico_tituloAutobuses = QLabel(self.widget_opfiltro_autobus)
         self.label_estatico_tituloAutobuses.setObjectName(u"label_estatico_tituloAutobuses")
-        self.label_estatico_tituloAutobuses.setGeometry(QRect(30, 10, 481, 71))
+        self.label_estatico_tituloAutobuses.setGeometry(QRect(30, 0, 481, 101))
         font1 = QFont()
         font1.setPointSize(59)
         font1.setBold(True)
@@ -476,7 +476,7 @@ class Ui_pantalla_autobuses(object):
     def retranslateUi(self, pantalla_autobuses):
         self.boton_registrarAutobus.setText(QCoreApplication.translate("pantalla_autobuses", u" Registrar", None))
         self.boton_bajaAutobus.setText(QCoreApplication.translate("pantalla_autobuses", u"Dar de baja", None))
-        self.label_estatico_tituloAutobuses.setText(QCoreApplication.translate("pantalla_autobuses", u"Autobuses", None))
+        self.label_estatico_tituloAutobuses.setText(QCoreApplication.translate("pantalla_autobuses", u"<html><head/><body><p><span style=\" color:#9d9d9d;\">Autobuses</span></p></body></html>", None))
         self.label_estatico_servicio.setText(QCoreApplication.translate("pantalla_autobuses", u"<html><head/><body><p><span style=\" font-size:16pt; font-weight:700;\">Filtrar por servicio:</span></p></body></html>", None))
         ___qtablewidgetitem = self.QtableWidget_autobuses.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("pantalla_autobuses", u"N\u00famero", None));
