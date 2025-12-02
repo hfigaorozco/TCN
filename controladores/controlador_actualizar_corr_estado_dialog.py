@@ -93,4 +93,6 @@ class ControladorActualizarCorrEstadoDialog:
             QMessageBox.critical(self.dialog, "Error", "Número de corrida inválido.")
 
     def mostrar_dialogo(self, corrida_data=None):
+        if not hasattr(self, '_setup_ui'):
+            raise AttributeError("DEBUG_ERROR: _setup_ui method is not found on this instance.")
         self.corrida_data = corrida_data
