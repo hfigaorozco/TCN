@@ -161,8 +161,26 @@ class CorridaDAO:
                                    numero_viaje))
             conexion.commit()
             return True
+        finally:
+            if cursor:
+                cursor.close()
+
+    def actualizar_operador_corrida(self, numero_viaje, operador_numero):
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = """
+                UPDATE corrida
+                SET operador = %s
+                WHERE numero = %s
+            """
+            cursor.execute(query, (operador_numero, numero_viaje))
+            conexion.commit()
+            return True
         except Error as e:
-            print(f"Error al actualizar corrida: {e}")
+            print(f"Error al actualizar el operador de la corrida: {e}")
             if conexion:
                 conexion.rollback()
             return False
