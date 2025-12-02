@@ -187,3 +187,72 @@ class CorridaDAO:
         finally:
             if cursor:
                 cursor.close()
+
+    def obtener_corrida_por_numero_viaje(self, numero_viaje):
+        corrida_data = None
+        try:
+            conn = Connection.getConnection()
+            cursor = conn.cursor(dictionary=True)
+            query = """
+                SELECT
+                    c.numero AS numero_viaje,
+                    ro.nombre AS ciudad_origen,
+                    rd.nombre AS ciudad_destino,
+                    r.codigo AS ruta_codigo,
+                    r.distancia,
+                    CONCAT(c.fecha, ' ', c.hora_salida) AS fecha_hora_salida,
+                    CONCAT(c.fecha, ' ', c.hora_llegada) AS fecha_hora_llegada,
+                    CONCAT(o.nombre, ' ', o.apellPat, ' ', COALESCE(o.apellMat, '')) AS nombre_operador,
+                    c.operador AS operador_numero,
+                    a.numero AS autobus_numero,
+                    a.matricula,
+                    a.cantAsientos AS cantidad_asientos,
+                    c.tarifaBase AS precio,
+                    c.estado AS estado_corrida,
+                    (SELECT COUNT(*) FROM reservacion res WHERE res.corrida = c.numero) AS cantidad_pasajeros
+                FROM
+                    corrida c
+                JOIN
+                    ruta r ON c.ruta = r.codigo
+                JOIN
+                    ciudad ro ON r.ciudadOrigen = ro.codigo
+                JOIN
+                    ciudad rd ON r.ciudadDestino = rd.codigo
+                JOIN
+                    operador o ON c.operador = o.numero
+                JOIN
+                    autobus a ON c.autobus = a.numero
+                WHERE
+                    c.numero = %s
+            """
+            cursor.execute(query, (numero_viaje,))
+            corrida_data = cursor.fetchone()
+        except Exception as e:
+            print(f"Error al obtener corrida por numero de viaje: {e}")
+        finally:
+            if 'cursor' in locals() and cursor:
+                cursor.close()
+        return corrida_data
+
+    def actualizar_estado_corrida(self, numero_viaje, nuevo_estado):
+        conexion = None
+        cursor = None
+        try:
+            conexion = Connection.getConnection()
+            cursor = conexion.cursor()
+            query = """
+                UPDATE corrida
+                SET estado = %s
+                WHERE numero = %s
+            """
+            cursor.execute(query, (nuevo_estado, numero_viaje))
+            conexion.commit()
+            return True
+        except Error as e:
+            print(f"Error al actualizar el estado de la corrida: {e}")
+            if conexion:
+                conexion.rollback()
+            return False
+        finally:
+            if cursor:
+                cursor.close()
