@@ -206,3 +206,73 @@ class AutobusDAO:
             return result[0] if result else None
         finally:
             cursor.close()
+
+    def tiene_corridas_futuras(self, numero_autobus):
+        """
+        Verifica si el autobús tiene corridas asignadas para hoy o fechas futuras
+        con estado ACTIVO.
+        Retorna: True si tiene corridas, False si no
+        """
+        cursor = self._conexion.cursor()
+        try:
+            query = """
+            SELECT COUNT(*) 
+            FROM corrida c
+            JOIN edo_corrida ec ON c.estado = ec.codigo
+            WHERE c.autobus = %s 
+            AND c.fecha >= CURDATE()  -- Fechas de hoy en adelante
+            AND ec.descripcion = 'ACTIVO'  -- Solo corridas ACTIVAS
+            """
+            cursor.execute(query, (numero_autobus,))
+            count = cursor.fetchone()[0]
+            return count > 0
+        finally:
+            cursor.close()
+
+    def obtener_corridas_futuras(self, numero_autobus):
+        """
+        Obtiene las corridas futuras asignadas al autobús
+        Retorna: Lista de diccionarios con información básica
+        """
+        cursor = self._conexion.cursor(dictionary=True)
+        try:
+            query = """
+            SELECT c.numero, c.fecha, c.hora_salida, c.hora_llegada, r.codigo as ruta
+            FROM corrida c
+            JOIN ruta r ON c.ruta = r.codigo
+            JOIN edo_corrida ec ON c.estado = ec.codigo
+            WHERE c.autobus = %s 
+            AND c.fecha >= CURDATE()
+            AND ec.descripcion = 'ACTIVO'
+            ORDER BY c.fecha, c.hora_salida
+            LIMIT 5  -- Limitar a 5 corridas para no saturar el mensaje
+            """
+            cursor.execute(query, (numero_autobus,))
+            return cursor.fetchall()
+        finally:
+            cursor.close()
+
+    # REEMPLAZA el método dar_baja_autobus existente con este:
+    def dar_baja_autobus(self, numero_autobus):
+        """
+        Cambia el estado del autobús a INACTIVO
+        Retorna: (exito, mensaje_error)
+        """
+        cursor = self._conexion.cursor()
+        try:
+            # 1. Verificar si tiene corridas futuras
+            if self.tiene_corridas_futuras(numero_autobus):
+                return (False, "Tiene corridas asignadas.")
+            
+            # 2. Dar de baja
+            query = "UPDATE autobus SET estado = 'INAC' WHERE numero = %s"
+            cursor.execute(query, (numero_autobus,))
+            self._conexion.commit()
+            
+            return (True, None)
+            
+        except Exception as e:
+            self._conexion.rollback()
+            return (False, f"Error al dar de baja autobús: {str(e)}")
+        finally:
+            cursor.close()

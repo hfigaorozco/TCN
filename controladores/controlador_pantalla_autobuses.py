@@ -334,7 +334,7 @@ class ControladorPantallaAutobuses:
         ui.label_mostrarMarca.setText("")
         ui.label_mostrarModelo.setText("")
         ui.label_mostrarTipoAutobus.setText("")
-    
+
     def dar_baja_autobus_dialogo(self, ui, dialog):
         """Da de baja el autobús seleccionado desde el diálogo"""
         try:
@@ -343,21 +343,45 @@ class ControladorPantallaAutobuses:
                 QMessageBox.warning(dialog, "Advertencia", "Seleccione un autobús")
                 return
             
-            # Confirmar con el usuario
+            # Verificar si tiene corridas futuras
+            if self.autobus_dao.tiene_corridas_futuras(numero_autobus):
+                # Obtener información de las corridas
+                corridas = self.autobus_dao.obtener_corridas_futuras(numero_autobus)
+                
+                # Crear mensaje
+                mensaje = f"No se puede dar de baja el autobús {numero_autobus}.\n\n"
+                mensaje += "Tiene corridas asignadas para hoy o fechas futuras:\n\n"
+                
+                for corrida in corridas:
+                    mensaje += f"• Corrida {corrida['numero']}: {corrida['fecha']} "
+                    mensaje += f"({corrida['hora_salida']} - {corrida['hora_llegada']}) "
+                    mensaje += f"Ruta: {corrida['ruta']}\n"
+                
+                if len(corridas) >= 5:
+                    mensaje += "\n... y más corridas.\n"
+                
+                mensaje += "\nDebe cancelar o reasignar estas corridas primero."
+                
+                QMessageBox.warning(dialog, "No se puede dar de baja", mensaje)
+                return
+            
+            # Si no tiene corridas, proceder con la baja
             confirmacion = QMessageBox.question(
                 dialog,
                 "Confirmar baja",
                 f"¿Está seguro de dar de baja el autobús {numero_autobus}?\n\n"
+                "El autobús NO tiene corridas asignadas para hoy ni fechas futuras.\n"
                 "Esta acción cambiará el estado a INACTIVO.",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
             )
             
             if confirmacion == QMessageBox.StandardButton.Yes:
-                # Dar de baja el autobús
-                if self.autobus_dao.dar_baja_autobus(numero_autobus):
+                exito, mensaje_error = self.autobus_dao.dar_baja_autobus(numero_autobus)
+                if exito:
+                    QMessageBox.information(dialog, "Éxito", f"Autobús {numero_autobus} dado de baja exitosamente")
                     dialog.accept()
                 else:
-                    QMessageBox.warning(dialog, "Error", "No se pudo dar de baja el autobús")
-                    
+                    QMessageBox.warning(dialog, "Error", mensaje_error)
+                        
         except Exception as e:
             QMessageBox.critical(dialog, "Error", f"Error al dar de baja autobús: {str(e)}")
