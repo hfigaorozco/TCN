@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox
+from PySide6.QtWidgets import QTableWidgetItem, QTableWidget, QLineEdit, QComboBox, QDialog, QPushButton
+from PySide6.QtUiTools import QUiLoader
 
 class ControladorPantallaCorridas:
     def __init__(self, corrida_dao):
@@ -6,6 +7,7 @@ class ControladorPantallaCorridas:
         self.vista = None
         self.tabla_corridas = None 
         self.todas_las_corridas = [] # Store all corridas
+        self.ui_loader = QUiLoader()
 
         # Filter states
         self.filtro_numero_corrida = ""
@@ -44,6 +46,14 @@ class ControladorPantallaCorridas:
         else:
             print("Error: comboBox_filtroDestinoCorr not found in the UI.")
 
+        # Connect boton_anadirCorr
+        self.boton_anadirCorr = self.vista.ui.findChild(QPushButton, 'boton_anadirCorr')
+        if self.boton_anadirCorr:
+            self.boton_anadirCorr.clicked.connect(self._abrir_corrida_dialog)
+        else:
+            print("Error: boton_anadirCorr not found in the UI.")
+
+
         self.tabla_corridas.setColumnCount(10)
         self.tabla_corridas.setHorizontalHeaderLabels([
             "Número de Viaje", "Origen", "Destino", "Distancia",
@@ -53,6 +63,14 @@ class ControladorPantallaCorridas:
         self.tabla_corridas.setEditTriggers(QTableWidget.NoEditTriggers)
         self.tabla_corridas.verticalHeader().setVisible(False)
         self._cargar_todas_las_corridas() # Call this to load data on init and store it
+
+    def _abrir_corrida_dialog(self):
+        # Create a QDialog instance
+        dialog = QDialog(self.vista)
+        # Load the UI file into the dialog
+        self.ui_loader.load("vista/empresa/corridaDialog.ui", dialog)
+        # Display the dialog modally
+        dialog.exec()
 
     def _cargar_todas_las_corridas(self):
         # Fetch and store all corridas
@@ -86,9 +104,8 @@ class ControladorPantallaCorridas:
     def _on_filtro_origen_changed(self, index):
         if self.comboBox_filtroOrigenCorr:
             self.filtro_origen = self.comboBox_filtroOrigenCorr.currentText()
-            # If the first item is a "select all" or "none" option, treat it as no filter
-            # Assuming "Seleccione..." or similar is the first item
-            if index == 0 and (self.filtro_origen == "Seleccione..." or self.filtro_origen == "All" or self.filtro_origen == ""):
+            # If "TODOS" or an empty string is selected, treat it as no filter
+            if self.filtro_origen == "TODOS" or self.filtro_origen == "":
                 self.filtro_origen = ""
             self._aplicar_filtros()
 
@@ -96,8 +113,8 @@ class ControladorPantallaCorridas:
     def _on_filtro_destino_changed(self, index):
         if self.comboBox_filtroDestinoCorr:
             self.filtro_destino = self.comboBox_filtroDestinoCorr.currentText()
-            # If the first item is a "select all" or "none" option, treat it as no filter
-            if index == 0 and (self.filtro_destino == "Seleccione..." or self.filtro_destino == "All" or self.filtro_destino == ""):
+            # If "TODOS" or an empty string is selected, treat it as no filter
+            if self.filtro_destino == "TODOS" or self.filtro_destino == "":
                 self.filtro_destino = ""
             self._aplicar_filtros()
 

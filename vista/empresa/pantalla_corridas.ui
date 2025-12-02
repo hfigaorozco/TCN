@@ -486,55 +486,11 @@ border:none;</string>
      <string>Número de corrida</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_filtroDestinoCorr">
-    <property name="geometry">
-     <rect>
-      <x>1420</x>
-      <y>56</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 12px;
-    color: #606266;
-    min-height: 10px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}</string>
-    </property>
+    <item>
+     <property name="text">
+      <string>TODOS</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>Ensenada</string>
@@ -611,55 +567,11 @@ border: none;</string>
      <string>Destino</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_filtroOrigenCorr">
-    <property name="geometry">
-     <rect>
-      <x>1240</x>
-      <y>56</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background-color: #ffffff;
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 12px;
-    color: #606266;
-    min-height: 10px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-}</string>
-    </property>
+    <item>
+     <property name="text">
+      <string>TODOS</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>Ensenada</string>
