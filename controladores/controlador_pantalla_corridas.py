@@ -20,6 +20,7 @@ class ControladorPantallaCorridas:
         self._setup_ui()
 
     def _setup_ui(self):
+        print("DEBUG: _setup_ui called in ControladorPantallaCorridas")
         self.tabla_corridas = self.vista.ui.findChild(QTableWidget, 'QtableWidget_corridas')
         
         if self.tabla_corridas is None:
@@ -64,9 +65,10 @@ class ControladorPantallaCorridas:
         # Connect boton_estadoCorr (New connection)
         self.boton_estadoCorr = self.vista.ui.findChild(QPushButton, 'boton_estadoCorr')
         if self.boton_estadoCorr:
+            print("DEBUG: boton_estadoCorr found and connected.")
             self.boton_estadoCorr.clicked.connect(self._abrir_actualizar_corr_estado_dialog)
         else:
-            print("Error: boton_estadoCorr not found in the UI.")
+            print("DEBUG: boton_estadoCorr NOT found.")
 
 
         self.tabla_corridas.setColumnCount(10)
@@ -123,6 +125,7 @@ class ControladorPantallaCorridas:
         self._cargar_todas_las_corridas()
 
     def _abrir_actualizar_corr_estado_dialog(self):
+        print("DEBUG: _abrir_actualizar_corr_estado_dialog called.")
         selected_row = self.tabla_corridas.currentRow()
         if selected_row < 0:
             QMessageBox.warning(self.vista, "Selección Requerida", "Por favor, seleccione una corrida de la tabla para actualizar su estado.")
@@ -142,7 +145,7 @@ class ControladorPantallaCorridas:
             QMessageBox.critical(self.vista, "Error", "No se encontró la corrida seleccionada en los datos internos.")
             return
 
-        controlador_dialogo = ControladorActualizarCorrEstadoDialog(self.vista)
+        controlador_dialogo = ControladorActualizarCorrEstadoDialog(self.corrida_dao, self.vista)
         controlador_dialogo.mostrar_dialogo(corrida_data=corrida_to_update)
         self._cargar_todas_las_corridas() # Refresh table after dialog closes
 
