@@ -307,7 +307,7 @@ class Ui_pantalla_operadores(object):
         self.QTableWidget_operadores.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.QTableWidget_operadores.setObjectName(u"QTableWidget_operadores")
         self.QTableWidget_operadores.setGeometry(QRect(360, 280, 1421, 661))
-        self.QTableWidget_operadores.setLayoutDirection(Qt.LeftToRight)
+        self.QTableWidget_operadores.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.QTableWidget_operadores.setStyleSheet(u"QTableView {\n"
 "    background: #ffffff;\n"
 "    border: 2px solid #e6e8ec;\n"
@@ -391,8 +391,8 @@ class Ui_pantalla_operadores(object):
 "    height: 0px;\n"
 "}\n"
 "")
-        self.QTableWidget_operadores.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.QTableWidget_operadores.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.QTableWidget_operadores.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.QTableWidget_operadores.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.QTableWidget_operadores.horizontalHeader().setDefaultSectionSize(284)
         self.QTableWidget_operadores.verticalHeader().setVisible(False)
 
@@ -410,7 +410,7 @@ class Ui_pantalla_operadores(object):
         self.boton_inicio.setText("")
         self.boton_reservaciones.setText(QCoreApplication.translate("pantalla_operadores", u"Reservaciones", None))
         self.boton_salir.setText("")
-        self.boton_editaroperadores.setText(QCoreApplication.translate("pantalla_operadores", u"editar", None))
+        self.boton_editaroperadores.setText(QCoreApplication.translate("pantalla_operadores", u"Editar", None))
         self.boton_agregaroperadores.setText(QCoreApplication.translate("pantalla_operadores", u"A\u00f1adir", None))
         self.label_estatico_operadores.setText(QCoreApplication.translate("pantalla_operadores", u"Operadores", None))
         self.lineEdit_boperadores.setPlaceholderText(QCoreApplication.translate("pantalla_operadores", u"Buscar operador..", None))
