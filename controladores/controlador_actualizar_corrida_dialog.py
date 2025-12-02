@@ -92,13 +92,32 @@ class ControladorActualizarCorridaDialog(QDialog):
         # Keep existing corrida data, only update the operator
         ruta_codigo = self.corrida_data['ruta_codigo']
         fecha_hora_salida = self.corrida_data['fecha_hora_salida']
-        fecha_hora_llegada = self.corrida_data['fecha_hora_llegada'] # Assuming this is available
+        
+        # DEBUG: Check if fecha_hora_llegada exists in corrida_data
+        if 'fecha_hora_llegada' not in self.corrida_data:
+            print("DEBUG: 'fecha_hora_llegada' not found in self.corrida_data. Using default or raising error.")
+            fecha_hora_llegada = "0000-00-00 00:00:00" # Placeholder to avoid error for now
+        else:
+            fecha_hora_llegada = self.corrida_data['fecha_hora_llegada']
+
+
         precio = self.corrida_data['precio']
         autobus_numero = self.corrida_data['autobus_numero']
         lugares_disponibles = self.corrida_data['lugares_disponibles']
         estado = self.corrida_data.get('estado', 'ACT')
 
         operador_numero = selected_operador.get_numero()
+
+        print(f"DEBUG: Updating corrida {numero_viaje} with:")
+        print(f"  ruta_codigo: {ruta_codigo}")
+        print(f"  fecha_hora_salida: {fecha_hora_salida}")
+        print(f"  fecha_hora_llegada: {fecha_hora_llegada}")
+        print(f"  precio: {precio}")
+        print(f"  operador_numero: {operador_numero}")
+        print(f"  autobus_numero: {autobus_numero}")
+        print(f"  lugares_disponibles: {lugares_disponibles}")
+        print(f"  estado: {estado}")
+
 
         if self.corrida_dao.actualizar_corrida(numero_viaje, ruta_codigo, fecha_hora_salida, fecha_hora_llegada, precio, operador_numero, autobus_numero, lugares_disponibles, estado):
             QMessageBox.information(self, "Éxito", "Corrida actualizada exitosamente.")
