@@ -95,8 +95,6 @@ def main():
                             controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp,
                             controlador_pcidad=controlador_pcidad) 
     
-    # Inyectar app_manager en los controladores que lo necesitan
-    controlador_prutas.set_app_manager(app_manager) # Inyectar app_manager en controlador_prutas
     #iniciando UI
     print('Iniciando UI')
     
