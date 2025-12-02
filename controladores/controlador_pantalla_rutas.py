@@ -5,11 +5,6 @@ class ControladorPantallaRutas:
     def __init__(self, ruta_dao, ciudad_dao):
         self.ruta_dao = ruta_dao
         self.ciudad_dao = ciudad_dao
-        self.app_manager = None # Se inicializa a None, se inyectará después
-
-    def set_app_manager(self, app_manager):
-        """Inyecta la instancia de AppManager en el controlador."""
-        self.app_manager = app_manager
 
     def obtener_todas_las_rutas(self):
         """
