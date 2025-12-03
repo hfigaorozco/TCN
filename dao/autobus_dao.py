@@ -294,20 +294,21 @@ class AutobusDAO:
                 SELECT
                     a.numero,
                     a.matricula,
+                    a.claveWIFI,
                     a.cantAsientos,
                     a.tipoAutobus,
-                    a.estado,
-                    a.marca AS marca_clave,
-                    a.modelo AS modelo_clave,
-                    m.nombre AS marca_nombre,
-                    mo.nombre AS modelo_nombre
+                    m.clave,
+                    mo.clave,
+                    a.estado
                 FROM
-                    autobus a
-                JOIN
-                    marca m ON a.marca = m.clave
-                JOIN
-                    modelo mo ON a.modelo = mo.clave
+                    autobus as a
+                INNER JOIN marca AS m ON a.marca = m.clave
+                INNER JOIN modelo AS mo ON a.modelo = mo.clave
             """
+            # a.marca AS marca_clave,
+                    # a.modelo AS modelo_clave,
+                    # m.nombre AS marca_nombre,
+                    # mo.nombre AS modelo_nombre
             cursor.execute(query)
             resultados = cursor.fetchall()
 

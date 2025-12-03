@@ -126,10 +126,11 @@ class CorridaDAO:
             conexion = Connection.getConnection()
             cursor = conexion.cursor()
             query = """
-                INSERT INTO corrida (ruta, fecha, hora_salida, hora_llegada, tarifaBase, lugaresDisp, operador, autobus, estado)
+                INSERT INTO corrida (fecha, hora_salida, hora_llegada, tarifaBase, lugaresDisp, autobus, ruta, operador,estado)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(query, (ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, lugares_disponibles, operador_numero, autobus_numero, estado))
+            print(fecha, hora_salida, hora_llegada, tarifaBase, lugares_disponibles, autobus_numero,ruta_codigo,operador_numero,estado)
+            cursor.execute(query, (fecha, hora_salida, hora_llegada, tarifaBase, lugares_disponibles, autobus_numero,ruta_codigo,operador_numero,estado))
             conexion.commit()
             return True
         except Error as e:
