@@ -297,7 +297,7 @@ class ReservacionDAO:
             raise e
         
 
-    def buscarReservacionPorCiudad(self,ciudad):
+    def buscarReservacionPorCiudadOrigen(self,ciudad):
         """
         Obtiene las reservaciones pero personalizada para la info de la tabla reservaciones
         y la cosulta 10 de Profe Cleo
@@ -317,7 +317,7 @@ class ReservacionDAO:
                     INNER JOIN ruta AS rt ON c.ruta = rt.codigo
                     INNER JOIN ciudad AS co ON rt.ciudadOrigen = co.codigo
                     INNER JOIN ciudad AS cd ON rt.ciudadDestino = cd.codigo
-                    WHERE c.numero = '{ciudad}'
+                    WHERE co.nombre = '{ciudad}'
                     ORDER BY fecha ASC;
                     """          
             cursor = conn.cursor()
@@ -327,5 +327,38 @@ class ReservacionDAO:
             return respuesta
         
         except Error as e:
-            print(f'Error en ReservacionDAO (buscarReservacionesPorCiudad): {e}')
+            print(f'Error en ReservacionDAO (buscarReservacionesPorCiudadOrigen): {e}')
+            raise e
+        
+    def buscarReservacionPorCiudadDestino(self,ciudad):
+        """
+        Obtiene las reservaciones pero personalizada para la info de la tabla reservaciones
+        y la cosulta 10 de Profe Cleo
+        """
+        try:
+            conn = Connection.getConnection()
+            if not conn or not conn.is_connected():
+                raise Error('No se puede establecer conexion con la BD.')
+
+            query = f"""
+                    SELECT reservacion.fecha,corrida, CONCAT(p.nombre,' ', p.apellPat,' ',p.apellMat),
+                    co.nombre,cd.nombre, c.hora_salida, c.hora_llegada,
+                    cantPasajeros,fechaLimPago
+                    FROM reservacion 
+                    INNER JOIN corrida AS c ON reservacion.corrida = c.numero
+                    INNER JOIN pasajero AS p ON reservacion.pasajero = p.numero
+                    INNER JOIN ruta AS rt ON c.ruta = rt.codigo
+                    INNER JOIN ciudad AS co ON rt.ciudadOrigen = co.codigo
+                    INNER JOIN ciudad AS cd ON rt.ciudadDestino = cd.codigo
+                    WHERE cd.nombre = '{ciudad}'
+                    ORDER BY fecha ASC;
+                    """          
+            cursor = conn.cursor()
+            cursor.execute(query)
+            respuesta = cursor.fetchall()
+            
+            return respuesta
+        
+        except Error as e:
+            print(f'Error en ReservacionDAO (buscarReservacionesPorCiudadDestino): {e}')
             raise e
