@@ -94,6 +94,20 @@ class PantallaOperadores(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Error", f"No se pudieron cargar los operadores: {e}")
 
+    def _attempt_add_operador(self, dialogo, operadores_widget_instance):
+        nombre = operadores_widget_instance.get_nombre_lineEdit().text().strip()
+        apellPat = operadores_widget_instance.get_apellidop_lineEdit().text().strip()
+        apellMat = operadores_widget_instance.get_apellidom_lineEdit().text().strip()
+        telefono = operadores_widget_instance.get_telefono_lineEdit().text().strip()
+        fechaNac = operadores_widget_instance.get_fechanacimiento_dateEdit().date().toString("yyyy-MM-dd")
+        fechaContrato = operadores_widget_instance.get_fechacontrato_dateEdit().date().toString("yyyy-MM-dd")
+        
+        if self.controlador_operadores.insertar_operador(dialogo, nombre, apellPat, apellMat, fechaNac, telefono, fechaContrato):
+            QMessageBox.information(self, "Éxito", "Operador agregado correctamente.")
+            self.cargar_operadores_desde_bd()
+            dialogo.accept() # Close the dialog only if successful
+        # If validation fails, the controller already showed the QMessageBox, and we do nothing here, leaving the dialog open.
+
     def abrir_dialogo_agregar_operador(self):
         try:
             dialogo = QDialog(self)
@@ -106,10 +120,9 @@ class PantallaOperadores(QWidget):
             dialogo.setWindowTitle("Nuevo Operador")
 
             dialogo.setFixedSize(424, 530) # Tamaño fijo
-
-            validador = Validaciones() 
             
-            operadores_widget_instance.get_agregar_button().clicked.connect(dialogo.accept)
+            # Connect the "Agregar" button to our custom handler
+            operadores_widget_instance.get_agregar_button().clicked.connect(lambda: self._attempt_add_operador(dialogo, operadores_widget_instance))
             operadores_widget_instance.get_cancelar_button().clicked.connect(dialogo.reject) 
             
             # Establecer el título del Label en el diálogo
@@ -118,26 +131,7 @@ class PantallaOperadores(QWidget):
                 label_titulo.setText("Añadir nuevo operador") # Texto por defecto del UI
                 label_titulo.setAlignment(Qt.AlignCenter)
 
-            if dialogo.exec():
-                nombre = operadores_widget_instance.get_nombre_lineEdit().text().strip()
-                apellPat = operadores_widget_instance.get_apellidop_lineEdit().text().strip()
-                apellMat = operadores_widget_instance.get_apellidom_lineEdit().text().strip()
-                telefono = operadores_widget_instance.get_telefono_lineEdit().text().strip()
-                fechaNac = operadores_widget_instance.get_fechanacimiento_dateEdit().date().toString("yyyy-MM-dd")
-                fechaContrato = operadores_widget_instance.get_fechacontrato_dateEdit().date().toString("yyyy-MM-dd")
-                
-                valido, errores = validador.validar_operador_completo(
-                    nombre, apellPat, apellMat, telefono, fechaNac, fechaContrato
-                )
-                
-                if valido:
-                    if self.controlador_operadores.insertar_operador(nombre, apellPat, apellMat, fechaNac, telefono, fechaContrato):
-                        QMessageBox.information(self, "Éxito", "Operador agregado correctamente.")
-                        self.cargar_operadores_desde_bd()
-                    else:
-                        QMessageBox.critical(self, "Error", "No se pudo agregar el operador")
-                else:
-                    validador.mostrar_errores(self, errores)
+            dialogo.exec() # Show the dialog as modal, but it only closes on accept() or reject()
                         
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al abrir diálogo operador: {e}") 
@@ -162,9 +156,24 @@ class PantallaOperadores(QWidget):
             QMessageBox.critical(self, "Error", f"Error al editar operador: {e}") # Usar QMessageBox
             print(f"Error al editar operador: {e}")
 
+    def _attempt_edit_operador(self, dialogo, operadores_widget_instance, numero_operador_int):
+        nombre = operadores_widget_instance.get_nombre_lineEdit().text().strip()
+        apellPat = operadores_widget_instance.get_apellidop_lineEdit().text().strip()
+        apellMat = operadores_widget_instance.get_apellidom_lineEdit().text().strip()
+        telefono = operadores_widget_instance.get_telefono_lineEdit().text().strip()
+        fechaNac = operadores_widget_instance.get_fechanacimiento_dateEdit().date().toString("yyyy-MM-dd")
+        fechaContrato = operadores_widget_instance.get_fechacontrato_dateEdit().date().toString("yyyy-MM-dd")
+        
+        if self.controlador_operadores.actualizar_operador(dialogo, numero_operador_int, nombre, apellPat, apellMat, fechaNac, telefono, fechaContrato):
+            QMessageBox.information(self, "Éxito", "Operador actualizado correctamente.")
+            self.cargar_operadores_desde_bd()
+            dialogo.accept() # Close the dialog only if successful
+        # If validation fails, the controller already showed the QMessageBox, and we do nothing here, leaving the dialog open.
+
+
     def abrir_dialogo_editar_operador(self, numero_operador):
         try:
-            validador = Validaciones() 
+            # validador = Validaciones() # No longer needed
             
             operadores = self.controlador_operadores.obtener_todos() 
             operador_actual = None
@@ -219,31 +228,12 @@ class PantallaOperadores(QWidget):
                 operadores_widget_instance.get_fechacontrato_dateEdit().setDate(QDate.currentDate())
             operadores_widget_instance.get_fechacontrato_dateEdit().setEnabled(False) # Deshabilitar
             
-            operadores_widget_instance.get_agregar_button().clicked.connect(dialogo.accept)
+            # Connect the "Actualizar" button to our custom handler
+            operadores_widget_instance.get_agregar_button().clicked.connect(lambda: self._attempt_edit_operador(dialogo, operadores_widget_instance, numero_operador_int))
             operadores_widget_instance.get_cancelar_button().clicked.connect(dialogo.reject) 
             operadores_widget_instance.get_agregar_button().setText("Actualizar Operador")  
             
-            if dialogo.exec():
-                nuevo_nombre = operadores_widget_instance.get_nombre_lineEdit().text().strip()
-                nuevo_apellPat = operadores_widget_instance.get_apellidop_lineEdit().text().strip()
-                nuevo_apellMat = operadores_widget_instance.get_apellidom_lineEdit().text().strip()
-                nuevo_telefono = operadores_widget_instance.get_telefono_lineEdit().text().strip()
-                nueva_fechaNac = operadores_widget_instance.get_fechanacimiento_dateEdit().date().toString("yyyy-MM-dd")
-                nueva_fechaContrato = operadores_widget_instance.get_fechacontrato_dateEdit().date().toString("yyyy-MM-dd")
-                
-                valido, errores = validador.validar_operador_completo(
-                    nuevo_nombre, nuevo_apellPat, nuevo_apellMat, nuevo_telefono, 
-                    nueva_fechaNac, nueva_fechaContrato
-                )
-                
-                if valido:
-                    if self.controlador_operadores.actualizar_operador(numero_operador_int, nuevo_nombre, nuevo_apellPat, nuevo_apellMat, nueva_fechaNac, nuevo_telefono, nueva_fechaContrato):
-                        QMessageBox.information(self, "Éxito", "Operador actualizado correctamente.")
-                        self.cargar_operadores_desde_bd()
-                    else:
-                        QMessageBox.critical(self, "Error", "No se pudo actualizar el operador")
-                else:
-                    validador.mostrar_errores(self, errores)
+            dialogo.exec() # Show the dialog as modal, but it only closes on accept() or reject()
                     
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al abrir diálogo de edición operador: {e}") 

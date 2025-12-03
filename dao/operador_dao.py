@@ -61,9 +61,14 @@ class OperadorDAO:
             if not conn or not conn.is_connected():
                 raise Error('No se puede establecer conexion con la BD.')
 
-            query = "INSERT INTO operador (nombre, apellPat, apellMat, fechaNac, telefono, fechaContrato) VALUES (%s, %s, %s, %s, %s, %s)"
+            query = "INSERT INTO operador (nombre, apellPat, apellMat, telefono, fechaNac, fechaContrato) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor = conn.cursor()
-            cursor.execute(query, (operador.get_nombre(), operador.get_apellPat(), operador.get_apellMat(), operador.get_fechaNac(), operador.get_telefono(), operador.get_fechaContrato()))
+            
+            # Explicitly format date objects to strings
+            fechaNac_str = operador.get_fechaNac().strftime("%Y-%m-%d") if operador.get_fechaNac() else None
+            fechaContrato_str = operador.get_fechaContrato().strftime("%Y-%m-%d") if operador.get_fechaContrato() else None
+            
+            cursor.execute(query, (operador.get_nombre(), operador.get_apellPat(), operador.get_apellMat(), operador.get_telefono(), fechaNac_str, fechaContrato_str))
             conn.commit()
             cursor.close()
             return True
@@ -80,7 +85,13 @@ class OperadorDAO:
 
             query = "UPDATE operador SET nombre = %s, apellPat = %s, apellMat = %s, fechaNac = %s, telefono = %s WHERE numero = %s"
             cursor = conn.cursor()
-            cursor.execute(query, (operador.get_nombre(), operador.get_apellPat(), operador.get_apellMat(), operador.get_fechaNac(), operador.get_telefono(), operador.get_numero()))
+            
+            # Explicitly format date objects to strings
+            fechaNac_str = operador.get_fechaNac().strftime("%Y-%m-%d") if operador.get_fechaNac() else None
+            # fechaContrato is not updated in this query based on the current structure, but should be formatted if it were.
+            # Assuming fechaContrato is not part of the update for now based on the query.
+            
+            cursor.execute(query, (operador.get_nombre(), operador.get_apellPat(), operador.get_apellMat(), fechaNac_str, operador.get_telefono(), operador.get_numero()))
             conn.commit()
             cursor.close()
             return True

@@ -57,19 +57,13 @@ class CiudadWidget(QWidget):
         nombre = self.ui.lineEdit_ciudad.text()
         print(f"CiudadWidget: Intentando agregar ciudad - Código: '{codigo}', Nombre: '{nombre}'")
         
-        resultado = self.app_manager.controlador_pcidad.insertar_ciudad(codigo, nombre)
-        print(f"CiudadWidget: Resultado del controlador al agregar: {resultado}")
-        
-        if resultado is True:
+        # La validación y el mensaje de error ahora se manejan en el controlador
+        if self.app_manager.controlador_pcidad.insertar_ciudad(self, codigo, nombre):
             QMessageBox.information(self, "Éxito", "Ciudad agregada correctamente.")
             self.cargar_ciudades()
             self.limpiar_campos()
-        elif resultado == "duplicado":
-            QMessageBox.warning(self, "Error", "El código o nombre de la ciudad ya existe.")
-        elif resultado == "codigo_invalido":
-            QMessageBox.warning(self, "Error", "El código debe tener exactamente 3 caracteres.")
-        else:
-            QMessageBox.critical(self, "Error", resultado)
+        # Si el controlador devuelve False, significa que la validación falló
+        # y el controlador ya mostró el QMessageBox, así que no hacemos nada aquí, dejando la ventana abierta.
 
     def editar_ciudad(self):
         print("CiudadWidget: Iniciando editar_ciudad.")
@@ -83,19 +77,14 @@ class CiudadWidget(QWidget):
         nuevo_nombre = self.ui.lineEdit_ciudad.text()
         print(f"CiudadWidget: Intentando editar ciudad - Código actual: '{codigo_actual}', Nuevo Código: '{nuevo_codigo}', Nuevo Nombre: '{nuevo_nombre}'")
 
-        resultado = self.app_manager.controlador_pcidad.actualizar_ciudad(codigo_actual, nuevo_codigo, nuevo_nombre)
-        print(f"CiudadWidget: Resultado del controlador al editar: {resultado}")
-
-        if resultado is True:
+        # La validación y el mensaje de error ahora se manejan en el controlador
+        if self.app_manager.controlador_pcidad.actualizar_ciudad(self, codigo_actual, nuevo_codigo, nuevo_nombre):
             QMessageBox.information(self, "Éxito", "Ciudad actualizada correctamente.")
             self.cargar_ciudades()
             self.limpiar_campos()
-        elif resultado == "duplicado":
-            QMessageBox.warning(self, "Error", "El nuevo código de ciudad ya existe.")
-        elif resultado == "codigo_invalido":
-            QMessageBox.warning(self, "Error", "El código debe tener exactamente 3 caracteres.")
-        else:
-            QMessageBox.critical(self, "Error", "No se pudo actualizar la ciudad.")
+        # Si el controlador devuelve False, significa que la validación falló
+        # y el controlador ya mostró el QMessageBox, así que no hacemos nada aquí, dejando la ventana abierta.
+
 
     def buscar_ciudad(self):
         texto_busqueda = self.ui.lineEdit_ciudad.text()
