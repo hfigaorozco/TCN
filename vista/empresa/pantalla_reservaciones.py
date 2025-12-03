@@ -158,7 +158,6 @@ class PantallaReservaciones(QWidget):
                 elif filtro_seleccionado == "Origen" or filtro_seleccionado == "Destino":
                     
                     datos_tabla = self.controlador.buscarReservacionPorCiudad(texto_busqueda)
-                    print(datos_tabla)
                     self.__llenar_tabla_reservaciones(datos_tabla)
             else:
                 # El usuario cancelo o no ingreso texto se recarga la tabla original o no hace nada
