@@ -124,9 +124,33 @@ class PantallaRutas(QWidget):
         
         self.mostrar_rutas_en_tabla(rutas_filtradas)
 
+    def _attempt_add_ruta(self, dialogo, widget_dialogo):
+        nombre_origen = widget_dialogo.findChild(QComboBox, "ComboBox_origen").currentText()
+        nombre_destino = widget_dialogo.findChild(QComboBox, "ComboBox_destino").currentText()
+        distancia = widget_dialogo.findChild(QLineEdit, "txt_distancia").text().strip()
+
+        codigo_origen = self.ciudades_map.get(nombre_origen)
+        codigo_destino = self.ciudades_map.get(nombre_destino)
+        # print(f"DEBUG: Datos para agregar ruta - Origen: {codigo_origen}, Destino: {codigo_destino}, Distancia: {distancia}")
+
+        # print("DEBUG: Calling controlador.agregar_nueva_ruta...")
+        result = self.controlador.agregar_nueva_ruta(dialogo, codigo_origen, codigo_destino, distancia)
+        # print(f"DEBUG: controlador.agregar_nueva_ruta returned: {result}")
+
+        if result:
+            # print("DEBUG: Controlador returned True (success).")
+            self.cargar_datos_iniciales()
+            QMessageBox.information(self, "Éxito", "Ruta agregada correctamente")
+            dialogo.accept() # <--- This closes the dialog on success
+            # print("DEBUG: Dialog accepted (success).")
+        # else:
+            # print("DEBUG: Controlador returned False (validation failed or error). Dialog should remain open.")
+        # If controller returns False (validation failed or error),
+        # it has already shown a QMessageBox, and we do nothing here, leaving the dialog open.
+
     def abrir_dialogo_agregar(self):
         """Abre un diálogo para agregar una nueva ruta."""
-        print("Vista: Abriendo diálogo para agregar ruta.")
+        # print("DEBUG: abrir_dialogo_agregar called.")
         try:
             dialogo = QDialog(self)
             
@@ -150,35 +174,30 @@ class PantallaRutas(QWidget):
             combo_origen.addItems(nombres_ciudades)
             combo_destino.addItems(nombres_ciudades)
 
-            widget_dialogo.findChild(QPushButton, "boton_agregar").clicked.connect(dialogo.accept)
+            widget_dialogo.findChild(QPushButton, "boton_agregar").clicked.connect(lambda: self._attempt_add_ruta(dialogo, widget_dialogo))
             widget_dialogo.findChild(QPushButton, "boton_cancelar").clicked.connect(dialogo.reject)
 
-            if dialogo.exec():
-                nombre_origen = combo_origen.currentText()
-                nombre_destino = combo_destino.currentText()
-                distancia = widget_dialogo.findChild(QLineEdit, "txt_distancia").text().strip()
-
-                codigo_origen = self.ciudades_map.get(nombre_origen)
-                codigo_destino = self.ciudades_map.get(nombre_destino)
-                print(f"Vista: Datos del diálogo de agregar - Origen: {nombre_origen} ({codigo_origen}), Destino: {nombre_destino} ({codigo_destino}), Distancia: {distancia}")
-
-                resultado = self.controlador.agregar_nueva_ruta(codigo_origen, codigo_destino, distancia)
-                print(f"Vista: Resultado del controlador al agregar ruta: {resultado}")
-
-                if resultado is True:
-                    self.cargar_datos_iniciales()
-                    QMessageBox.information(self, "Éxito", "Ruta agregada correctamente")
-                elif resultado == "duplicado":
-                    QMessageBox.information(self, "Información", f"La ruta {nombre_origen} - {nombre_destino} ya existe.")
-                else:
-                    QMessageBox.warning(self, "Error", resultado)
+            # print("DEBUG: Calling dialogo.exec()...")
+            dialogo.exec() # <--- This shows the dialog as modal
+            # print("DEBUG: dialogo.exec() returned.")
 
         except Exception as e:
+            # print(f"DEBUG: Exception in abrir_dialogo_agregar: {e}")
             QMessageBox.critical(self, "Error", f"No se pudo abrir el diálogo de agregar: {e}")
 
-    def abrir_dialogo_editar(self):
+    def _attempt_edit_ruta(self, dialogo, widget_dialogo, codigo_ruta):
+        nueva_distancia = widget_dialogo.findChild(QLineEdit, "txt_distancia").text().strip()
+        # print(f"Vista: Nueva distancia ingresada en el diálogo: {nueva_distancia}")
+        
+        if self.controlador.actualizar_distancia_ruta(dialogo, codigo_ruta, nueva_distancia):
+            self.cargar_datos_iniciales()
+            QMessageBox.information(self, "Éxito", "Distancia actualizada correctamente.")
+            dialogo.accept()
+        # If controller returns False, it has already shown a QMessageBox, and the dialog remains open.
+
+    def abrir_dialogo_editar(self, numero_operador): # Changed parameter name from `numero_operador` to `codigo_ruta` for clarity
         """Abre un diálogo para editar la distancia de una ruta seleccionada."""
-        print("Vista: Abriendo diálogo para editar ruta.")
+        # print("Vista: Abriendo diálogo para editar ruta.")
         fila_seleccionada = self.ui.QtableWidget_rutas.currentRow()
         if fila_seleccionada == -1:
             QMessageBox.warning(self, "Advertencia", "Selecciona una ruta para editar.")
@@ -188,7 +207,7 @@ class PantallaRutas(QWidget):
         origen_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 1).text()
         destino_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 2).text()
         distancia_actual = self.ui.QtableWidget_rutas.item(fila_seleccionada, 3).text().replace(" km", "")
-        print(f"Vista: Ruta seleccionada para editar - Código: {codigo_ruta}, Origen: {origen_actual}, Destino: {destino_actual}, Distancia: {distancia_actual}")
+        # print(f"Vista: Ruta seleccionada para editar - Código: {codigo_ruta}, Origen: {origen_actual}, Destino: {destino_actual}, Distancia: {distancia_actual}")
 
         try:
             dialogo = QDialog(self)
@@ -230,22 +249,11 @@ class PantallaRutas(QWidget):
             line_distancia.setText(distancia_actual)
             
             boton_actualizar = widget_dialogo.findChild(QPushButton, "boton_agregar")
-            boton_actualizar.setText("Editar Ruta") # Cambiar a "Editar Ruta"
-            boton_actualizar.clicked.connect(dialogo.accept)
+            boton_actualizar.setText("Actualizar Ruta") # Cambiar a "Actualizar Ruta"
+            boton_actualizar.clicked.connect(lambda: self._attempt_edit_ruta(dialogo, widget_dialogo, codigo_ruta))
             widget_dialogo.findChild(QPushButton, "boton_cancelar").clicked.connect(dialogo.reject)
 
-            if dialogo.exec():
-                nueva_distancia = line_distancia.text().strip()
-                print(f"Vista: Nueva distancia ingresada en el diálogo: {nueva_distancia}")
-                
-                resultado = self.controlador.actualizar_distancia_ruta(codigo_ruta, nueva_distancia)
-                print(f"Vista: Resultado del controlador al actualizar ruta: {resultado}")
-
-                if resultado is True:
-                    self.cargar_datos_iniciales()
-                    QMessageBox.information(self, "Éxito", "Distancia actualizada correctamente.")
-                else:
-                    QMessageBox.warning(self, "Error", resultado)
+            dialogo.exec()
         
         except Exception as e:
             QMessageBox.critical(self, "Error", f"No se pudo abrir el diálogo de edición: {e}")

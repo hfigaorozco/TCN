@@ -164,9 +164,6 @@ QPushButton:pressed {
     min-height: 18px;
 }</string>
       </property>
-      <property name="inputMask">
-       <string>&gt;A&lt;AAAAAAAAAAAAAA</string>
-      </property>
      </widget>
     </item>
     <item>
@@ -212,9 +209,6 @@ QPushButton:pressed {
     min-height: 18px;
 }
 </string>
-      </property>
-      <property name="inputMask">
-       <string>&gt;A&lt;AAAAAAAAAAAAAA</string>
       </property>
      </widget>
     </item>
@@ -262,8 +256,8 @@ QPushButton:pressed {
 }
 </string>
       </property>
-      <property name="inputMask">
-       <string>&gt;A&lt;AAAAAAAAAAAAAA</string>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </item>

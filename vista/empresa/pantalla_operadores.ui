@@ -43,6 +43,7 @@ border-bottom: 1px solid #E3E3E3;</string>
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -90,6 +91,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -137,6 +139,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -184,6 +187,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -231,6 +235,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -278,6 +283,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -325,6 +331,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -394,6 +401,7 @@ color: #606266;
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -437,6 +445,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -502,6 +511,7 @@ border-bottom: 1px solid #E3E3E3;
     <property name="font">
      <font>
       <pointsize>59</pointsize>
+      <weight>75</weight>
       <italic>true</italic>
       <bold>true</bold>
      </font>
@@ -544,7 +554,7 @@ border-bottom: 1px solid #E3E3E3;
     </rect>
    </property>
    <property name="layoutDirection">
-    <enum>Qt::LayoutDirection::LeftToRight</enum>
+    <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
     <string notr="true">QTableView {
@@ -631,15 +641,18 @@ QScrollBar::sub-line {
 </string>
    </property>
    <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <attribute name="horizontalHeaderDefaultSectionSize">
     <number>284</number>
    </attribute>
    <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
+   <attribute name="verticalHeaderHighlightSections">
     <bool>false</bool>
    </attribute>
    <column>
@@ -648,6 +661,7 @@ QScrollBar::sub-line {
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -658,6 +672,7 @@ QScrollBar::sub-line {
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -668,6 +683,7 @@ QScrollBar::sub-line {
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -678,6 +694,7 @@ QScrollBar::sub-line {
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -688,6 +705,7 @@ QScrollBar::sub-line {
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
