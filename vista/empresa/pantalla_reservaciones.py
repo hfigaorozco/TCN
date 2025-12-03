@@ -77,7 +77,15 @@ class PantallaReservaciones(QWidget):
         pass
 
     def buscarPorCorrida(self):
-        corridas = self.controlador.buscarReservacionPorCorrida(str(self.line_edit_buscar_reservacion.text()))
+        num_corrida = str(self.line_edit_buscar_reservacion.text())
+        validacion = Validaciones.validar_id(num_corrida)
+        if validacion != num_corrida:
+            return QMessageBox.information(self, "Mensaje", validacion)
+        corridas = self.controlador.buscarReservacionPorCorrida(num_corrida)
+        print('corridas:',corridas)
+        if not corridas:
+            self.llenarTablaAlInicio()
+            return QMessageBox.information(self, "Mensaje", "No se encontraron reservaciones para la corrida ingresada.")
         self.__llenar_tabla_reservaciones(corridas)
 
     def editarReservacion(self):
@@ -150,7 +158,6 @@ class PantallaReservaciones(QWidget):
                 elif filtro_seleccionado == "Origen" or filtro_seleccionado == "Destino":
                     
                     datos_tabla = self.controlador.buscarReservacionPorCiudad(texto_busqueda)
-                    print(datos_tabla)
                     self.__llenar_tabla_reservaciones(datos_tabla)
             else:
                 # El usuario cancelo o no ingreso texto se recarga la tabla original o no hace nada

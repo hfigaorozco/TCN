@@ -75,9 +75,16 @@ class ControlardorPantallaReservaciones:
             print(f'Error en ControladorVEReservaciones (buscarReservacionesPorNUmero()): {e}')
             raise e
         
-    def buscarReservacionPorCiudad(self,ciudad):
+    def buscarReservacionPorCiudadOrigen(self,ciudad):
         try:
-            return self.reservacion_dao.buscarReservacionPorCiudad(ciudad)
+            return self.reservacion_dao.buscarReservacionPorCiudadOrigen(ciudad)
+        except Error as e:
+            print(f'Error en ControladorVEReservaciones (buscarReservacionesPorCiudad()): {e}')
+            raise e
+        
+    def buscarReservacionPorCiudadDestino(self,ciudad):
+        try:
+            return self.reservacion_dao.buscarReservacionPorCiudadDestino(ciudad)
         except Error as e:
             print(f'Error en ControladorVEReservaciones (buscarReservacionesPorCiudad()): {e}')
             raise e
