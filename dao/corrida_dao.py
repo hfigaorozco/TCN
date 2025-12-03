@@ -129,7 +129,8 @@ class CorridaDAO:
                 INSERT INTO corrida (ruta, fecha, hora_salida, hora_llegada, tarifaBase, lugaresDisp, operador, autobus, estado)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
-            cursor.execute(query, (ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, lugares_disponibles, operador_numero, autobus_numero, estado))
+            print(ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, operador_numero, autobus_numero, lugares_disponibles,estado)
+            cursor.execute(query, (ruta_codigo, fecha, hora_salida, hora_llegada, tarifaBase, operador_numero, autobus_numero, lugares_disponibles,estado))
             conexion.commit()
             return True
         except Error as e:
