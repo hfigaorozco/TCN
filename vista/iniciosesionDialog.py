@@ -84,27 +84,33 @@ class InicioSesionDialog(QDialog):
         phone = str(self.lineEdit_telefono.text())
         validacion = Validaciones.validarNumeroDeTelefono(phone)
         if phone != validacion:
-            QMessageBox.warning(self,'Mensaje',validacion)
+            QMessageBox.warning(self, 'Mensaje', validacion)
             return
         
         password = str(self.lineEdit_contrasena.text())
         validacion = Validaciones.validarPassword(password)
         if password != validacion:
-            QMessageBox.warning(self,'Mensaje',validacion)
+            QMessageBox.warning(self, 'Mensaje', validacion)
             return
 
-        respuesta_del_controlador = self.controlador.validarInicioSesion(phone,password)
-        #Cerrar este dialog correctamente
-        if respuesta_del_controlador == 1:
-            print('Es admin')
+        # ⭐ CAMBIO: Recibir el usuario y el tipo
+        usuario, es_admin = self.controlador.validarInicioSesion(phone, password)
+        
+        # Si hubo error (usuario es None)
+        if usuario is None:
+            QMessageBox.information(self, "Mensaje", es_admin)  # es_admin contiene el mensaje de error
+            return
+        
+        # ⭐ NUEVO: Guardar el usuario en AppManager
+        self.app_manager.set_usuario_actual(usuario)
+        
+        # Cerrar este dialog correctamente
+        if es_admin == 1:
+            print(f'Admin logueado: {usuario.phone}')
             self.done(self.ENTRAR_VISTA_EMPRESA)
-        elif respuesta_del_controlador == 0:
-            print('No es admin')
+        elif es_admin == 0:
+            print(f'Usuario logueado: {usuario.phone}')
             self.done(self.ENTRAR_VISTA_CLIENTE)
-        elif respuesta_del_controlador == 'Numero no encontrado.' or respuesta_del_controlador == 'Contrasena incorrecta.':
-            QMessageBox.information(self,"Mensaje",respuesta_del_controlador)
-        else:
-            print(respuesta_del_controlador)
 
 
     def abrirDialogRegistro(self):

@@ -10,6 +10,12 @@
     <height>1080</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>192</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -109,7 +115,7 @@ QPushButton:disabled {
      <x>60</x>
      <y>300</y>
      <width>1781</width>
-     <height>681</height>
+     <height>521</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -271,17 +277,45 @@ QScrollBar::sub-line {
     </property>
    </column>
   </widget>
-  <widget class="QPushButton" name="boton_continuar">
+  <widget class="QLabel" name="label_estatico_titulo_2">
    <property name="geometry">
     <rect>
-     <x>1110</x>
-     <y>1000</y>
-     <width>191</width>
-     <height>61</height>
+     <x>160</x>
+     <y>200</y>
+     <width>411</width>
+     <height>71</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton {
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt; font-weight:700;&quot;&gt;Ingrese los datos:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>-20</y>
+     <width>1931</width>
+     <height>1121</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Shadow::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="boton_continuar">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>930</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
     background-color: transparent;
     border: 4px solid #1877F2;
     border-radius: 15px;
@@ -309,148 +343,40 @@ QPushButton:disabled {
     color: #CCCCCC;
     background-color: transparent;
 }</string>
-   </property>
-   <property name="text">
-    <string>Continuar</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_estatico_subtitulo_4">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>1010</y>
-     <width>651</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;Selecciona una corrida para continuar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_destino">
-   <property name="geometry">
-    <rect>
-     <x>910</x>
-     <y>210</y>
-     <width>301</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox {
+    </property>
+    <property name="text">
+     <string>Continuar</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_estatico_subtitulo_4">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>940</y>
+      <width>651</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt; font-weight:700;&quot;&gt;Selecciona una corrida para continuar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LineEdit_pasajeros">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>230</y>
+      <width>221</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
     background-color: #ffffff;
     border: 2px solid #dcdfe6;
     border-radius: 6px;
     padding: 6px 12px;
-    font-size: 25px;
-    color: #1061C4;
-    min-height: 18px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-    /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
-}</string>
-   </property>
-   <property name="placeholderText">
-    <string>Destino</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_fecha">
-   <property name="geometry">
-    <rect>
-     <x>1230</x>
-     <y>210</y>
-     <width>261</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox {
-    background-color: #ffffff;
-    border: 2px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 25px;
-    color: #1061C4;
-    min-height: 18px;
-}
-
-QComboBox:hover {
-    border-color: #c0c4cc;
-}
-
-QComboBox:focus {
-    border-color: #409eff;
-}
-
-QComboBox::drop-down {
-    border: none;
-    width: 25px;
-}
-
-QComboBox::down-arrow {
-    image: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #909399;
-}
-
-QComboBox QAbstractItemView {
-    border: 1px solid #dcdfe6;
-    border-radius: 6px;
-    background-color: white;
-    outline: none;
-    selection-background-color: #409eff;
-    selection-color: white;
-    /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
-}</string>
-   </property>
-   <property name="placeholderText">
-    <string>Fecha</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="LineEdit_pasajeros">
-   <property name="geometry">
-    <rect>
-     <x>1510</x>
-     <y>210</y>
-     <width>221</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLineEdit {
-    background-color: #ffffff;
-    border: 2px solid #dcdfe6;
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 25px;
+    font-size: 22px;
     color: #1061C4;
     min-height: 18px;
 }
@@ -473,25 +399,25 @@ QLineEdit:read-only {
     background-color: #f5f7fa;
     color: #909399;
 }</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string>Pasajeros</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_origen">
-   <property name="geometry">
-    <rect>
-     <x>590</x>
-     <y>210</y>
-     <width>301</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox {
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>Cantidad pasajeros</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_fecha">
+    <property name="geometry">
+     <rect>
+      <x>1480</x>
+      <y>230</y>
+      <width>261</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
     background-color: #ffffff;
     border: 2px solid #dcdfe6;
     border-radius: 6px;
@@ -530,24 +456,126 @@ QComboBox QAbstractItemView {
     selection-color: white;
     /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
 }</string>
-   </property>
-   <property name="placeholderText">
-    <string>Origen</string>
-   </property>
+    </property>
+    <property name="placeholderText">
+     <string>Fecha</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_origen">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>230</y>
+      <width>301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    background-color: #ffffff;
+    border: 2px solid #dcdfe6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 25px;
+    color: #1061C4;
+    min-height: 18px;
+}
+
+QComboBox:hover {
+    border-color: #c0c4cc;
+}
+
+QComboBox:focus {
+    border-color: #409eff;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 25px;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #909399;
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    background-color: white;
+    outline: none;
+    selection-background-color: #409eff;
+    selection-color: white;
+    /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Origen</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_destino">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>230</y>
+      <width>301</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
+    background-color: #ffffff;
+    border: 2px solid #dcdfe6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 25px;
+    color: #1061C4;
+    min-height: 18px;
+}
+
+QComboBox:hover {
+    border-color: #c0c4cc;
+}
+
+QComboBox:focus {
+    border-color: #409eff;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 25px;
+}
+
+QComboBox::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #909399;
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid #dcdfe6;
+    border-radius: 6px;
+    background-color: white;
+    outline: none;
+    selection-background-color: #409eff;
+    selection-color: white;
+    /* ELIMINA CUALQUIER cursor: ...; DE AQUÍ */
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Destino</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QLabel" name="label_estatico_titulo_2">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>200</y>
-     <width>411</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt; font-weight:700;&quot;&gt;Ingrese los datos:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
+  <zorder>frame</zorder>
+  <zorder>label_estatico_logo</zorder>
+  <zorder>label_estatico_titulo</zorder>
+  <zorder>boton_regresar</zorder>
+  <zorder>tableWidget</zorder>
+  <zorder>label_estatico_titulo_2</zorder>
  </widget>
  <resources/>
  <connections/>

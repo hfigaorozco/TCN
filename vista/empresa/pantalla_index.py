@@ -4,25 +4,16 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidge
                             QDialog, QPushButton, QLineEdit, QLabel, QMessageBox, QTableWidgetItem, QHeaderView, QAbstractItemView)
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
-from PySide6.QtGui import QCloseEvent, QFont # Añadido QFont
-from utilidades.validaciones import Validaciones
-
-
-#imports de pyside
-import os
-from PySide6.QtWidgets import (QApplication, QMainWindow, QStackedWidget, QWidget,QVBoxLayout,
-                            QDialog, QPushButton, QLineEdit, QLabel, QMessageBox, QTableWidgetItem, QHeaderView, QAbstractItemView)
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
-from PySide6.QtGui import QCloseEvent, QFont # Añadido QFont
+from PySide6.QtGui import QCloseEvent, QFont
 from utilidades.validaciones import Validaciones
 
 
 class PantallaIndex(QWidget):
 
-    def __init__(self, controlador, parent=None):
+    def __init__(self, controlador, app_manager, parent=None):  # ⭐ AGREGAR app_manager
         super().__init__(parent)
         self.controlador = controlador
+        self.app_manager = app_manager  # ⭐ NUEVO: Guardar app_manager
 
         # Crear una instancia del loader
         loader = QUiLoader()
@@ -60,11 +51,11 @@ class PantallaIndex(QWidget):
         self.ui.QtableWidget_pasajeros.setSelectionBehavior(QAbstractItemView.SelectRows)
         
         self.cargar_datos_dashboard()
-        self._setup_connections() # New: Call to setup connections
+        self._setup_connections()
 
     def _setup_connections(self):
         self.ui.comboBox_bfecha.currentIndexChanged.connect(self._filter_corridas_by_fecha)
-        self.ui.QtableWidget_corridasact.itemClicked.connect(self._on_corrida_selected) # New connection
+        self.ui.QtableWidget_corridasact.itemClicked.connect(self._on_corrida_selected)
 
     def cargar_datos_dashboard(self):
         self.cargar_pasajeros_dashboard()
@@ -143,21 +134,20 @@ class PantallaIndex(QWidget):
                     item_telefono.setFont(font_bold)
                     self.ui.QtableWidget_pasajeros.setItem(fila_idx, 3, item_telefono)
                     
-                    # Asumiendo que la columna 4 es para "Boleto", no se rellena aquí
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al cargar pasajeros dashboard: {e}")
 
     def cargar_corridas_dashboard(self):
         try:
-            self.all_corridas_data = self.controlador.obtener_corridas_dashboard() # Store all data
-            self._populate_fecha_combobox(self.all_corridas_data) # Populate combobox
-            self._display_corridas_in_table(self.all_corridas_data) # Display all corridas initially
+            self.all_corridas_data = self.controlador.obtener_corridas_dashboard()
+            self._populate_fecha_combobox(self.all_corridas_data)
+            self._display_corridas_in_table(self.all_corridas_data)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al cargar corridas dashboard: {e}")
 
     def _populate_fecha_combobox(self, corridas_data):
         self.ui.comboBox_bfecha.clear()
-        self.ui.comboBox_bfecha.addItem("Todas las fechas") # Option to show all
+        self.ui.comboBox_bfecha.addItem("Todas las fechas")
         
         unique_dates = sorted(list(set([corrida[1].strftime("%Y-%m-%d") for corrida in corridas_data])))
         for date_str in unique_dates:
@@ -214,7 +204,7 @@ class PantallaIndex(QWidget):
             font_bold = QFont()
             font_bold.setBold(True)
             
-            last_operator_numero = None # Track the last displayed operator number
+            last_operator_numero = None
 
             if operadores_data:
                 for fila_idx, operador in enumerate(operadores_data):

@@ -35,6 +35,7 @@ from dao.ruta_dao import RutaDAO
 from dao.operador_dao import OperadorDAO
 from dao.pasajero_dao import PasajeroDAO
 from dao.ciudad_dao import CiudadesDAO # Agregado
+from dao.viajar_dao import ViajarDAO  # ⭐ NUEVO: DAO para compra de boletos
 
 #importando controladores
 from controladores.controlador_index_empresa import ControladorIndex
@@ -47,6 +48,7 @@ from controladores.controlador_pantalla_rutas import ControladorPantallaRutas
 from controladores.controlador_pantalla_operadores import ControladorPantallaOperadores
 from controladores.controlador_pantalla_pasajeros import ControladorPantallaPasajeros
 from controladores.controlador_pantalla_ciudad import ControladorPantallaCiudad # Agregado
+from controladores.controlador_viajar import ControladorViajar   # ⭐ NUEVO: Controlador para compra de boletos
 
 from utilidades.validaciones import Validaciones
 
@@ -75,6 +77,7 @@ def main():
     operador_dao = OperadorDAO()
     pasajero_dao = PasajeroDAO()
     ciudad_dao = CiudadesDAO() # Agregado
+    viajar_dao = ViajarDAO() # Agregado por Hector :3
 
     #Iniciando controladores
     controlador_index = ControladorIndex(index_dao=index_dao)
@@ -88,12 +91,16 @@ def main():
     controlador_po = ControladorPantallaOperadores(operador_dao=operador_dao)
     controlador_pp = ControladorPantallaPasajeros(pasajero_dao=pasajero_dao)
     controlador_pcidad = ControladorPantallaCiudad(ciudad_dao=ciudad_dao) 
+    controlador_viajar = ControladorViajar(viajar_dao=viajar_dao) # Agregado por Hector :3
 
     #iniciando app manager
     app_manager = AppManager(controlador_index=controlador_index, controlador_isd=controlador_isd, controlador_rd=controlador_rd, 
                             controlador_pr=controlador_pr, controlador_pc=controlador_pc, controlador_pa=controlador_pa, 
                             controlador_prutas=controlador_prutas, controlador_po=controlador_po, controlador_pp=controlador_pp,
                             controlador_pcidad=controlador_pcidad) 
+    
+    # ⭐ NUEVO: Inyectar controlador de viajar (despues de crear app_manager)
+    app_manager.controlador_viajar = controlador_viajar
     
     #iniciando UI
     print('Iniciando UI')

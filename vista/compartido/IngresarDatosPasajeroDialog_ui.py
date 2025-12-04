@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDateEdit, QDialog, QLabel,
     QLineEdit, QPushButton, QSizePolicy, QWidget)
 
-class Ui_Dialog(object):
+class IngresarDatosPasajeroDialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")

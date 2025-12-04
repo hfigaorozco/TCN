@@ -5,9 +5,11 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QIODevice, QCoreApplication, Qt
 from PySide6.QtGui import QCloseEvent
 
+
 class MainUIUsuario(QMainWindow):
-    def __init__(self):
+    def __init__(self, app_manager):  # ⭐ AGREGAR app_manager como parámetro
         super().__init__()
+        self.app_manager = app_manager  # ⭐ GUARDAR app_manager
         
         # Configurar stacked widget
         self.stacked_widget = QStackedWidget()
@@ -18,7 +20,7 @@ class MainUIUsuario(QMainWindow):
         
         # Cargar todas las interfaces
         self.cargar_interfaces()
-        # self.setup_connections()
+        self.setup_connections()  # ⭐ DESCOMENTAR para conectar señales
 
         # Mostrar MainWindow por defecto (índice 0)
         self.stacked_widget.setCurrentIndex(0)
@@ -44,35 +46,31 @@ class MainUIUsuario(QMainWindow):
         ui = loader.load(file)
         file.close()
         return ui
-
     
-    def setup_connections(self):
-        # Agregando evento a los botones de navegacion del index.ui
+    def abrir_pantalla_viajar(self):
+        """Abre la pantalla de búsqueda de viajes."""
+        # ⭐ MOVER el import AQUÍ para evitar importación circular
+        from vista.compartido.pantalla_viajar import PantallaViajarWidget
         
-        if self.pagina_reservaciones_widget:
-            boton_reservaciones = self.index_ui.findChild(QWidget, "boton_reservaciones")
-            if boton_reservaciones:
-                boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
+        pantalla = PantallaViajarWidget(self.app_manager, self)
+        pantalla.show()
 
-        if self.pagina_corridas_widget:
-            boton_corridas = self.index_ui.findChild(QWidget, "boton_corridas")
-            if boton_corridas:
-                boton_corridas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(2))
-
-        if self.pagina_autobuses_widget:
-            boton_autobuses = self.index_ui.findChild(QWidget, "boton_autobuses")
-            if boton_autobuses:
-                boton_autobuses.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(3))
-
-        if self.pagina_rutas_widget:
-            boton_rutas = self.index_ui.findChild(QWidget, "boton_rutas")
-            if boton_rutas:
-                boton_rutas.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
-
-        if self.pagina_operadores_widget:
-            boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
-            if boton_operadores:
-                boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(4))
+    def setup_connections(self):
+        # ⭐ NUEVO: Conectar el botón viajar
+        if self.index_ui:
+            boton_viajar = self.index_ui.findChild(QWidget, "boton_viajar")
+            if boton_viajar:
+                boton_viajar.clicked.connect(self.abrir_pantalla_viajar)
+            else:
+                print("⚠️ ADVERTENCIA: No se encontró el botón 'boton_viajar' en el UI")
+        
+        # ⭐ NOTA: Los siguientes botones no existen en tu UI de usuario
+        # Si quieres agregar más pantallas después, descomenta y crea los widgets
+        
+        # if self.pagina_reservaciones_widget:
+        #     boton_reservaciones = self.index_ui.findChild(QWidget, "boton_reservaciones")
+        #     if boton_reservaciones:
+        #         boton_reservaciones.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
 
 
     def closeEvent(self, event: QCloseEvent):

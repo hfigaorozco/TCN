@@ -17,6 +17,7 @@ from vista.empresa.pantalla_pasajeros import PantallaPasajeros
 from vista.empresa.pantalla_index import PantallaIndex
 
 class MainUIEmpresa(QMainWindow):
+    
     def __init__(self, app_manager):
         super().__init__()
         self.app_manager = app_manager
@@ -53,37 +54,45 @@ class MainUIEmpresa(QMainWindow):
     def cargar_interfaces(self):
         # Cargar todas las interfaces
         base_path = os.path.dirname(__file__) # Ruta del directorio de main_ui.py
-        # Cargar el resto de interfaces con rutas absolutas
-        self.index_ui = PantallaIndex(self.app_manager.controlador_index)
+        
+        # ⭐ MODIFICADO: Pasar app_manager a PantallaIndex
+        self.index_ui = PantallaIndex(self.app_manager.controlador_index, self.app_manager)
+        
         self.pagina_reservaciones_widget = PantallaReservaciones(self.app_manager.controlador_pr)
         self.pagina_corridas_widget = PantallaCorridas(self.app_manager.controlador_pc)
         self.pagina_autobuses_widget = PantallaAutobuses(self.app_manager.controlador_pa)
         self.pagina_rutas_widget = PantallaRutas(self.app_manager)
-        self.pagina_operadores_widget = PantallaOperadores(self.app_manager.controlador_po, self.app_manager) # Pasar app_manager
+        self.pagina_operadores_widget = PantallaOperadores(self.app_manager.controlador_po, self.app_manager)
         self.pagina_pasajeros_widget = PantallaPasajeros(self.app_manager.controlador_pp)
                                                     
-        # Agregar al stacked widget en orden (el índice 0 ya está ocupado por main_index_widget)
-        if self.index_ui: self.stacked_widget.addWidget(self.index_ui) #Index 0
-        if self.pagina_reservaciones_widget: self.stacked_widget.addWidget(self.pagina_reservaciones_widget) # Index 1
-        if self.pagina_corridas_widget: self.stacked_widget.addWidget(self.pagina_corridas_widget)  # Index
-        if self.pagina_autobuses_widget: self.stacked_widget.addWidget(self.pagina_autobuses_widget) # Index
-        if self.pagina_rutas_widget: self.stacked_widget.addWidget(self.pagina_rutas_widget) # Index
-        if self.pagina_operadores_widget: self.stacked_widget.addWidget(self.pagina_operadores_widget) # Index 5
-        if self.pagina_pasajeros_widget: self.stacked_widget.addWidget(self.pagina_pasajeros_widget) # Index 6
+        # Agregar al stacked widget en orden
+        if self.index_ui: self.stacked_widget.addWidget(self.index_ui)
+        if self.pagina_reservaciones_widget: self.stacked_widget.addWidget(self.pagina_reservaciones_widget)
+        if self.pagina_corridas_widget: self.stacked_widget.addWidget(self.pagina_corridas_widget)
+        if self.pagina_autobuses_widget: self.stacked_widget.addWidget(self.pagina_autobuses_widget)
+        if self.pagina_rutas_widget: self.stacked_widget.addWidget(self.pagina_rutas_widget)
+        if self.pagina_operadores_widget: self.stacked_widget.addWidget(self.pagina_operadores_widget)
+        if self.pagina_pasajeros_widget: self.stacked_widget.addWidget(self.pagina_pasajeros_widget)
 
     
     def load_ui(self, ui_path):
         file = QFile(ui_path)
         if not file.open(QFile.ReadOnly):
             print(f"ERROR: No se pudo abrir el archivo UI: {ui_path}")
-            return None # Retorna None explícitamente en caso de error
+            return None
         
         loader = QUiLoader()
         ui = loader.load(file)
         file.close()
         return ui
-
     
+    def abrir_pantalla_viajar(self):
+        """Abre la pantalla de compra de boletos."""
+        from vista.compartido.pantalla_viajar import PantallaViajarWidget
+        
+        pantalla = PantallaViajarWidget(self.app_manager, self)
+        pantalla.show()
+
     def setup_connections_pantalla_index(self):
         '''Agregando evento a los botones de navegacion del index.ui'''
         # Si el boton de inicio es presionado
@@ -121,6 +130,11 @@ class MainUIEmpresa(QMainWindow):
             boton_operadores = self.index_ui.findChild(QWidget, "boton_operadores")
             if boton_operadores:
                 boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))
+        
+        # ⭐ NUEVO: Si el boton comprar boleto es presionado
+        boton_comprar_boleto = self.index_ui.findChild(QWidget, "boton_comprarboleto")
+        if boton_comprar_boleto:
+            boton_comprar_boleto.clicked.connect(self.abrir_pantalla_viajar)
 
 
     def setup_connections_pantalla_reservaciones(self):
@@ -318,7 +332,7 @@ class MainUIEmpresa(QMainWindow):
                 boton_operadores.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(5))  
 
     def setup_connections_pantalla_pasajeros(self):
-        '''Agregando evento a los botones de navegacion de pantalla_operadores.ui'''
+        '''Agregando evento a los botones de navegacion de pantalla_pasajeros.ui'''
         # Si el boton de inicio es presionado
         if self.index_ui:
             boton_inicio = self.pagina_pasajeros_widget.findChild(QWidget, "boton_inicio")
@@ -361,7 +375,6 @@ class MainUIEmpresa(QMainWindow):
         Este metodo que se llama cuando se preciona la X en esta ventana.
         """
         print("Terminando programa.")
-
         event.accept() 
         
         #Nota: Luego de esto event.accept(), el flujo del programa regresa al main.py

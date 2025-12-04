@@ -1,5 +1,6 @@
 #Este modulo contiene todas las referencias a los controladores del programa.
 class AppManager:
+    
     def __init__(self, controlador_index,controlador_isd, controlador_rd, controlador_pr, 
                 controlador_pc,controlador_pa,controlador_prutas, controlador_po,controlador_pp, controlador_pcidad):
         # Almacena los controladores como atributos
@@ -13,3 +14,19 @@ class AppManager:
         self.controlador_po = controlador_po #controlador pantalla operadores
         self.controlador_pp = controlador_pp #controlador pantalla pasajeros
         self.controlador_pcidad = controlador_pcidad #controlador pantalla ciudad
+        
+        # ⭐ NUEVO: Usuario logueado y controlador de compra
+        self.usuario_actual = None
+        self.controlador_viajar = None  # Se inicializará después
+        
+    def set_usuario_actual(self, usuario):
+        """Guarda el usuario que acaba de iniciar sesión"""
+        self.usuario_actual = usuario
+
+    def get_usuario_actual(self):
+        """Obtiene el usuario logueado"""
+        return self.usuario_actual
+
+    def cerrar_sesion(self):
+        """Limpia la sesión del usuario"""
+        self.usuario_actual = None
